@@ -3,10 +3,12 @@
  * @author RobStyling
  * @version 0.0.0
  * @copyright RobStyling 2018
+ * @beta
  */
 
 const request = require('request-promise');
 const endpoints = require('./endpoints.js');
+const sorter = require('./sorter.js');
 
 module.exports = {
     /**
@@ -86,6 +88,11 @@ getJoinedChats: async function(sid, com) {
                      */
                     body = JSON.parse(body);
                     body.threadList.forEach((element) => {
+                        /**
+                         * A Sorting for various Symboles for 
+                         * @param  {Integer} element.type For Various Status Symboles
+                         * @return {[type]}               For setting the JSON Objects 
+                         */
                         if (element.type == 2) {
                             public = true;
                         } else {
