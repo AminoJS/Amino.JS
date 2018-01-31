@@ -6,6 +6,7 @@ let should = require('chai').should(),
 	loginEnd = end.login;
 	getChatCall = end.loadChat;
 	communityCall = end.getComs;
+	getJoinedChats = end.getJoinedChats
 	login = index.login;
 
 describe('how does the sorter react... ', function () {
@@ -22,9 +23,13 @@ describe('how do the enpoints react..', function() {
 		loginEnd.should.equal('http://service.narvii.com/api/v1/g/s/auth/login');
 	})
 
-	it('when a community load call is recived', function() {
+	it('when a community load api call is recived', function() {
 		communityCall.should.equal('http://service.narvii.com/api/v1/g/s/community/joined?start=0&size=50');
 	})
+
+	it('when a chat thread load api call is recived', function() {
+		getJoinedChats('xtesting').should.equal('http://service.narvii.com/api/v1/xtesting/s/chat/thread?type=joined-me&start=0&size=100');
+	});
 
 	it('when a chat api call is recived', function() {
 		getChatCall('xtesting', 'a_great_uuid', 7).should.equal('http://service.narvii.com/api/v1/xtesting/s/chat/thread/a_great_uuid/message?start=0&size=7&cv=v1.2');
