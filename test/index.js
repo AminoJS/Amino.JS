@@ -6,7 +6,8 @@ let should = require('chai').should(),
 	loginEnd = end.login;
 	getChatCall = end.loadChat;
 	communityCall = end.getComs;
-	getJoinedChats = end.getJoinedChats
+	getJoinedChats = end.getJoinedChats;
+	grpChat = sorter.groupChat;
 	login = index.login;
 
 describe('how does the sorter react... ', function () {
@@ -15,6 +16,12 @@ describe('how does the sorter react... ', function () {
 		});
 		it('when a chat is private', function() {
 			publicChat(1).should.equal(false);
+		})
+		it('when a chat is a group chat', function() {
+			grpChat(1).should.equal(true);
+		})
+		it('when a chat is a private chat', function() {
+			grpChat(0).should.equal(false);
 		})
 });
 

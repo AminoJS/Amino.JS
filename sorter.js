@@ -22,5 +22,13 @@ module.exports = {
         }
     },
 
-
+    groupChat: (type) => {
+        if(typeof(type) != "number") {
+            throw new Error("The Sorter Failed!");
+        }
+        if(type == 1 || type == 2) {
+            return true;
+        }
+        else return false;
+    }
 }
