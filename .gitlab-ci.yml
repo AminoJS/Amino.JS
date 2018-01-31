@@ -13,7 +13,7 @@ cache:
   paths:
   - node_modules/
 
-test:
+make_test_build:
   script:
    - npm install
    - npm test
