@@ -93,16 +93,8 @@ getJoinedChats: async function(sid, com) {
                          * @param  {Integer} element.type For Various Status Symboles
                          * @return {[type]}               For setting the JSON Objects 
                          */
-                        if (element.type == 2) {
-                            public = true;
-                        } else {
-                            public = false;
-                        }
-                        if (element.type == 1 || element.type == 2) {
-                            group = true;
-                        } else {
-                            group = false;
-                        }
+                         public = sorter.publicChat(element.type);
+                         group = sorter.groupChat(element.type);
                         if (element.membershipStatus == 1) {
                             joined = true;
                         } else {
@@ -120,21 +112,7 @@ getJoinedChats: async function(sid, com) {
                             unread = false;
                         }
                         console.log(element.type);
-                        threadList.threads.push({
-                            'threadId': element.threadId,
-                            'memberCount': element.membersCount,
-                            'title': element.title,
-                            'joined': joined,
-                            'public': public,
-                            'group': group,
-                            'muted': muted,
-                            'unread': unread,
-                            'lastMessage': {
-                                'senderId': element.lastMessageSummary.uid,
-                                'message': element.lastMessageSummary.content
-                            },
-                            'members': element.membersSummary
-                        });
+                        threadList.threads.push(sorter.threadSort(element, ));
                     })
                     threadList.status = "ok";
                     threadList.error = null;
@@ -143,6 +121,7 @@ getJoinedChats: async function(sid, com) {
             catch (err) {
                 threadList.status = "not ok";
                 threadList.error = err;
+                throw new Error("The Loading of the Chat did not work." + threadList);
             }
         })},
 

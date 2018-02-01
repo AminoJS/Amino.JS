@@ -30,5 +30,39 @@ module.exports = {
             return true;
         }
         else return false;
+    },
+
+    didJoin: (membershipStatus) => {
+        if(typeof(membershipStatus) != "number") {
+            throw new Error("The Sorter failed!");
+        }
+        if(membershipStatus == 1) {
+            return true;
+        }
+        else return false;
+    },
+
+    didMute: (alertOption) => {
+        if(typeof(alertOption) != "number") {
+            throw new Error("")
+        }
+    },
+
+    threadSort: (element, joined, public, group, muted, unread) => {
+        return {
+            'threadId': element.threadId,
+                            'memberCount': element.membersCount,
+                            'title': element.title,
+                            'joined': joined,
+                            'public': public,
+                            'group': group,
+                            'muted': muted,
+                            'unread': unread,
+                            'lastMessage': {
+                                'senderId': element.lastMessageSummary.uid,
+                                'message': element.lastMessageSummary.content
+                            },
+                            'members': element.membersSummary
+        };
     }
 }
