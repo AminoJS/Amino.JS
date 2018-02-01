@@ -60,3 +60,6 @@ typings/
 # next.js build output
 .next
 testing.js
+
+#A Testing file for tesing various stuff
+testing.js

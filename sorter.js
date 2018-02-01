@@ -6,15 +6,15 @@
  */
 
 module.exports = {
-	/**
-	 * If the public Chat 
-	 * @param  {[type]} type [description]
-	 * @return {[type]}      [description]
-	 */
+    /**
+     * If the public Chat 
+     * @param  {[type]} type [description]
+     * @return {[type]}      [description]
+     */
     publicChat: (type) => {
-    	if(typeof(type) != "number") {
-    		throw new Error("The Sorter Failed!");
-    	}
+        if (typeof(type) != "number") {
+            throw new Error("The Sorter Failed!");
+        }
         if (type == 2) {
             return true;
         } else {
@@ -23,46 +23,58 @@ module.exports = {
     },
 
     groupChat: (type) => {
-        if(typeof(type) != "number") {
+        if (typeof(type) != "number") {
             throw new Error("The Sorter Failed!");
         }
-        if(type == 1 || type == 2) {
+        if (type == 1 || type == 2) {
             return true;
-        }
-        else return false;
+        } else return false;
     },
 
     didJoin: (membershipStatus) => {
-        if(typeof(membershipStatus) != "number") {
+        if (typeof(membershipStatus) != "number") {
             throw new Error("The Sorter failed!");
         }
-        if(membershipStatus == 1) {
+        if (membershipStatus == 1) {
             return true;
-        }
-        else return false;
+        } else return false;
     },
 
     didMute: (alertOption) => {
-        if(typeof(alertOption) != "number") {
-            throw new Error("")
+        if (typeof(alertOption) != "number") {
+            throw new Error("The Sorter failed!");
+        }
+        if (alertOption == 1) {
+            return true;
+        } else return false;
+    },
+
+    didUnread: (condition) => {
+    	if(typeof(condition) != "number") {
+    		throw new Error("The Sorter failed!");
+    	}
+        if (condition == 1) {
+            unread = true;
+        } else {
+            unread = false;
         }
     },
 
     threadSort: (element, joined, public, group, muted, unread) => {
         return {
             'threadId': element.threadId,
-                            'memberCount': element.membersCount,
-                            'title': element.title,
-                            'joined': joined,
-                            'public': public,
-                            'group': group,
-                            'muted': muted,
-                            'unread': unread,
-                            'lastMessage': {
-                                'senderId': element.lastMessageSummary.uid,
-                                'message': element.lastMessageSummary.content
-                            },
-                            'members': element.membersSummary
+            'memberCount': element.membersCount,
+            'title': element.title,
+            'joined': joined,
+            'public': public,
+            'group': group,
+            'muted': muted,
+            'unread': unread,
+            'lastMessage': {
+                'senderId': element.lastMessageSummary.uid,
+                'message': element.lastMessageSummary.content
+            },
+            'members': element.membersSummary
         };
     }
 }
