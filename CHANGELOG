@@ -1,3 +1,18 @@
+v.0.0.1 alpha:
+
+The Client Framework can now do the Following:
+
+It can Authenticate with the Narvii API.
+It can Load all Communitys that a User is joined.
+It can Load all joined Chats.
+It can send Messages to Specific Chats.
+It can load Messages from Specific Chats.
+
+TODO:
+Add Media Support (v.0.0.2 alpha)
+Make the Get Messages Cleaner (v.0.0.2 alpha)
+A lot more... 
+
 indev:
 
 Initial Commit
