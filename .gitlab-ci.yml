@@ -21,7 +21,6 @@ make_test_build:
 deploy_to_prod:
   stage: deploy
   script:
-     - npm install -g jsdoc
      - jsdoc .
      - cp -R out/ /srv/http/docs
      - npm publish
