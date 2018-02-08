@@ -25,7 +25,7 @@ deploy_to_prod:
      - jsdoc .
      - cp -R out/ /srv/http/docs
      - npm publish
-  enviroment:
+  environment:
     url: https://docs.robsys.space
   when: manual
   only:
