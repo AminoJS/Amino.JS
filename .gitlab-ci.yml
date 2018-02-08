@@ -23,7 +23,6 @@ deploy_to_prod:
   script:
      - jsdoc .
      - cp -R out/ /srv/http/docs
-     - npm publish
   environment:
     name: DocSite
     url: https://docs.robsys.space
