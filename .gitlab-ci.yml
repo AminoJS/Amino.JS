@@ -17,3 +17,16 @@ make_test_build:
   script:
    - npm install
    - npm test
+
+deploy_to_prod:
+  stage: deploy
+  script:
+     - npm install -g jsdoc
+     - jsdoc .
+     - cp -R out/ /srv/http/docs
+     - npm publish
+  enviroment:
+  	url: https://docs.robsys.space
+  when: manual
+  only:
+   - master
