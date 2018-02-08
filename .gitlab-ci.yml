@@ -26,6 +26,7 @@ deploy_to_prod:
      - cp -R out/ /srv/http/docs
      - npm publish
   environment:
+    name: DocSite
     url: https://docs.robsys.space
   when: manual
   only:
