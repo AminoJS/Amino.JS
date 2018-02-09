@@ -1,47 +1,43 @@
 /**
- * @name Kikai Framework
- * @author RobStyling
- * @version 0.0.0
- * @copyright RobStyling 2018
- * @beta
+ * @module Libary for AminoApps
  */
 
+//Libary Imports
 const request = require('request-promise');
 const endpoints = require('./endpoints.js');
 const sorter = require('./sorter.js');
 const objs = require('./objects.js');
 
-module.exports = {
-    /**
-     * Loginfunction for the Framework for Handeling API Reqeusts.
-     * @param  {String} email    Email-Adresse für den Login
-     * @param  {String} password Passwort für den Login
-     * @param  {UUID} deviceID Siehe mehr unter ('howto/deviceid_dump.md')
-     * @return {SecurityString} sid      Der Security String um mit der API zu komunizieren.
-     */
-    
-    //eslint-disable-next-line
-    login: async (email, password, deviceID) => { 
-        let sid;
-        await request.post(endpoints.login, {
-            json: {
-                'email': email,
-                'secret': '0 ' + password,
-                'deviceID': deviceID,
-                'clientType': 100,
-                'action': 'normal',
-                'timestamp': new Date().getUTCMilliseconds()
-            }
-        }, (err, res, body) => {
-            if (err) throw 'Request Error: ' + err;
-            if (!body.sid) throw 'Login Error: SID is not defined.' + res;
-            sid = body.sid;
-        }).catch((err) => {
-            throw 'Error while calling Login: ' + err;
-        });
-        return sid;
-    },
+/**
+ * Loginfunction for the Framework for Handeling API Reqeusts.
+ * @param  {String} email    Email-Adresse für den Login
+ * @param  {String} password Passwort für den Login
+ * @param  {UUID} deviceID Siehe mehr unter ('howto/deviceid_dump.md')
+ * @return {SecurityString} sid Der Security String um mit der API zu komunizieren.
+ */
+async function login(email, password, deviceID) {
+    let sid;
+    await request.post(endpoints.login, {
+        json: {
+            'email': email,
+            'secret': '0 ' + password,
+            'deviceID': deviceID,
+            'clientType': 100,
+            'action': 'normal',
+            'timestamp': new Date().getUTCMilliseconds()
+        }
+    }, (err, res, body) => {
+        if (err) throw 'Request Error: ' + err;
+        if (!body.sid) throw 'Login Error: SID is not defined.' + res;
+        sid = body.sid;
+    }).catch((err) => {
+        throw 'Error while calling Login: ' + err;
+    });
+    return sid;
+}
 
+module.exports = {
+    login,
     getJoinedComs: async function(sid) {
         let communityList = objs.communityList;
         await request.get(endpoints.getComs, {
@@ -118,8 +114,7 @@ module.exports = {
             });
             msgList.status = 'ok';
             msgList.error = null;
-        }
-        catch(err) {
+        } catch (err) {
             msgList.error = err;
         }
         return msgList;

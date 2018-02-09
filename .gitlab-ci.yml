@@ -22,7 +22,7 @@ make_test_build:
 Deploy_to_Docs:
   stage: deploy
   script:
-     - jsdoc .
+     - jsdoc -t ./node_modules/ink-docstrap/template -R README.md .
      - cp -R out/*.* /srv/http/docs
   environment:
     name: DocSite
