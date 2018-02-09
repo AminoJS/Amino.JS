@@ -1,7 +1,7 @@
 /**
  * @name Kikai Framework
  * @author RobStyling
- * @version 0.0.0
+ * @version 0.0.2
  * @copyright RobStyling 2018
  * @beta
  */
@@ -44,6 +44,7 @@ module.exports = {
 
     getJoinedComs: async function(sid) {
         let communityList = objs.communityList;
+        communityList.coms = [];
         await request.get(endpoints.getComs, {
             headers: {
                 'NDCAUTH': `sid=${sid}`
@@ -67,6 +68,7 @@ module.exports = {
 
     getJoinedChats: async function(sid, com) {
         let threadList = objs.threadList;
+        threadList.threads = [];
         await request.get(endpoints.getJoinedChats(com), {
             headers: {
                 'NDCAUTH': `sid=${sid}`
@@ -93,6 +95,7 @@ module.exports = {
 
     getChat: async function(sid, com, uid, count) {
         let msgList = objs.recivedMessages;
+        msgList.messages = [];
         try {
             await request.get(endpoints.loadChat(com, uid, count), {
                 headers: {
