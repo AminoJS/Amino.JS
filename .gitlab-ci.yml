@@ -17,12 +17,13 @@ make_test_build:
   script:
    - npm install
    - npm test
+   - ./node_modules/.bin/eslint .
 
-deploy_to_prod:
+Deploy_to_Docs:
   stage: deploy
   script:
      - jsdoc .
-     - cp -R out/ /srv/http/docs
+     - cp -R out/*.* /srv/http/docs
   environment:
     name: DocSite
     url: https://docs.robsys.space

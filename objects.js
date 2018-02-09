@@ -7,8 +7,8 @@ module.exports = {
 
     threadList: {
         threads: [],
-        status: "not ok",
-        error: "not everything defined"
+        status: 'not ok',
+        error: 'not everything defined'
     },
 
     sendingMessage: {
@@ -26,4 +26,4 @@ module.exports = {
         status: 'not ok',
         error: 'nothing happend'
     }
-}
+};
