@@ -19,16 +19,18 @@ module.exports = {
      * @param  {UUID} deviceID Siehe mehr unter ('howto/deviceid_dump.md')
      * @return {SecurityString} sid      Der Security String um mit der API zu komunizieren.
      */
-    login: async function(email, password, deviceID) {
+    
+    //eslint-disable-next-line
+    login: async (email, password, deviceID) => { 
         let sid;
         await request.post(endpoints.login, {
             json: {
-                "email": email,
-                "secret": "0 " + password,
-                "deviceID": deviceID,
-                "clientType": 100,
-                "action": "normal",
-                "timestamp": new Date().getUTCMilliseconds()
+                'email': email,
+                'secret': '0 ' + password,
+                'deviceID': deviceID,
+                'clientType': 100,
+                'action': 'normal',
+                'timestamp': new Date().getUTCMilliseconds()
             }
         }, (err, res, body) => {
             if (err) throw 'Request Error: ' + err;
@@ -52,13 +54,13 @@ module.exports = {
                 body = JSON.parse(body);
                 body.communityList.forEach((element) => {
                     communityList.coms.push(sorter.comSort(element));
-                })
-                communityList.status = "ok";
+                });
+                communityList.status = 'ok';
                 communityList.error = null;
             } catch (err) {
                 communityList.error = err;
             }
-        })
+        });
         return communityList;
     },
 
@@ -73,20 +75,19 @@ module.exports = {
             try {
                 body = JSON.parse(body);
                 body.threadList.forEach((element) => {
-                    publicChat = sorter.publicChat(element.type);
-                    group = sorter.groupChat(element.type);
-                    joined = sorter.didJoin(element.membershipStatus);
-                    muted = sorter.didMute(element.alertOption);
-                    unread = sorter.didUnread(element.condition);
+                    let publicChat = sorter.publicChat(element.type);
+                    let group = sorter.groupChat(element.type);
+                    let joined = sorter.didJoin(element.membershipStatus);
+                    let muted = sorter.didMute(element.alertOption);
+                    let unread = sorter.didUnread(element.condition);
                     threadList.threads.push(sorter.threadSort(element, joined, publicChat, group, muted, unread));
-                })
-                threadList.status = "ok";
+                });
+                threadList.status = 'ok';
                 threadList.error = null;
             } catch (err) {
                 threadList.error = err;
-                console.log(threadList);
             }
-        })
+        });
         return threadList;
     },
 
@@ -112,8 +113,8 @@ module.exports = {
                             'level': element.author.level,
                             'role': element.author.role
                         }
-                    })
-                })
+                    });
+                });
             });
             msgList.status = 'ok';
             msgList.error = null;
@@ -145,10 +146,10 @@ module.exports = {
                     message.status = 'ok';
                     message.error = null;
                 }
-            })
+            });
         } catch (err) {
             message.error = err;
         }
         return message;
     }
-}
+};

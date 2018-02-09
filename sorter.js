@@ -8,8 +8,8 @@
 module.exports = {
 
     publicChat: (type) => {
-        if (typeof(type) != "number") {
-            throw new Error("The Sorter Failed!");
+        if (typeof(type) != 'number') {
+            throw new Error('The Sorter Failed!');
         }
         if (type == 2) {
             return true;
@@ -19,8 +19,8 @@ module.exports = {
     },
 
     groupChat: (type) => {
-        if (typeof(type) != "number") {
-            throw new Error("The Sorter Failed!");
+        if (typeof(type) != 'number') {
+            throw new Error('The Sorter Failed!');
         }
         if (type == 1 || type == 2) {
             return true;
@@ -28,8 +28,8 @@ module.exports = {
     },
 
     didJoin: (membershipStatus) => {
-        if (typeof(membershipStatus) != "number") {
-            throw new Error("The Sorter failed!");
+        if (typeof(membershipStatus) != 'number') {
+            throw new Error('The Sorter failed!');
         }
         if (membershipStatus == 1) {
             return true;
@@ -37,19 +37,19 @@ module.exports = {
     },
 
     didMute: (alertOption) => {
-        if (typeof(alertOption) != "number") {
-            throw new Error("The Sorter failed!");
+        if (typeof(alertOption) != 'number') {
+            throw new Error('The Sorter failed!');
         }
         if (alertOption == 1) {
             return true;
         } else return false;
     },
 
-    didUnread: (condition) => {
-    	if(typeof(condition) != "number") {
-    		throw new Error("The Sorter failed!");
-    	}
-        if (condition == 1) {
+    didUnread: (unread) => {
+        if (typeof(unread) != 'number') {
+            throw new Error('The Sorter failed!');
+        }
+        if (unread == 1) {
             unread = true;
         } else {
             unread = false;
@@ -79,6 +79,6 @@ module.exports = {
             'id': 'x' + element.ndcId,
             'name': element.name,
             'link': element.link
-        }
+        };
     }
-}
+};

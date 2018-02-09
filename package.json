@@ -18,7 +18,9 @@
   "author": "Robin Möller <moelrobi@gmail.com>",
   "license": "AGPL-3.0",
   "devDependencies": {
+    "babel-eslint": "^8.2.1",
     "chai": "^4.1.2",
+    "eslint": "^4.17.0",
     "mocha": "^5.0.0"
   },
   "dependencies": {
