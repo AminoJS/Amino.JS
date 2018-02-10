@@ -105,6 +105,7 @@ module.exports = {
                 body = JSON.parse(body);
                 body.messageList.forEach((element) => {
                     //TODO: Do a Sorting for this System.
+                    console.log(element.author);
                     msgList.messages.push({
                         'threadId': uid,
                         'messageId': element.messageId,
@@ -112,7 +113,7 @@ module.exports = {
                         'type': element.type,
                         'author': {
                             'uid': element.author.uid,
-                            'name': element.author.name,
+                            'name': element.author.nickname,
                             'level': element.author.level,
                             'role': element.author.role
                         }

@@ -30,3 +30,14 @@ Deploy_to_Docs:
   when: manual
   only:
    - master
+
+Deploy_to_NPM:
+  stage: deploy
+  script:
+    - npm publish
+  enviroment:
+    name: NPM_Repo
+    url: https://www.npmjs.com/package/kiframe
+  when: manual
+  only:
+    - master
