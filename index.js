@@ -112,7 +112,7 @@ module.exports = {
                         'type': element.type,
                         'author': {
                             'uid': element.author.uid,
-                            'name': element.author.name,
+                            'name': element.author.nickname,
                             'level': element.author.level,
                             'role': element.author.role
                         }
