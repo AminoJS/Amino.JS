@@ -35,7 +35,7 @@ Deploy_to_NPM:
   stage: deploy
   script:
     - npm publish
-  enviroment:
+  environment:
     name: NPM_Repo
     url: https://www.npmjs.com/package/kiframe
   when: manual
