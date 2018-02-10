@@ -1,7 +1,7 @@
 /**
  * @name Kikai Framework
  * @author RobStyling
- * @version 0.0.2
+ * @version 0.0.3
  * @copyright RobStyling 2018
  * @beta
  */
