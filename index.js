@@ -105,7 +105,6 @@ module.exports = {
                 body = JSON.parse(body);
                 body.messageList.forEach((element) => {
                     //TODO: Do a Sorting for this System.
-                    console.log(element.author);
                     msgList.messages.push({
                         'threadId': uid,
                         'messageId': element.messageId,
