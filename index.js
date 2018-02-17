@@ -13,7 +13,7 @@ const objs = require('./objects.js');
  * @param  {String} email    Email-Adresse für den Login
  * @param  {String} password Passwort für den Login
  * @param  {UUID} deviceID Siehe mehr unter ('howto/deviceid_dump.md')
- * @return {SecurityString} sid Der Security String um mit der API zu komunizieren.
+ * @returns {SecurityString} sid Der Security String um mit der API zu komunizieren.
  */
 async function login(email, password, deviceID) {
     let sid;
@@ -36,32 +36,37 @@ async function login(email, password, deviceID) {
     return sid;
 }
 
+/**
+ * 
+ * @param {SecurityString} sid For authenticating with the Narvii-API.
+ * @returns {JSON} JSON Object containing all Joined Coms with the Logged in Account.
+ */
+async function getJoinedComs(sid) {
+    let communityList = objs.communityList;
+    await request.get(endpoints.getComs, {
+        headers: {
+            'NDCAUTH': `sid=${sid}`
+        }
+    }, (err, res, body) => {
+        try {
+            if (err) throw 'Request Error: ' + err;
+            body = JSON.parse(body);
+            body.communityList.forEach((element) => {
+                communityList.coms.push(sorter.comSort(element));
+            });
+            communityList.status = 'ok';
+            communityList.error = null;
+        } catch (err) {
+            communityList.error = err;
+        }
+    });
+    return communityList;
+}
+
 module.exports = {
     login,
-    getJoinedComs: async function(sid) {
-        let communityList = objs.communityList;
-        await request.get(endpoints.getComs, {
-            headers: {
-                'NDCAUTH': `sid=${sid}`
-            }
-        }, (err, res, body) => {
-            try {
-                if (err) throw 'Request Error: ' + err;
-                body = JSON.parse(body);
-                body.communityList.forEach((element) => {
-                    communityList.coms.push(sorter.comSort(element));
-                });
-                communityList.status = 'ok';
-                communityList.error = null;
-            } catch (err) {
-                communityList.error = err;
-            }
-        });
-        return communityList;
-    },
-
-
-    getJoinedChats: async function(sid, com) {
+    getJoinedComs,
+    getJoinedChats: async function (sid, com) {
         let threadList = objs.threadList;
         await request.get(endpoints.getJoinedChats(com), {
             headers: {
@@ -87,7 +92,7 @@ module.exports = {
         return threadList;
     },
 
-    getChat: async function(sid, com, uid, count) {
+    getChat: async function (sid, com, uid, count) {
         let msgList = objs.recivedMessages;
         try {
             await request.get(endpoints.loadChat(com, uid, count), {
@@ -120,7 +125,7 @@ module.exports = {
         return msgList;
     },
 
-    sendChat: async function(sid, com, uid, msg) {
+    sendChat: async function (sid, com, uid, msg) {
         let message = objs.sendingMessage;
         message.message.message = msg;
         message.message.threadId = uid;

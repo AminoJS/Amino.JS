@@ -19,14 +19,36 @@ make_test_build:
    - npm test
    - ./node_modules/.bin/eslint .
 
+Deploy_to_Dev_Docs:
+  stage: deploy
+  script:
+    - jsdoc -t ./node_modules/ink-docstrap/template -R README.md .
+    - cp -R out/* /srv/http/docs/dev
+  environment:
+    name: DevDocSite
+    url: http://docs.robsys.space/dev
+  only:
+    - dev
+
 Deploy_to_Docs:
   stage: deploy
   script:
-     - jsdoc -t ./node_modules/ink-docstrap/template -R README.md .
-     - cp -R out/*.* /srv/http/docs
+    - jsdoc -t ./node_modules/ink-docstrap/template -R README.md .
+    - cp -R out/*.* /srv/http/docs
   environment:
     name: DocSite
-    url: https://docs.robsys.space
+    url: http://docs.robsys.space
   when: manual
   only:
    - master
+
+Deploy_to_NPM:
+  stage: deploy
+  script:
+    - npm publish
+  environment:
+    name: NPM_Repo
+    url: https://www.npmjs.com/package/kiframe
+  when: manual
+  only:
+    - master
