@@ -1,7 +1,3 @@
-/**
- * @module Libary for AminoApps
- */
-
 //Libary Imports
 const request = require('request-promise');
 const endpoints = require('./endpoints.js');
