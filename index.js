@@ -59,35 +59,41 @@ async function getJoinedComs(sid) {
     return communityList;
 }
 
+/**
+ * 
+ * @param {SecurityString} sid For authenticating with the Narvii-API.
+ * @param {CommunityUUID} com 
+ */
+async function getJoinedChats(sid, com) {
+    let threadList = objs.threadList;
+    await request.get(endpoints.getJoinedChats(com), {
+        headers: {
+            'NDCAUTH': `sid=${sid}`
+        }
+    }, (err, res, body) => {
+        try {
+            body = JSON.parse(body);
+            body.threadList.forEach((element) => {
+                let publicChat = sorter.publicChat(element.type);
+                let group = sorter.groupChat(element.type);
+                let joined = sorter.didJoin(element.membershipStatus);
+                let muted = sorter.didMute(element.alertOption);
+                let unread = sorter.didUnread(element.condition);
+                threadList.threads.push(sorter.threadSort(element, joined, publicChat, group, muted, unread));
+            });
+            threadList.status = 'ok';
+            threadList.error = null;
+        } catch (err) {
+            threadList.error = err;
+        }
+    });
+    return threadList;
+}
+
 module.exports = {
     login,
     getJoinedComs,
-    getJoinedChats: async function (sid, com) {
-        let threadList = objs.threadList;
-        await request.get(endpoints.getJoinedChats(com), {
-            headers: {
-                'NDCAUTH': `sid=${sid}`
-            }
-        }, (err, res, body) => {
-            try {
-                body = JSON.parse(body);
-                body.threadList.forEach((element) => {
-                    let publicChat = sorter.publicChat(element.type);
-                    let group = sorter.groupChat(element.type);
-                    let joined = sorter.didJoin(element.membershipStatus);
-                    let muted = sorter.didMute(element.alertOption);
-                    let unread = sorter.didUnread(element.condition);
-                    threadList.threads.push(sorter.threadSort(element, joined, publicChat, group, muted, unread));
-                });
-                threadList.status = 'ok';
-                threadList.error = null;
-            } catch (err) {
-                threadList.error = err;
-            }
-        });
-        return threadList;
-    },
-
+    getJoinedChats,
     getChat: async function (sid, com, uid, count) {
         let msgList = objs.recivedMessages;
         try {
