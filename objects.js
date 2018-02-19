@@ -6,7 +6,7 @@
  */
 
 /**
- * @argument {Array | JSON} coms 
+ * @argument {Array | JSON} coms test
  */
 const communityList = {
     coms: [],
