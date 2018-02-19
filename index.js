@@ -34,6 +34,7 @@ async function login(email, password, deviceID) {
 
 /**
  * Gets a JSON-Object were all ID's, Name's and URL's for the current Logged-In Account. 
+ * @function testing something
  * @param {SecurityString} sid For authenticating with the Narvii-API.
  * @returns {JSON} JSON Object containing all Joined Coms with the Logged in Account.
  */
