@@ -1,10 +1,21 @@
-module.exports = {
-    communityList: {
-        coms: [],
-        status: 'not ok',
-        error: 'there has been nothing done with the Object.'
-    },
+/**
+ * @module Objects_KiFrame
+ * @author RobStyling
+ * @version v.0.1
+ * @beta
+ */
 
+/**
+ * @argument {Array <JSON>} coms 
+ */
+const communityList = {
+    coms: [],
+    status: 'not ok',
+    error: 'there has been nothing done with the Object.'
+}
+
+module.exports = {
+    communityList,
     threadList: {
         threads: [],
         status: 'not ok',

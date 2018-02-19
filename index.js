@@ -1,15 +1,33 @@
+/**
+ * @module index_KiFrame
+ * @author RobStyling
+ * @version v.0.1
+ * @beta
+ */
+
+/** 
+ * TODO:
+ * Create Throw Error Cases if @param's are Missing. (comming in v.0.1)
+ * Get User Infos (comming in v.0.2)
+ * Comment on a User Profile (comming in v.0.2)
+ * Create a Wiki Entry / Blog Post (comming in v.0.2)
+ * Comment a Wiki Entry / Blog Post (comming in v.0.2)
+ * Delete a Wiki Entry / Blog Post (comming in v.0.2)
+ */
+
+
 //Libary Imports
-const request = require('request-promise');
-const endpoints = require('./endpoints.js');
-const sorter = require('./sorter.js');
-const objs = require('./objects.js');
+const request = require('request-promise'); //The Request Module for sending the different Modules
+const endpoints = require('./endpoints.js'); //For Creating shorter URL's in this Module
+const sorter = require('./sorter.js'); //For easier Sorting of various Responses.
+const objs = require('./objects.js'); //For Storing the Objects that the Framework returns. 
 
 /**
  * Loginfunction for the Framework for Handeling API Reqeusts.
- * @param  {String} email    Email-Adresse für den Login
- * @param  {String} password Passwort für den Login
- * @param  {UUID} deviceID Siehe mehr unter ('howto/deviceid_dump.md')
- * @returns {SecurityString} sid Der Security String um mit der API zu komunizieren.
+ * @param  {String} email Email-Adress for logging in.
+ * @param  {String} password Password for logging in.
+ * @param  {UUID} deviceID Siehe mehr unter ('Wiki/Device ID Dump').
+ * @returns {SecurityString} The Securitystring for authenticating with Amino. (required by all other functions).
  */
 async function login(email, password, deviceID) {
     let sid;
@@ -33,8 +51,7 @@ async function login(email, password, deviceID) {
 }
 
 /**
- * Gets a JSON-Object were all ID's, Name's and URL's for the current Logged-In Account. 
- * @function testing something
+ * Gets a JSON-Object were all Community ID's, Name's and URL's for the current Logged-In Account are obainted in. 
  * @param {SecurityString} sid For authenticating with the Narvii-API.
  * @returns {JSON} JSON Object containing all Joined Coms with the Logged in Account.
  */
@@ -61,10 +78,10 @@ async function getJoinedComs(sid) {
 }
 
 /**
- * 
+ * Loads all Kind of Chat Infomations that the Person itself joined.
  * @param {SecurityString} sid For authenticating with the Narvii-API.
  * @param {CommunityUUID} com A ID that can be obtained by @function getJoinedComs
- * @returns {JSON} A JSON-Object where all the Chats that the Logged-in User has joined are contained.
+ * @returns {JSON} JSON-Object where all the Chats that the Logged-in User has joined are contained in an Array.
  */
 async function getJoinedChats(sid, com) {
     let threadList = objs.threadList;
@@ -92,69 +109,92 @@ async function getJoinedChats(sid, com) {
     });
     return threadList;
 }
+/**
+ * Loads Messages in a specific Chat.
+ * @param {SecurityString} sid For authenticating with the Narvii-API.
+ * @param {CommunityUUID} com The Community ID that can be Obtained by @function getJoinedComs
+ * @param {ChatUUID} uid The Chats ID that can be obtained by @function getJoinedChats
+ * @param {Int} count The ammount of Messages to Load (defaults to 1);
+ * @returns {JSON} JSON-Object where all the Messages in the requested Chat are contained in an Array.
+ */
+async function getChat(sid, com, uid, count) {
+    let msgList = objs.recivedMessages;
+    if(count == undefined || count == null) {
+        count = 1;
+    }
+    try {
+        await request.get(endpoints.loadChat(com, uid, count), {
+            headers: {
+                'NDCAUTH': `sid=${sid}`
+            }
+        }, (err, res, body) => {
+            body = JSON.parse(body);
+            body.messageList.forEach((element) => {
+                //TODO: Do a Sorting for this System. (planed for v.0.1)
+                msgList.messages.push({
+                    'threadId': uid,
+                    'messageId': element.messageId,
+                    'msg': element.content,
+                    'type': element.type,
+                    'author': {
+                        'uid': element.author.uid,
+                        'name': element.author.name,
+                        'level': element.author.level,
+                        'role': element.author.role
+                    }
+                });
+            });
+        });
+        msgList.status = 'ok';
+        msgList.error = null;
+    } catch (err) {
+        msgList.error = err;
+    }
+    return msgList;
+};
 
+/**
+ * Function to send a Mesage into a Chat.
+ * @param {SecurityString} sid For authenticating with the Narvii-API.
+ * @param {CommunityUUID} com The Community ID that can be Obtained by @function getJoinedComs
+ * @param {ChatUUID} uid The Chats ID that can be obtained by @function getJoinedChats
+ * @param {String} msg The Message to be sent.
+ */
+async function sendChat(sid, com, uid, msg) {
+    let message = objs.sendingMessage;
+    message.message.message = msg;
+    message.message.threadId = uid;
+    try {
+        await request.post(endpoints.sendChat(com, uid), {
+            headers: {
+                'NDCAUTH': `sid=${sid}`
+            },
+            json: {
+                'content': msg,
+                'type': 0,
+                'clientRefId': 43196704,
+                'timestamp': new Date().getUTCMilliseconds()
+            }
+        }, (err, res, body) => {
+            if (body.message) {
+                message.message.sent = true;
+                message.status = 'ok';
+                message.error = null;
+            }
+        });
+    } catch (err) {
+        message.error = err;
+    }
+    return message;
+}
+
+/**
+ * For Exporting Suff
+ */
 module.exports = {
     login,
     getJoinedComs,
     getJoinedChats,
-    getChat: async function (sid, com, uid, count) {
-        let msgList = objs.recivedMessages;
-        try {
-            await request.get(endpoints.loadChat(com, uid, count), {
-                headers: {
-                    'NDCAUTH': `sid=${sid}`
-                }
-            }, (err, res, body) => {
-                body = JSON.parse(body);
-                body.messageList.forEach((element) => {
-                    //TODO: Do a Sorting for this System.
-                    msgList.messages.push({
-                        'threadId': uid,
-                        'messageId': element.messageId,
-                        'msg': element.content,
-                        'type': element.type,
-                        'author': {
-                            'uid': element.author.uid,
-                            'name': element.author.name,
-                            'level': element.author.level,
-                            'role': element.author.role
-                        }
-                    });
-                });
-            });
-            msgList.status = 'ok';
-            msgList.error = null;
-        } catch (err) {
-            msgList.error = err;
-        }
-        return msgList;
-    },
-
-    sendChat: async function (sid, com, uid, msg) {
-        let message = objs.sendingMessage;
-        message.message.message = msg;
-        message.message.threadId = uid;
-        try {
-            await request.post(endpoints.sendChat(com, uid), {
-                headers: {
-                    'NDCAUTH': `sid=${sid}`
-                },
-                json: {
-                    'content': msg,
-                    'type': 0,
-                    'clientRefId': 43196704,
-                    'timestamp': new Date().getUTCMilliseconds()
-                }
-            }, (err, res, body) => {
-                if (body.message) {
-                    message.message.sent = true;
-                    message.status = 'ok';
-                    message.error = null;
-                }
-            });
-        } catch (err) {
-            message.error = err;
-        }
-        return message;
-    }
+    getChat,
+    sendChat
 };
