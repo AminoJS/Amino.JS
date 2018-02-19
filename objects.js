@@ -6,7 +6,11 @@
  */
 
 /**
- * @argument {Array | JSON} coms test
+ * @example {@lang json}
+ * ```json
+ * coms[0] = {
+ * }
+ * ```
  */
 const communityList = {
     coms: [],
