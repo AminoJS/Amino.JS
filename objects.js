@@ -19,14 +19,33 @@ const communityList = {
     error: 'there has been nothing done with the Object.'
 };
 
+/**
+ * @example
+ * threads[0] = {
+ * 'threadId': '<A Random UUID>',
+ * 'memberCount': 59,
+ * 'title': 'Laberchat für alle',
+ * 'joined': true,
+ * 'public': false,
+ * 'group': true,
+ * 'muted': false,
+ * 'unread': true,
+ * 'lastMessage': {
+ *   'senderId': 'A UserID',
+ *   'message': 'The Last Message sent to the Channel'
+ *  },
+ * 'members': 'still Raw JSON from the API!'
+ * }
+ */
+const threadList = {
+    threads: [],
+    status: 'not ok',
+    error: 'not everything defined'
+};
+
 module.exports = {
     communityList,
-    threadList: {
-        threads: [],
-        status: 'not ok',
-        error: 'not everything defined'
-    },
-
+    threadList,
     sendingMessage: {
         message: {
             sent: false,
