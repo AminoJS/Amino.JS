@@ -8,6 +8,9 @@
 /**
  * @example
  * coms[0] = {
+ *     "id": "x159192087",
+ *     "name": "German Roleplay Community",
+ *     "url": "https://aminoapps.com/c/german-roleplay-community/"
  * }
  */
 const communityList = {
