@@ -75,6 +75,7 @@ async function getJoinedChats(sid, com) {
         try {
             body = JSON.parse(body);
             body.threadList.forEach((element) => {
+                //TODO: Move all of that into the Sorter Function (planed for v.0.1)
                 let publicChat = sorter.publicChat(element.type);
                 let group = sorter.groupChat(element.type);
                 let joined = sorter.didJoin(element.membershipStatus);
