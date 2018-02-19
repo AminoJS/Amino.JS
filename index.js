@@ -33,7 +33,7 @@ async function login(email, password, deviceID) {
 }
 
 /**
- * 
+ * Gets a JSON-Object were all ID's, Name's and URL's for the current Logged-In Account. 
  * @param {SecurityString} sid For authenticating with the Narvii-API.
  * @returns {JSON} JSON Object containing all Joined Coms with the Logged in Account.
  */
@@ -62,7 +62,8 @@ async function getJoinedComs(sid) {
 /**
  * 
  * @param {SecurityString} sid For authenticating with the Narvii-API.
- * @param {CommunityUUID} com 
+ * @param {CommunityUUID} com A ID that can be obtained by @function getJoinedComs
+ * @returns {JSON} A JSON-Object where all the Chats that the Logged-in User has joined are contained.
  */
 async function getJoinedChats(sid, com) {
     let threadList = objs.threadList;
