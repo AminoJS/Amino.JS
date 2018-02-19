@@ -12,7 +12,7 @@ const communityList = {
     coms: [],
     status: 'not ok',
     error: 'there has been nothing done with the Object.'
-}
+};
 
 module.exports = {
     communityList,

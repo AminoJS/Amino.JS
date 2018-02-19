@@ -151,7 +151,7 @@ async function getChat(sid, com, uid, count) {
         msgList.error = err;
     }
     return msgList;
-};
+}
 
 /**
  * Function to send a Mesage into a Chat.
