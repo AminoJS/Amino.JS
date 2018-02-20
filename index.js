@@ -178,7 +178,7 @@ async function sendChat(sid, com, uid, msg) {
     let message = objs.sendingMessage;
     if(typeof sid != 'string' || typeof com !== 'string' || typeof uid !== 'string' || typeof msg !== 'string') {
         throw new Error('All Arguments are not satisfied.');
-    };
+    }
     message.message.message = msg;
     message.message.threadId = uid;
     try {
