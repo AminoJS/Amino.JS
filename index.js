@@ -33,7 +33,7 @@ async function login(email, password, deviceID) {
     let sid;
     if(typeof email != 'string' || typeof password !== 'string' || typeof deviceID !== 'string') {
         throw new Error('All Arguments are not satisfied.');
-    };
+    }
     await request.post(endpoints.login, {
         json: {
             'email': email,
@@ -62,7 +62,7 @@ async function getJoinedComs(sid) {
     let communityList = objs.communityList;
     if(typeof sid != 'string') {
         throw new Error('All Arguments are not satisfied.');
-    };
+    }
     await request.get(endpoints.getComs, {
         headers: {
             'NDCAUTH': `sid=${sid}`
@@ -86,14 +86,14 @@ async function getJoinedComs(sid) {
 /**
  * Loads all Kind of Chat Infomations that the Person itself joined.
  * @param {SecurityString} sid For authenticating with the Narvii-API.
- * @param {CommunityUUID} com A ID that can be obtained by @function getJoinedComs
+ * @param {CommunityUUID} com A ID that can be obtained by the function getJoinedComs
  * @returns {Object} Object where all the Chats that the Logged-in User has joined are contained in an Array.
  */
 async function getJoinedChats(sid, com) {
     let threadList = objs.threadList;
     if(typeof sid != 'string' || typeof com !== 'string') {
         throw new Error('All Arguments are not satisfied.');
-    };
+    }
     await request.get(endpoints.getJoinedChats(com), {
         headers: {
             'NDCAUTH': `sid=${sid}`
@@ -122,8 +122,8 @@ async function getJoinedChats(sid, com) {
 /**
  * Loads Messages in a specific Chat.
  * @param {SecurityString} sid For authenticating with the Narvii-API.
- * @param {CommunityUUID} com The Community ID that can be Obtained by @function getJoinedComs
- * @param {ChatUUID} uid The Chats ID that can be obtained by @function getJoinedChats
+ * @param {CommunityUUID} com The Community ID that can be Obtained by the function getJoinedComs
+ * @param {ChatUUID} uid The Chats ID that can be obtained by the function getJoinedChats
  * @param {Number} count The ammount of Messages to Load (defaults to 1);
  * @returns {Object} Object where all the Messages in the requested Chat are contained in an Array.
  */
@@ -131,7 +131,7 @@ async function getChat(sid, com, uid, count) {
     let msgList = objs.recivedMessages;
     if(typeof sid != 'string' || typeof com !== 'string' || typeof uid !== 'string') {
         throw new Error('All Arguments are not satisfied.');
-    };
+    }
     if(count == undefined || count == null) {
         count = 1;
     }
@@ -169,10 +169,10 @@ async function getChat(sid, com, uid, count) {
 /**
  * Function to send a Mesage into a Chat.
  * @param {SecurityString} sid For authenticating with the Narvii-API.
- * @param {CommunityUUID} com The Community ID that can be Obtained by @function getJoinedComs
- * @param {ChatUUID} uid The Chats ID that can be obtained by @function getJoinedChats
+ * @param {CommunityUUID} com The Community ID that can be Obtained by the Function getJoinedComs
+ * @param {ChatUUID} uid The Chats ID that can be obtained by the function getJoinedChats
  * @param {String} msg The Message to be sent.
- * @returns {Object} 
+ * @returns {Object} A Custom Object where the Message, the MessageID, and a Boolean 
  */
 async function sendChat(sid, com, uid, msg) {
     let message = objs.sendingMessage;
