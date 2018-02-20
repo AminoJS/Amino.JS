@@ -31,6 +31,9 @@ const objs = require('./objects.js'); //For Storing the Objects that the Framewo
  */
 async function login(email, password, deviceID) {
     let sid;
+    if(typeof email != 'string' || typeof password !== 'string' || typeof deviceID !== 'string') {
+        throw new Error('All Arguments are not satisfied.');
+    };
     await request.post(endpoints.login, {
         json: {
             'email': email,
@@ -53,10 +56,13 @@ async function login(email, password, deviceID) {
 /**
  * Gets a JSON-Object were all Community ID's, Name's and URL's for the current Logged-In Account are obainted in. 
  * @param {SecurityString} sid For authenticating with the Narvii-API.
- * @returns {JSON} JSON Object containing all Joined Coms with the Logged in Account.
+ * @returns {Object} Object containing all Joined Coms with the Logged in Account.
  */
 async function getJoinedComs(sid) {
     let communityList = objs.communityList;
+    if(typeof sid != 'string') {
+        throw new Error('All Arguments are not satisfied.');
+    };
     await request.get(endpoints.getComs, {
         headers: {
             'NDCAUTH': `sid=${sid}`
@@ -81,10 +87,13 @@ async function getJoinedComs(sid) {
  * Loads all Kind of Chat Infomations that the Person itself joined.
  * @param {SecurityString} sid For authenticating with the Narvii-API.
  * @param {CommunityUUID} com A ID that can be obtained by @function getJoinedComs
- * @returns {JSON} JSON-Object where all the Chats that the Logged-in User has joined are contained in an Array.
+ * @returns {Object} Object where all the Chats that the Logged-in User has joined are contained in an Array.
  */
 async function getJoinedChats(sid, com) {
     let threadList = objs.threadList;
+    if(typeof sid != 'string' || typeof com !== 'string') {
+        throw new Error('All Arguments are not satisfied.');
+    };
     await request.get(endpoints.getJoinedChats(com), {
         headers: {
             'NDCAUTH': `sid=${sid}`
@@ -109,16 +118,20 @@ async function getJoinedChats(sid, com) {
     });
     return threadList;
 }
+
 /**
  * Loads Messages in a specific Chat.
  * @param {SecurityString} sid For authenticating with the Narvii-API.
  * @param {CommunityUUID} com The Community ID that can be Obtained by @function getJoinedComs
  * @param {ChatUUID} uid The Chats ID that can be obtained by @function getJoinedChats
- * @param {Int} count The ammount of Messages to Load (defaults to 1);
- * @returns {JSON} JSON-Object where all the Messages in the requested Chat are contained in an Array.
+ * @param {Number} count The ammount of Messages to Load (defaults to 1);
+ * @returns {Object} Object where all the Messages in the requested Chat are contained in an Array.
  */
 async function getChat(sid, com, uid, count) {
     let msgList = objs.recivedMessages;
+    if(typeof sid != 'string' || typeof com !== 'string' || typeof uid !== 'string') {
+        throw new Error('All Arguments are not satisfied.');
+    };
     if(count == undefined || count == null) {
         count = 1;
     }
@@ -159,9 +172,13 @@ async function getChat(sid, com, uid, count) {
  * @param {CommunityUUID} com The Community ID that can be Obtained by @function getJoinedComs
  * @param {ChatUUID} uid The Chats ID that can be obtained by @function getJoinedChats
  * @param {String} msg The Message to be sent.
+ * @returns {Object} 
  */
 async function sendChat(sid, com, uid, msg) {
     let message = objs.sendingMessage;
+    if(typeof sid != 'string' || typeof com !== 'string' || typeof uid !== 'string' || typeof msg !== 'string') {
+        throw new Error('All Arguments are not satisfied.');
+    };
     message.message.message = msg;
     message.message.threadId = uid;
     try {
