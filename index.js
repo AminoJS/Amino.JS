@@ -1,7 +1,12 @@
 /**
  * @module Amino.JS
  * @author RobStyling
+<<<<<<< HEAD
  * @version v.0.1
+=======
+ * @version 0.0.3
+ * @copyright RobStyling 2018
+>>>>>>> master
  * @beta
  */
 
@@ -150,7 +155,7 @@ async function getChat(sid, com, uid, count) {
     return msgList;
 }
 
-/**
+/*
  * Function to send a Mesage into a Chat.
  * @param {SecurityString} sid For authenticating with the Narvii-API.
  * @param {CommunityUUID} com The Community ID that can be Obtained by the Function getJoinedComs
@@ -168,12 +173,6 @@ async function sendChat(sid, com, uid, msg) {
     try {
         await request.post(endpoints.sendChat(com, uid), {
             headers: {
-                'NDCAUTH': `sid=${sid}`
-            },
-            json: {
-                'content': msg,
-                'type': 0,
-                'clientRefId': 43196704,
                 'timestamp': new Date().getUTCMilliseconds()
             }
         }, (err, res, body) => {
