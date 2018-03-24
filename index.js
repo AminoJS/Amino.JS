@@ -139,7 +139,6 @@ async function getChat(sid, com, uid, count) {
         }, (err, res, body) => {
             body = JSON.parse(body);
             body.messageList.forEach((element) => {
-                //TODO: Do a Sorting for this System. (planed for v.0.1)
                 msgList.messages.push(sorter.sendMessageSorter(uid, element));
             });
         });
