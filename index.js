@@ -1,12 +1,7 @@
 /**
  * @module Amino.JS
  * @author RobStyling
-<<<<<<< HEAD
  * @version v.0.1
-=======
- * @version 0.0.3
- * @copyright RobStyling 2018
->>>>>>> master
  * @beta
  */
 
