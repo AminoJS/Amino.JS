@@ -127,9 +127,9 @@ async function getChat(sid, com, uid, count) {
     if(typeof sid != 'string' || typeof com !== 'string' || typeof uid !== 'string') {
         throw new Error('All Arguments are not satisfied.');
     }
+    //Silent fallback if a Count is not present.
     if(count == undefined || count == null) {
         count = 1;
-        console.log('[AminoJS.getChat()] No count Variable Defined. Defaulting to 1'); // eslint-disable-line 
     }
     try {
         await request.get(endpoints.loadChat(com, uid, count), {
