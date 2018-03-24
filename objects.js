@@ -1,5 +1,5 @@
 /**
- * @module Objects_KiFrame
+ * @module Amino.JS_Objects
  * @author RobStyling
  * @version v.0.1
  * @beta

@@ -1,5 +1,5 @@
 /**
- * @module index_KiFrame
+ * @module Amino.JS
  * @author RobStyling
  * @version v.0.1
  * @beta
@@ -7,7 +7,6 @@
 
 /** 
  * TODO:
- * Create Throw Error Cases if @param's are Missing. (comming in v.0.1)
  * Get User Infos (comming in v.0.2)
  * Comment on a User Profile (comming in v.0.2)
  * Create a Wiki Entry / Blog Post (comming in v.0.2)
@@ -100,15 +99,11 @@ async function getJoinedChats(sid, com) {
         }
     }, (err, res, body) => {
         try {
+            //Parsing the Response.
             body = JSON.parse(body);
             body.threadList.forEach((element) => {
-                //TODO: Move all of that into the Sorter Function (planed for v.0.1)
-                let publicChat = sorter.publicChat(element.type);
-                let group = sorter.groupChat(element.type);
-                let joined = sorter.didJoin(element.membershipStatus);
-                let muted = sorter.didMute(element.alertOption);
-                let unread = sorter.didUnread(element.condition);
-                threadList.threads.push(sorter.threadSort(element, joined, publicChat, group, muted, unread));
+                //Sorting the Elements and pushing them into the Array.
+                threadList.threads.push(sorter.threadSort(element));
             });
             threadList.status = 'ok';
             threadList.error = null;
@@ -134,6 +129,7 @@ async function getChat(sid, com, uid, count) {
     }
     if(count == undefined || count == null) {
         count = 1;
+        console.log('[AminoJS.getChat()] No count Variable Defined. Defaulting to 1'); // eslint-disable-line 
     }
     try {
         await request.get(endpoints.loadChat(com, uid, count), {
@@ -144,18 +140,7 @@ async function getChat(sid, com, uid, count) {
             body = JSON.parse(body);
             body.messageList.forEach((element) => {
                 //TODO: Do a Sorting for this System. (planed for v.0.1)
-                msgList.messages.push({
-                    'threadId': uid,
-                    'messageId': element.messageId,
-                    'msg': element.content,
-                    'type': element.type,
-                    'author': {
-                        'uid': element.author.uid,
-                        'name': element.author.name,
-                        'level': element.author.level,
-                        'role': element.author.role
-                    }
-                });
+                msgList.messages.push(sorter.sendMessageSorter(uid, element));
             });
         });
         msgList.status = 'ok';
@@ -206,7 +191,7 @@ async function sendChat(sid, com, uid, msg) {
 }
 
 /**
- * For Exporting Suff
+ * For exporting the Functions for Usage in the Client.
  */
 module.exports = {
     login,

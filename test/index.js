@@ -43,6 +43,10 @@ describe('how do the enpoints react..', () => {
         });
     })
     /*
+    Not Suitable Testcases. Maybe should be added later.
+
+    Do we actually need test Cases? Well. Good to have them at least.
+
     describe('how do the api react...', function() {
 
     })

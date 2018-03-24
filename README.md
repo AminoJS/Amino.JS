@@ -1,1 +1,1 @@
-# Amino.JS //TODO: Make this better
+# Amino.JS //TODO: Make this better. (already done. lol. see master/README.md)
