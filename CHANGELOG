@@ -1,3 +1,17 @@
+v.0.1 alpha (The Documentaion Update!):
+
+The Code was documentated.
+
+First Official Alpha Release since open-sourcing the Project.
+
+The Code is now Avaible and Maintend on Github! (https://github.com/moelrobi/Amino.JS)
+
+Also some Minorfixes:
+
+[db28fd1 & 05b6e08] Switching from gitlab-ci to Travis-Ci.
+[95180d5] Added Eslint as a Sutiable Testcase.
+[6935738] Removed some Testcases because of Sorter-Rewrite
+
 v.0.0.3 alpha:
 
 A Bug was fixed.
