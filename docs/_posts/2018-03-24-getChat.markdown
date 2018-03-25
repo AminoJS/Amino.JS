@@ -13,4 +13,25 @@ categories: jekyll update
 | `uid`   | ChatUUID       | The Chats ID that can be obtained by the function getJoinedChats    |
 | `count` | Number         | The amount of Messages to Load (defaults to 1);                     |
 
+**Returns:**
+Array of message objects.
 
+Example of message object:
+
+{% highlight javascript %}
+msgList[0] = {
+  'threadId': uid,
+  'messageId': element.messageId,
+  'msg': element.content,
+  'type': element.type,
+  'author': {
+    'uid': element.author.uid,
+    'name': element.author.nickname,
+    'level': element.author.level,
+    'role': element.author.role
+  }
+}
+{% endhighlight %}
+
+
+Access using `getChat().messages`

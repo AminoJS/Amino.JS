@@ -12,3 +12,19 @@ categories: jekyll update
 | `com` | CommunityUUID  | The Community ID that can be Obtained by `getJoinedComs()` |
 | `uid` | ChatUUID       | The chat ID returned by `getJoinedChats`                   |
 | `msg` | String         | The message to be sent.                                    |
+
+**Returns:** Confirmation JSON that the message was sent.
+
+Example of a successful send.
+{% highlight javascript %}
+message = {
+  message: {
+    message: "Hello, squad!",
+    threadID: "<chat room>",
+    sent: true
+  },
+  
+  status: "ok",
+  error: null
+}
+{% endhighlight %}
