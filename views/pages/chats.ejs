@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<% include ../partials/head %>
+</head>
+<body onload="loadProfile()">
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">Amino</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        <li class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown" href="#">Communities <b class="caret"></b></a>
+			<ul class="dropdown-menu">
+			  <% for (var i = 0; i < communities.length; i++) { %>
+				<li><a href="#" onclick="loadCommunity('<%= communities[i].id %>')"><%= communities[i].name %></a></li>
+			  <% } %>
+			</ul>
+		</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#"><span class="glyphicon glyphicon-user"></span> My Account</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+  
+<div class="container text-center">    
+  <div class="row">
+    <div class="col-sm-3 well">
+      <div class="well">
+        <p><a href="#" id="userName">Loading...</a></p>
+        <img id="userIcon" class="img-circle" height="65" width="65" alt="Avatar">
+      </div>
+      <div class="well">
+        <p><a href="#">Titles</a></p>
+        <p>
+          <span class="label label-default">Titles Here</span>
+        </p>
+      </div>
+    </div>
+	
+    <div class="col-sm-7" id="chats"></div>
+	
+  </div>
+</div>
+</body>
+</html>

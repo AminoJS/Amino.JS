@@ -1,0 +1,78 @@
+<!-- views/pages/login.ejs -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include ../partials/head %>
+</head>
+
+<body class="login-page">
+    <div class="login-box">
+        <div class="logo">
+            <a href="javascript:void(0);">Amino</b></a>
+            <small>Welcome! Please do login!</small>
+        </div>
+        <div class="card">
+            <div class="body">
+                <form id="sign_in" action="/api/auth/login" method="post" name="Login_Form">
+                    <div class="msg">Sign in to start your session</div>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">person</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="text" class="form-control" name="Username" placeholder="Username" required autofocus>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="material-icons">lock</i>
+                        </span>
+                        <div class="form-line">
+                            <input type="password" class="form-control" name="Password" placeholder="Password" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <button class="btn btn-block bg-pink waves-effect" type="submit">SIGN IN</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery Core Js -->
+    <script src="/plugins/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core Js -->
+    <script src="/plugins/bootstrap/js/bootstrap.js"></script>
+
+    <!-- Waves Effect Plugin Js -->
+    <script src="/plugins/node-waves/waves.js"></script>
+
+    <!-- Validation Plugin Js -->
+    <script src="/plugins/jquery-validation/jquery.validate.js"></script>
+
+    <!-- Custom Js -->
+    <script src="/js/admin.js"></script>
+    <script>
+		$(function () {
+			$('#sign_in').validate({
+				highlight: function (input) {
+					console.log(input);
+					$(input).parents('.form-line').addClass('error');
+				},
+				unhighlight: function (input) {
+					$(input).parents('.form-line').removeClass('error');
+				},
+				errorPlacement: function (error, element) {
+					$(element).parents('.input-group').append(error);
+				}
+			});
+		});
+	</script>
+</body>
+
+</html>

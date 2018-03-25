@@ -1,0 +1,45 @@
+{
+	"account":
+	{ 
+		"status": 0,
+		"uid": "cd808e7d-92f6-4910-acec-385d02eb24fc",
+		"phoneNumberActivation": 0,
+		"emailActivation": 1,
+		"facebookID": null,
+		"advancedSettings":
+		{ 
+			"amplitudeAnalyticsEnabled": 0,
+			"amplitudeAppId": null
+		},
+		"mediaList":
+		[
+			[ 100,
+				"http://pm1.narvii.com/6773/49bfb20b9629fbcb63fe1705f874e90ade265367v2_00.jpg",
+				null
+			]
+		],
+		"dateOfBirth": null,
+		"role": 0,
+		"latitude": 35246256,
+		"phoneNumber": null,
+		"email": "katsuo.hatory@cwin.com.br",
+		"username": null,
+		"modifiedTime": "2018-03-23T23:04:37Z",
+		"twitterID": null,
+		"activation": 1,
+		"membership": null,
+		"address": "Odawara-shi, Japan",
+		"nickname": "Levi",
+		"googleID": null,
+		"icon": "http://pm1.narvii.com/6748/8c72bb5b1b2f44a3d6bee69b71e6d5b4e8761a2fv2_00.jpg",
+		"securityLevel": 3,
+		"gender": null,
+		"longitude": 139151104,
+		"secret": "31 dCOtFCFY cd808e7d-92f6-4910-acec-385d02eb24fc 187.2.134.169 d5ed5be317f883719728b66e5d9d7a21bf359605 1 1521930557 QuqC05atkGYm53rbKSwD71zE6lg",
+		"api:message": "OK",
+		"sid": "AYACfXEBKEsASwFLAU5LAooR_CTrAl047KwQSfaSfY6AzQBLA0sASwRVBLsChqlLBUo90bZaSwZLZHUu-bentaJp88t63NoFBuq2Rzk3fcI",
+		"api:statuscode": 0,
+		"api:duration": "0.019s",
+		"api:timestamp": "2018-03-24T22:29:17Z"
+	}
+}
