@@ -1,0 +1,116 @@
+<!-- views/pages/amino/home.ejs -->
+<!DOCTYPE html>
+<html>
+	<head>
+		<% include partials/head %>
+	</head>
+	<body class="theme-red">
+		<!-- Page Loader -->
+		<div class="page-loader-wrapper" style="display: none;">
+			<div class="loader">
+				<div class="preloader">
+					<div class="spinner-layer pl-red">
+						<div class="circle-clipper left">
+							<div class="circle"></div>
+						</div>
+						<div class="circle-clipper right">
+							<div class="circle"></div>
+						</div>
+					</div>
+				</div>
+				<p>Please wait...</p>
+			</div>
+		</div>
+		<!-- #END# Page Loader -->
+		<!-- Top Bar -->
+		<nav class="navbar">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
+					<a href="javascript:void(0);" class="bars" style="display: none;"></a>
+					<a class="navbar-brand">Amino - Home</a>
+				</div>
+			</div>
+		</nav>
+		<!-- #Top Bar -->
+		<section>
+			<!-- Left Sidebar -->
+			<aside id="leftsidebar" class="sidebar" style="background: url('<%= cover %>') no-repeat no-repeat;">
+				<!-- User Info -->
+				<div class="user-info">
+					<div class="image">
+						<img src="<%= icon %>" width="48" height="48" alt="User">
+					</div>
+					<div class="info-container">
+						<div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><b><%= nickname %></b></div>
+					</div>
+				</div>
+				<!-- #User Info -->
+				<!-- Menu -->
+				<div class="menu" style="background: #eee;">
+					<div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 450px;">
+						<ul class="list" style="overflow: hidden; width: auto; height: 450px;">
+							<li class="header">Communities</li>
+							<% communities.forEach(function(community) { %>
+							<li>
+								<a href="javascript:void(0);" onclick="loadCommunity('<%= community.id %>')" class="toggled waves-effect waves-block">
+								<i class="material-icons">group_work</i>
+								<span><%= community.name %></span>
+								</a>
+							</li>
+							<% }); %>
+						</ul>
+						<div class="slimScrollBar" style="background: rgba(0, 0, 0, 0.5); width: 4px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 0px; z-index: 99; right: 1px; height: 368px;"></div>
+						<div class="slimScrollRail" style="width: 4px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 0px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div>
+					</div>
+				</div>
+				<!-- #Menu -->
+			</aside>
+			<!-- #END# Left Sidebar -->
+		</section>
+		<section class="content">
+			<div class="container-fluid">
+				<div class="block-header">
+					<h2>DASHBOARD</h2>
+				</div>
+				<div class="row clearfix" id="chats">
+					
+				</div>
+			</div>
+		</section>
+		<!-- Socket.IO Core Js -->
+		<script src="/socket.io/socket.io.js"></script>
+		<!-- Amino Core Js -->
+		<script src="/js/mainSystem.js"></script>
+		<!-- Jquery Core Js -->
+		<script src="/plugins/jquery/jquery.min.js"></script>
+		<!-- Bootstrap Core Js -->
+		<script src="/plugins/bootstrap/js/bootstrap.js"></script>
+		<!-- Select Plugin Js -->
+		<script src="/plugins/bootstrap-select/js/bootstrap-select.js"></script>
+		<!-- Slimscroll Plugin Js -->
+		<script src="/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+		<!-- Waves Effect Plugin Js -->
+		<script src="/plugins/node-waves/waves.js"></script>
+		<!-- Jquery CountTo Plugin Js -->
+		<script src="/plugins/jquery-countto/jquery.countTo.js"></script>
+		<!-- Morris Plugin Js -->
+		<script src="/plugins/raphael/raphael.min.js"></script>
+		<script src="/plugins/morrisjs/morris.js"></script>
+		<!-- ChartJs -->
+		<script src="/plugins/chartjs/Chart.bundle.js"></script>
+		<!-- Flot Charts Plugin Js -->
+		<script src="/plugins/flot-charts/jquery.flot.js"></script>
+		<script src="/plugins/flot-charts/jquery.flot.resize.js"></script>
+		<script src="/plugins/flot-charts/jquery.flot.pie.js"></script>
+		<script src="/plugins/flot-charts/jquery.flot.categories.js"></script>
+		<script src="/plugins/flot-charts/jquery.flot.time.js"></script>
+		<!-- Sparkline Chart Plugin Js -->
+		<script src="/plugins/jquery-sparkline/jquery.sparkline.js"></script>
+		<!-- Custom Js 
+		<script src="/js/admin.js"></script>
+		<script src="/js/pages/index.js"></script>-->
+		<!-- Demo Js -->
+		<script src="/js/demo.js"></script>
+	</body>
+</html>

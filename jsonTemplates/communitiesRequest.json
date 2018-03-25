@@ -1,0 +1,46 @@
+{  
+    "coms":[  
+        {  
+            "id":"x192469317",
+            "name":"Splatoon Unlimited Roleplay",
+            "link":"http://aminoapps.com/c/SplatoonUnlimit"
+        },
+        {  
+            "id":"x125232313",
+            "name":"Jikan Workbench",
+            "link":"http://aminoapps.com/c/JGDT"
+        },
+        {  
+            "id":"x143854876",
+            "name":"Nier And Drakengard",
+            "link":"http://aminoapps.com/c/DrakengardAmino"
+        },
+        {  
+            "id":"x208072179",
+            "name":"✿ our space ✿",
+            "link":"http://aminoapps.com/c/Our_Spacee"
+        },
+        {  
+            "id":"x173494268",
+            "name":"Computer Science.",
+            "link":"http://aminoapps.com/c/Computer_Science"
+        },
+        {  
+            "id":"x200528775",
+            "name":"NieR: Automata Roleplaying",
+            "link":"http://aminoapps.com/c/nier-automata-rp"
+        },
+        {  
+            "id":"x217473157",
+            "name":"1x1 Roleplaying",
+            "link":"http://aminoapps.com/c/1x1-roleplaying"
+        },
+        {  
+            "id":"x70669566",
+            "name":"Kantai Collection [艦これ]",
+            "link":"http://aminoapps.com/c/kantai-collection"
+        }
+    ],
+    "status":"ok",
+    "error":null
+}
