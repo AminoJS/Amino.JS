@@ -1,0 +1,15 @@
+---
+layout: post
+title:  "login(email, password, deviceID)"
+date:   2018-03-24 20:00:36 -0400
+categories: jekyll update
+---
+*Get a security string for access to the API.*
+
+| Name       | Type   | Description                                                                                          |
+|------------|--------|------------------------------------------------------------------------------------------------------|
+| `email`    | String | Email associated with Amino account.                                                                 |
+| `password` | String | Password to Amino account.                                                                           |
+| `deviceID` | UUID   | An *optional* device ID, defaults to ours. Go [here]() to find out how to use your own, or use ours. |
+
+**Returns:** Security ID (sid) to be used with other functions.
