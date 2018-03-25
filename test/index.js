@@ -2,13 +2,11 @@ let should = require('chai').should(),
     index = require('../index.js');
 sorter = require('../sorter.js');
 end = require('../endpoints.js');
-publicChat = sorter.publicChat;
 loginEnd = end.login;
+meEnd = end.getMe;
 getChatCall = end.loadChat;
 communityCall = end.getComs;
 getJoinedChats = end.getJoinedChats;
-grpChat = sorter.groupChat;
-login = index.login;
 
 /*
 Wow. Now Testcases got even more Useless.
@@ -20,6 +18,10 @@ describe('how does the sorter react... ', function() {
 describe('how do the enpoints react..', () => {
     it('when a login api call is recived', () => {
         loginEnd.should.equal('http://service.narvii.com/api/v1/g/s/auth/login');
+    })
+
+    it('when a Call for loading the user has arrvied', () => {
+        meEnd.should.equal('http://service.narvii.com/api/v1/g/s/account');
     })
 
     it('when a community load api call is recived', () => {

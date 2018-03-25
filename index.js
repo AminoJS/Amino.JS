@@ -7,7 +7,7 @@
 
 /** 
  * TODO:
- * Get User Infos (comming in v.0.2)
+ * Get Userinfos from other Users (comming in v.0.2)
  * Comment on a User Profile (comming in v.0.2)
  * Create a Wiki Entry / Blog Post (comming in v.0.2)
  * Comment a Wiki Entry / Blog Post (comming in v.0.2)
@@ -28,7 +28,7 @@ const objs = require('./objects.js'); //For Storing the Objects that the Framewo
  * @param  {UUID} deviceID Siehe mehr unter ('Wiki/Device ID Dump').
  * @returns {SecurityString} The Securitystring for authenticating with Amino. (required by all other functions).
  */
-async function login(email, password, deviceID) {
+async function login(email, password) {
     let sid;
     if(typeof email != 'string' || typeof password !== 'string' || typeof deviceID !== 'string') {
         throw new Error('All Arguments are not satisfied.');
@@ -37,7 +37,7 @@ async function login(email, password, deviceID) {
         json: {
             'email': email,
             'secret': '0 ' + password,
-            'deviceID': deviceID,
+            'deviceID': '015051B67B8D59D0A86E0F4A78F47367B749357048DD5F23DF275F05016B74605AAB0D7A6127287D9C',
             'clientType': 100,
             'action': 'normal',
             'timestamp': new Date().getUTCMilliseconds()
@@ -50,6 +50,23 @@ async function login(email, password, deviceID) {
         throw 'Error while calling Login: ' + err;
     });
     return sid;
+}
+/**
+ * WIP: Load own User Data.
+ * @param {SecurityString} sid For authenticating with the Narvii-API. 
+ */
+async function getMe(sid) {
+    if(typeof sid != 'string') {
+        throw new Error('Not all Arguments statisfied!');
+    }
+    await request.get(endpoints.getMe, {
+        headers: {
+            'NDCAUTH': `sid=${sid}`
+        }
+    }, (err, res, body) => {
+        body = JSON.parse(body);
+    });
+    return true;
 }
 
 /**
@@ -188,6 +205,7 @@ async function sendChat(sid, com, uid, msg) {
  */
 module.exports = {
     login,
+    getMe,
     getJoinedComs,
     getJoinedChats,
     getChat,
