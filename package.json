@@ -18,7 +18,10 @@
     "Framework",
     "Narvii"
   ],
-  "author": "Robin Möller <moelrobi@gmail.com>",
+  "author": "Robin Möller <moelrobi@gmail.com> (https://robsys.space)",
+  "contributors": [
+    "Jason Idris <jason.idris@chca-oh.org>"
+  ],
   "license": "AGPL-3.0",
   "devDependencies": {
     "babel-eslint": "^8.2.1",
