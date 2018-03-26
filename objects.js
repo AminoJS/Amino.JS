@@ -43,9 +43,28 @@ const threadList = {
     error: 'not everything defined'
 };
 
+const recivedMessages = {
+    messages: [],
+    status: 'not ok',
+    error: 'nothing happend'
+};
+
+const profile = {
+    account: {
+        uid: 'def. with. func.',
+        username: 'defaulting with function',
+        mediaList: ['with Arrays. lol.'],
+        icon: 'def. with func. blame rob'
+    },
+    status: 'not okay',
+    error: 'nothing happend!'
+};
+
 module.exports = {
     communityList,
     threadList,
+    recivedMessages,
+    profile,
     sendingMessage: {
         message: {
             sent: false,
@@ -55,10 +74,4 @@ module.exports = {
         status: 'not ok',
         error: 'Nothing has been done.'
     },
-
-    recivedMessages: {
-        messages: [],
-        status: 'not ok',
-        error: 'nothing happend'
-    }
 };

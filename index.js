@@ -30,7 +30,7 @@ const objs = require('./objects.js'); //For Storing the Objects that the Framewo
  */
 async function login(email, password) {
     let sid;
-    if(typeof email != 'string' || typeof password !== 'string' || typeof deviceID !== 'string') {
+    if (typeof email != 'string' || typeof password !== 'string') {
         throw new Error('All Arguments are not satisfied.');
     }
     await request.post(endpoints.login, {
@@ -52,21 +52,33 @@ async function login(email, password) {
     return sid;
 }
 /**
- * WIP: Load own User Data.
- * @param {SecurityString} sid For authenticating with the Narvii-API. 
+ * Load your own User Data.
+ * @param {SecurityString} sid For authenticating with the Narvii-API.
+ * @returns {Profile} A Profile containing the Userdata.
  */
-async function getMe(sid) {
-    if(typeof sid != 'string') {
+async function getMyProfile(sid) {
+    let profile = objs.profile;
+    if (typeof sid != 'string') {
         throw new Error('Not all Arguments statisfied!');
     }
-    await request.get(endpoints.getMe, {
-        headers: {
-            'NDCAUTH': `sid=${sid}`
-        }
-    }, (err, res, body) => {
-        body = JSON.parse(body);
-    });
-    return true;
+    try {
+        await request.get(endpoints.getMe, {
+            headers: {
+                'NDCAUTH': `sid=${sid}`
+            }
+        }, (err, res, body) => {
+            body = JSON.parse(body);
+            profile.account.username = body.account.nickname;
+            profile.account.icon = body.account.icon;
+            profile.account.mediaList = body.account.mediaList;
+            profile.account.uid = body.account.uid;
+            profile.status = 'ok';
+            profile.error = null;
+        });
+    } catch (ex) {
+        profile.error = ex;
+    }
+    return profile;
 }
 
 /**
@@ -76,7 +88,7 @@ async function getMe(sid) {
  */
 async function getJoinedComs(sid) {
     let communityList = objs.communityList;
-    if(typeof sid != 'string') {
+    if (typeof sid != 'string') {
         throw new Error('All Arguments are not satisfied.');
     }
     await request.get(endpoints.getComs, {
@@ -107,7 +119,7 @@ async function getJoinedComs(sid) {
  */
 async function getJoinedChats(sid, com) {
     let threadList = objs.threadList;
-    if(typeof sid != 'string' || typeof com !== 'string') {
+    if (typeof sid != 'string' || typeof com !== 'string') {
         throw new Error('All Arguments are not satisfied.');
     }
     await request.get(endpoints.getJoinedChats(com), {
@@ -141,11 +153,11 @@ async function getJoinedChats(sid, com) {
  */
 async function getChat(sid, com, uid, count) {
     let msgList = objs.recivedMessages;
-    if(typeof sid != 'string' || typeof com !== 'string' || typeof uid !== 'string') {
+    if (typeof sid != 'string' || typeof com !== 'string' || typeof uid !== 'string') {
         throw new Error('All Arguments are not satisfied.');
     }
     //Silent fallback if a Count is not present.
-    if(count == undefined || count == null) {
+    if (count == undefined || count == null) {
         count = 1;
     }
     try {
@@ -177,7 +189,7 @@ async function getChat(sid, com, uid, count) {
  */
 async function sendChat(sid, com, uid, msg) {
     let message = objs.sendingMessage;
-    if(typeof sid != 'string' || typeof com !== 'string' || typeof uid !== 'string' || typeof msg !== 'string') {
+    if (typeof sid != 'string' || typeof com !== 'string' || typeof uid !== 'string' || typeof msg !== 'string') {
         throw new Error('All Arguments are not satisfied.');
     }
     message.message.message = msg;
@@ -185,6 +197,12 @@ async function sendChat(sid, com, uid, msg) {
     try {
         await request.post(endpoints.sendChat(com, uid), {
             headers: {
+                'NDCAUTH': `sid=${sid}`
+            },
+            json: {
+                'content': msg,
+                'type': 0,
+                'clientRefId': 43196704,
                 'timestamp': new Date().getUTCMilliseconds()
             }
         }, (err, res, body) => {
@@ -205,7 +223,7 @@ async function sendChat(sid, com, uid, msg) {
  */
 module.exports = {
     login,
-    getMe,
+    getMyProfile,
     getJoinedComs,
     getJoinedChats,
     getChat,
