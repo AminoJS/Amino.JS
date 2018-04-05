@@ -1,4 +1,4 @@
-v.0.1 alpha (The Documentaion Update!):
+v.0.1 (The Documentaion Update!):
 
 The Code was documentated.
 
@@ -6,25 +6,30 @@ First Official Alpha Release since open-sourcing the Project.
 
 The Code is now Avaible and Maintend on Github! (https://github.com/moelrobi/Amino.JS)
 
-Also some Minorfixes:
+Pullrequest is under: (https://gitlab.com/moelrobi/Amino.JS/pull/2)
+
+Full Changelog with Commit Names:
 
 [db28fd1 & 05b6e08] Switching from gitlab-ci to Travis-Ci.
 [95180d5] Added Eslint as a Sutiable Testcase.
 [6935738] Removed some Testcases because of Sorter-Rewrite
+[840c1f2] Changed the Readme to actually Look Better.
+[3c489ae] Added a new Function called getMyProfile which fetches the logged in Profile
+[4641444] Added the Docs for the above mentioned Function
 
-v.0.0.3 alpha:
+v.0.0.3:
 
 A Bug was fixed.
 
 See: https://gitlab.robsys.space/Kikai/KikaiFramework/issues/2
 
-v.0.0.2 alpha:
+v.0.0.2:
 
 A major Bugfix was released.
 
 See https://gitlab.robsys.space/Kikai/KikaiFramework/issues/1
 
-v.0.0.1 alpha:
+v.0.0.1:
 
 The Client Framework can now do the Following:
 
