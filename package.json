@@ -1,6 +1,6 @@
 {
   "name": "amino.js",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "The Framework for interacting with Amino",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://gitlab.robsys.space/Kikai/KikaiFramework"
+    "url": "https://github.com/moelrobi/Amino.JS"
   },
   "keywords": [
     "Amino",
