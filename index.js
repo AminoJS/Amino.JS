@@ -21,6 +21,12 @@ const endpoints = require('./endpoints.js'); //For Creating shorter URL's in thi
 const sorter = require('./sorter.js'); //For easier Sorting of various Responses.
 const objs = require('./objects.js'); //For Storing the Objects that the Framework returns. 
 
+const config = {};
+
+const errorMessages = {
+    missingSid: 'SID is not specified, please use the login() method to authenticate',
+};
+
 /**
  * Loginfunction for the Framework for Handeling API Reqeusts.
  * @param  {String} email Email-Adress for logging in.
@@ -28,27 +34,34 @@ const objs = require('./objects.js'); //For Storing the Objects that the Framewo
  * @param  {UUID} deviceID Siehe mehr unter ('Wiki/Device ID Dump').
  * @returns {SecurityString} The Securitystring for authenticating with Amino. (required by all other functions).
  */
-async function login(email, password) {
+async function login(email, password, deviceID) {
     let sid;
     if (typeof email != 'string' || typeof password !== 'string') {
         throw new Error('All Arguments are not satisfied.');
     }
-    await request.post(endpoints.login, {
-        json: {
-            'email': email,
-            'secret': '0 ' + password,
-            'deviceID': '015051B67B8D59D0A86E0F4A78F47367B749357048DD5F23DF275F05016B74605AAB0D7A6127287D9C',
-            'clientType': 100,
-            'action': 'normal',
-            'timestamp': new Date().getUTCMilliseconds()
-        }
-    }, (err, res, body) => {
-        if (err) throw 'Request Error: ' + err;
-        if (!body.sid) throw 'Login Error: SID is not defined.' + res;
-        sid = body.sid;
-    }).catch((err) => {
+
+    if(!deviceID){
+        deviceID = '015051B67B8D59D0A86E0F4A78F47367B749357048DD5F23DF275F05016B74605AAB0D7A6127287D9C';
+    }
+
+    try{
+        const response = await request.post(endpoints.login, {
+            json: {
+                'email': email,
+                'secret': '0 ' + password,
+                'deviceID': deviceID,
+                'clientType': 100,
+                'action': 'normal',
+                'timestamp': new Date().getUTCMilliseconds()
+            }
+        });
+        if (!response.sid) throw 'Login Error: SID is not defined.' + response;
+        sid = response.sid;
+    }
+    catch(err){
         throw 'Error while calling Login: ' + err;
-    });
+    }
+    config.sid = sid;
     return sid;
 }
 /**
@@ -56,27 +69,30 @@ async function login(email, password) {
  * @param {SecurityString} sid For authenticating with the Narvii-API.
  * @returns {Profile} A Profile containing the Userdata.
  */
-async function getMyProfile(sid) {
+async function getMyProfile() {
     let profile = objs.profile;
-    if (typeof sid != 'string') {
-        throw new Error('Not all Arguments statisfied!');
+    let sid;
+    if (typeof config.sid != 'string') {
+        throw new Error(errorMessages.missingSid);
+    }else{
+        sid = config.sid;
     }
     try {
-        await request.get(endpoints.getMe, {
+        const response = await request.get(endpoints.getMe, {
             headers: {
                 'NDCAUTH': `sid=${sid}`
             }
-        }, (err, res, body) => {
-            body = JSON.parse(body);
-            profile.account.username = body.account.nickname;
-            profile.account.icon = body.account.icon;
-            profile.account.mediaList = body.account.mediaList;
-            profile.account.uid = body.account.uid;
-            profile.status = 'ok';
-            profile.error = null;
         });
-    } catch (ex) {
-        profile.error = ex;
+        const body = JSON.parse(response);
+        profile.account.username = body.account.nickname;
+        profile.account.icon = body.account.icon;
+        profile.account.mediaList = body.account.mediaList;
+        profile.account.uid = body.account.uid;
+        profile.status = 'ok';
+        profile.error = null;
+    } catch (err) {
+        profile.error = err;
+        throw 'Error while calling getMyProfile: ' + err;
     }
     return profile;
 }
@@ -86,28 +102,31 @@ async function getMyProfile(sid) {
  * @param {SecurityString} sid For authenticating with the Narvii-API.
  * @returns {Object} Object containing all Joined Coms with the Logged in Account.
  */
-async function getJoinedComs(sid) {
+async function getJoinedComs() {
     let communityList = objs.communityList;
-    if (typeof sid != 'string') {
-        throw new Error('All Arguments are not satisfied.');
+    let sid;
+    if (typeof config.sid != 'string') {
+        throw new Error(errorMessages.missingSid);
+    }else{
+        sid = config.sid;
     }
-    await request.get(endpoints.getComs, {
-        headers: {
-            'NDCAUTH': `sid=${sid}`
-        }
-    }, (err, res, body) => {
-        try {
-            if (err) throw 'Request Error: ' + err;
-            body = JSON.parse(body);
-            body.communityList.forEach((element) => {
-                communityList.coms.push(sorter.comSort(element));
-            });
-            communityList.status = 'ok';
-            communityList.error = null;
-        } catch (err) {
-            communityList.error = err;
-        }
-    });
+    try{
+        const response = await request.get(endpoints.getComs, {
+            headers: {
+                'NDCAUTH': `sid=${sid}`
+            }
+        });
+        const body = JSON.parse(response);
+        body.communityList.forEach((element) => {
+            communityList.coms.push(sorter.comSort(element));
+        });
+        communityList.status = 'ok';
+        communityList.error = null;
+    }
+    catch(err){
+        communityList.error = err;
+        throw 'Error while calling getJoinedComs: ' + err;
+    }
     return communityList;
 }
 
@@ -117,29 +136,33 @@ async function getJoinedComs(sid) {
  * @param {CommunityUUID} com A ID that can be obtained by the function getJoinedComs
  * @returns {Object} Object where all the Chats that the Logged-in User has joined are contained in an Array.
  */
-async function getJoinedChats(sid, com) {
+async function getJoinedChats(com) {
     let threadList = objs.threadList;
-    if (typeof sid != 'string' || typeof com !== 'string') {
+    let sid;
+    if (typeof config.sid != 'string' || typeof com !== 'string') {
         throw new Error('All Arguments are not satisfied.');
+    }else{
+        sid = config.sid;
     }
-    await request.get(endpoints.getJoinedChats(com), {
-        headers: {
-            'NDCAUTH': `sid=${sid}`
-        }
-    }, (err, res, body) => {
-        try {
-            //Parsing the Response.
-            body = JSON.parse(body);
-            body.threadList.forEach((element) => {
-                //Sorting the Elements and pushing them into the Array.
-                threadList.threads.push(sorter.threadSort(element));
-            });
-            threadList.status = 'ok';
-            threadList.error = null;
-        } catch (err) {
-            threadList.error = err;
-        }
-    });
+    try{
+        const response = await request.get(endpoints.getJoinedChats(com), {
+            headers: {
+                'NDCAUTH': `sid=${sid}`
+            }
+        });
+        //Parsing the Response.
+        const body = JSON.parse(response);
+        body.threadList.forEach((element) => {
+            //Sorting the Elements and pushing them into the Array.
+            threadList.threads.push(sorter.threadSort(element));
+        });
+        threadList.status = 'ok';
+        threadList.error = null;
+    }
+    catch(err){
+        threadList.error = err;
+        throw 'Error while calling getJoinedChats: ' + err;
+    }
     return threadList;
 }
 
@@ -151,9 +174,9 @@ async function getJoinedChats(sid, com) {
  * @param {Number} count The ammount of Messages to Load (defaults to 1);
  * @returns {Object} Object where all the Messages in the requested Chat are contained in an Array.
  */
-async function getChat(sid, com, uid, count) {
+async function getChat(com, uid, count) {
     let msgList = objs.recivedMessages;
-    if (typeof sid != 'string' || typeof com !== 'string' || typeof uid !== 'string') {
+    if (typeof config.sid != 'string' || typeof com !== 'string' || typeof uid !== 'string') {
         throw new Error('All Arguments are not satisfied.');
     }
     //Silent fallback if a Count is not present.
@@ -161,20 +184,20 @@ async function getChat(sid, com, uid, count) {
         count = 1;
     }
     try {
-        await request.get(endpoints.loadChat(com, uid, count), {
+        const response = await request.get(endpoints.loadChat(com, uid, count), {
             headers: {
-                'NDCAUTH': `sid=${sid}`
+                'NDCAUTH': `sid=${config.sid}`
             }
-        }, (err, res, body) => {
-            body = JSON.parse(body);
-            body.messageList.forEach((element) => {
-                msgList.messages.push(sorter.sendMessageSorter(uid, element));
-            });
+        });
+        const body = JSON.parse(response);
+        body.messageList.forEach((element) => {
+            msgList.messages.push(sorter.sendMessageSorter(uid, element));
         });
         msgList.status = 'ok';
         msgList.error = null;
     } catch (err) {
         msgList.error = err;
+        throw 'Error while calling getChat: ' + err;
     }
     return msgList;
 }
@@ -187,15 +210,18 @@ async function getChat(sid, com, uid, count) {
  * @param {String} msg The Message to be sent.
  * @returns {Object} A Custom Object where the Message, the MessageID, and a Boolean 
  */
-async function sendChat(sid, com, uid, msg) {
+async function sendChat(com, uid, msg) {
     let message = objs.sendingMessage;
-    if (typeof sid != 'string' || typeof com !== 'string' || typeof uid !== 'string' || typeof msg !== 'string') {
+    let sid;
+    if (typeof config.sid != 'string' || typeof com !== 'string' || typeof uid !== 'string' || typeof msg !== 'string') {
         throw new Error('All Arguments are not satisfied.');
+    }else{
+        sid = config.sid;
     }
     message.message.message = msg;
     message.message.threadId = uid;
     try {
-        await request.post(endpoints.sendChat(com, uid), {
+        const response = await request.post(endpoints.sendChat(com, uid), {
             headers: {
                 'NDCAUTH': `sid=${sid}`
             },
@@ -205,15 +231,15 @@ async function sendChat(sid, com, uid, msg) {
                 'clientRefId': 43196704,
                 'timestamp': new Date().getUTCMilliseconds()
             }
-        }, (err, res, body) => {
-            if (body.message) {
-                message.message.sent = true;
-                message.status = 'ok';
-                message.error = null;
-            }
         });
+        if (response.message) {
+            message.message.sent = true;
+            message.status = 'ok';
+            message.error = null;
+        }
     } catch (err) {
         message.error = err;
+        throw 'Error while calling sendChat: ' + err;
     }
     return message;
 }
