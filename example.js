@@ -1,3 +1,4 @@
+const env = require('./env');
 // Get my Amino profile
 
 // First, import the Amino.js library
@@ -6,7 +7,7 @@ const Amino = require('./index');
 // Login with your credentials
 (async function(){
     // All method will return a Promise
-    const sid = await Amino.login('<email address>', '<password>');
+    const sid = await Amino.login(env.email, env.password);
     // And once you are login, you can use all of the Amino.js methods
     console.log(`SID: ${sid}`);
     const myProfile = await Amino.getMyProfile();

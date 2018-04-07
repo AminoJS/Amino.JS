@@ -44,22 +44,23 @@ async function login(email, password, deviceID) {
         deviceID = '015051B67B8D59D0A86E0F4A78F47367B749357048DD5F23DF275F05016B74605AAB0D7A6127287D9C';
     }
 
-    await request.post(endpoints.login, {
-        json: {
-            'email': email,
-            'secret': '0 ' + password,
-            'deviceID': deviceID,
-            'clientType': 100,
-            'action': 'normal',
-            'timestamp': new Date().getUTCMilliseconds()
-        }
-    }, (err, res, body) => {
-        if (err) throw 'Request Error: ' + err;
-        if (!body.sid) throw 'Login Error: SID is not defined.' + res;
-        sid = body.sid;
-    }).catch((err) => {
+    try{
+        const response = await request.post(endpoints.login, {
+            json: {
+                'email': email,
+                'secret': '0 ' + password,
+                'deviceID': deviceID,
+                'clientType': 100,
+                'action': 'normal',
+                'timestamp': new Date().getUTCMilliseconds()
+            }
+        });
+        if (!response.sid) throw 'Login Error: SID is not defined.' + res;
+        sid = response.sid;
+    }
+    catch(err){
         throw 'Error while calling Login: ' + err;
-    });
+    }
     config.sid = sid;
     return sid;
 }
@@ -77,20 +78,20 @@ async function getMyProfile() {
         sid = config.sid;
     }
     try {
-        await request.get(endpoints.getMe, {
+        const response = await request.get(endpoints.getMe, {
             headers: {
                 'NDCAUTH': `sid=${sid}`
             }
-        }, (err, res, body) => {
-            body = JSON.parse(body);
-            profile.account.username = body.account.nickname;
-            profile.account.icon = body.account.icon;
-            profile.account.mediaList = body.account.mediaList;
-            profile.account.uid = body.account.uid;
-            profile.status = 'ok';
-            profile.error = null;
         });
+        const body = JSON.parse(response);
+        profile.account.username = body.account.nickname;
+        profile.account.icon = body.account.icon;
+        profile.account.mediaList = body.account.mediaList;
+        profile.account.uid = body.account.uid;
+        profile.status = 'ok';
+        profile.error = null;
     } catch (ex) {
+        throw 'Error while calling getMyProfile: ' + err;
         profile.error = ex;
     }
     return profile;
@@ -109,23 +110,23 @@ async function getJoinedComs() {
     }else{
         sid = config.sid;
     }
-    await request.get(endpoints.getComs, {
-        headers: {
-            'NDCAUTH': `sid=${sid}`
-        }
-    }, (err, res, body) => {
-        try {
-            if (err) throw 'Request Error: ' + err;
-            body = JSON.parse(body);
-            body.communityList.forEach((element) => {
-                communityList.coms.push(sorter.comSort(element));
-            });
-            communityList.status = 'ok';
-            communityList.error = null;
-        } catch (err) {
-            communityList.error = err;
-        }
-    });
+    try{
+        const response = await request.get(endpoints.getComs, {
+            headers: {
+                'NDCAUTH': `sid=${sid}`
+            }
+        });
+        const body = JSON.parse(response);
+        body.communityList.forEach((element) => {
+            communityList.coms.push(sorter.comSort(element));
+        });
+        communityList.status = 'ok';
+        communityList.error = null;
+    }
+    catch(err){
+        throw 'Error while calling getJoinedComs: ' + err;
+        communityList.error = err;
+    }
     return communityList;
 }
 
@@ -143,24 +144,25 @@ async function getJoinedChats(com) {
     }else{
         sid = config.sid;
     }
-    await request.get(endpoints.getJoinedChats(com), {
-        headers: {
-            'NDCAUTH': `sid=${sid}`
-        }
-    }, (err, res, body) => {
-        try {
-            //Parsing the Response.
-            body = JSON.parse(body);
-            body.threadList.forEach((element) => {
-                //Sorting the Elements and pushing them into the Array.
-                threadList.threads.push(sorter.threadSort(element));
-            });
-            threadList.status = 'ok';
-            threadList.error = null;
-        } catch (err) {
-            threadList.error = err;
-        }
-    });
+    try{
+        const response = await request.get(endpoints.getJoinedChats(com), {
+            headers: {
+                'NDCAUTH': `sid=${sid}`
+            }
+        });
+        //Parsing the Response.
+        const body = JSON.parse(response);
+        body.threadList.forEach((element) => {
+            //Sorting the Elements and pushing them into the Array.
+            threadList.threads.push(sorter.threadSort(element));
+        });
+        threadList.status = 'ok';
+        threadList.error = null;
+    }
+    catch(err){
+        throw 'Error while calling getJoinedChats: ' + err;
+        threadList.error = err;
+    }
     return threadList;
 }
 
@@ -182,19 +184,19 @@ async function getChat(com, uid, count) {
         count = 1;
     }
     try {
-        await request.get(endpoints.loadChat(com, uid, count), {
+        const response = await request.get(endpoints.loadChat(com, uid, count), {
             headers: {
                 'NDCAUTH': `sid=${sid}`
             }
-        }, (err, res, body) => {
-            body = JSON.parse(body);
-            body.messageList.forEach((element) => {
-                msgList.messages.push(sorter.sendMessageSorter(uid, element));
-            });
+        });
+        const body = JSON.parse(response);
+        body.messageList.forEach((element) => {
+            msgList.messages.push(sorter.sendMessageSorter(uid, element));
         });
         msgList.status = 'ok';
         msgList.error = null;
     } catch (err) {
+        throw 'Error while calling getChat: ' + err;
         msgList.error = err;
     }
     return msgList;
@@ -219,7 +221,7 @@ async function sendChat(com, uid, msg) {
     message.message.message = msg;
     message.message.threadId = uid;
     try {
-        await request.post(endpoints.sendChat(com, uid), {
+        const response = await request.post(endpoints.sendChat(com, uid), {
             headers: {
                 'NDCAUTH': `sid=${sid}`
             },
@@ -229,14 +231,14 @@ async function sendChat(com, uid, msg) {
                 'clientRefId': 43196704,
                 'timestamp': new Date().getUTCMilliseconds()
             }
-        }, (err, res, body) => {
-            if (body.message) {
-                message.message.sent = true;
-                message.status = 'ok';
-                message.error = null;
-            }
         });
+        if (response.message) {
+            message.message.sent = true;
+            message.status = 'ok';
+            message.error = null;
+        }
     } catch (err) {
+        throw 'Error while calling sendChat: ' + err;
         message.error = err;
     }
     return message;

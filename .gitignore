@@ -63,3 +63,6 @@ testing.js
 
 #A Testing file for tesing various stuff
 testing.js
+
+# env file for local testing
+env.js
