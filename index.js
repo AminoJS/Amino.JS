@@ -21,6 +21,12 @@ const endpoints = require('./endpoints.js'); //For Creating shorter URL's in thi
 const sorter = require('./sorter.js'); //For easier Sorting of various Responses.
 const objs = require('./objects.js'); //For Storing the Objects that the Framework returns. 
 
+const config = {};
+
+const errorMessages = {
+    missingSid: 'SID is not specified, please use the login() method to authenticate',
+}
+
 /**
  * Loginfunction for the Framework for Handeling API Reqeusts.
  * @param  {String} email Email-Adress for logging in.
@@ -28,16 +34,21 @@ const objs = require('./objects.js'); //For Storing the Objects that the Framewo
  * @param  {UUID} deviceID Siehe mehr unter ('Wiki/Device ID Dump').
  * @returns {SecurityString} The Securitystring for authenticating with Amino. (required by all other functions).
  */
-async function login(email, password) {
+async function login(email, password, deviceID) {
     let sid;
     if (typeof email != 'string' || typeof password !== 'string') {
         throw new Error('All Arguments are not satisfied.');
     }
+
+    if(!deviceID){
+        deviceID = '015051B67B8D59D0A86E0F4A78F47367B749357048DD5F23DF275F05016B74605AAB0D7A6127287D9C';
+    }
+
     await request.post(endpoints.login, {
         json: {
             'email': email,
             'secret': '0 ' + password,
-            'deviceID': '015051B67B8D59D0A86E0F4A78F47367B749357048DD5F23DF275F05016B74605AAB0D7A6127287D9C',
+            'deviceID': deviceID,
             'clientType': 100,
             'action': 'normal',
             'timestamp': new Date().getUTCMilliseconds()
@@ -49,6 +60,7 @@ async function login(email, password) {
     }).catch((err) => {
         throw 'Error while calling Login: ' + err;
     });
+    config.sid = sid;
     return sid;
 }
 /**
@@ -56,10 +68,13 @@ async function login(email, password) {
  * @param {SecurityString} sid For authenticating with the Narvii-API.
  * @returns {Profile} A Profile containing the Userdata.
  */
-async function getMyProfile(sid) {
+async function getMyProfile() {
     let profile = objs.profile;
-    if (typeof sid != 'string') {
-        throw new Error('Not all Arguments statisfied!');
+    let sid;
+    if (typeof config.sid != 'string') {
+        throw new Error(errorMessages.missingSid);
+    }else{
+        sid = config.sid;
     }
     try {
         await request.get(endpoints.getMe, {
@@ -86,10 +101,13 @@ async function getMyProfile(sid) {
  * @param {SecurityString} sid For authenticating with the Narvii-API.
  * @returns {Object} Object containing all Joined Coms with the Logged in Account.
  */
-async function getJoinedComs(sid) {
+async function getJoinedComs() {
     let communityList = objs.communityList;
-    if (typeof sid != 'string') {
-        throw new Error('All Arguments are not satisfied.');
+    let sid;
+    if (typeof config.sid != 'string') {
+        throw new Error(errorMessages.missingSid);
+    }else{
+        sid = config.sid;
     }
     await request.get(endpoints.getComs, {
         headers: {
@@ -117,10 +135,13 @@ async function getJoinedComs(sid) {
  * @param {CommunityUUID} com A ID that can be obtained by the function getJoinedComs
  * @returns {Object} Object where all the Chats that the Logged-in User has joined are contained in an Array.
  */
-async function getJoinedChats(sid, com) {
+async function getJoinedChats(com) {
     let threadList = objs.threadList;
-    if (typeof sid != 'string' || typeof com !== 'string') {
+    let sid;
+    if (typeof config.sid != 'string' || typeof com !== 'string') {
         throw new Error('All Arguments are not satisfied.');
+    }else{
+        sid = config.sid;
     }
     await request.get(endpoints.getJoinedChats(com), {
         headers: {
@@ -151,9 +172,9 @@ async function getJoinedChats(sid, com) {
  * @param {Number} count The ammount of Messages to Load (defaults to 1);
  * @returns {Object} Object where all the Messages in the requested Chat are contained in an Array.
  */
-async function getChat(sid, com, uid, count) {
+async function getChat(com, uid, count) {
     let msgList = objs.recivedMessages;
-    if (typeof sid != 'string' || typeof com !== 'string' || typeof uid !== 'string') {
+    if (typeof config.sid != 'string' || typeof com !== 'string' || typeof uid !== 'string') {
         throw new Error('All Arguments are not satisfied.');
     }
     //Silent fallback if a Count is not present.
@@ -187,10 +208,13 @@ async function getChat(sid, com, uid, count) {
  * @param {String} msg The Message to be sent.
  * @returns {Object} A Custom Object where the Message, the MessageID, and a Boolean 
  */
-async function sendChat(sid, com, uid, msg) {
+async function sendChat(com, uid, msg) {
     let message = objs.sendingMessage;
-    if (typeof sid != 'string' || typeof com !== 'string' || typeof uid !== 'string' || typeof msg !== 'string') {
+    let sid;
+    if (typeof config.sid != 'string' || typeof com !== 'string' || typeof uid !== 'string' || typeof msg !== 'string') {
         throw new Error('All Arguments are not satisfied.');
+    }else{
+        sid = config.sid;
     }
     message.message.message = msg;
     message.message.threadId = uid;
