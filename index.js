@@ -25,7 +25,7 @@ const config = {};
 
 const errorMessages = {
     missingSid: 'SID is not specified, please use the login() method to authenticate',
-}
+};
 
 /**
  * Loginfunction for the Framework for Handeling API Reqeusts.
@@ -55,7 +55,7 @@ async function login(email, password, deviceID) {
                 'timestamp': new Date().getUTCMilliseconds()
             }
         });
-        if (!response.sid) throw 'Login Error: SID is not defined.' + res;
+        if (!response.sid) throw 'Login Error: SID is not defined.' + response;
         sid = response.sid;
     }
     catch(err){
@@ -90,9 +90,9 @@ async function getMyProfile() {
         profile.account.uid = body.account.uid;
         profile.status = 'ok';
         profile.error = null;
-    } catch (ex) {
+    } catch (err) {
+        profile.error = err;
         throw 'Error while calling getMyProfile: ' + err;
-        profile.error = ex;
     }
     return profile;
 }
@@ -124,8 +124,8 @@ async function getJoinedComs() {
         communityList.error = null;
     }
     catch(err){
-        throw 'Error while calling getJoinedComs: ' + err;
         communityList.error = err;
+        throw 'Error while calling getJoinedComs: ' + err;
     }
     return communityList;
 }
@@ -160,8 +160,8 @@ async function getJoinedChats(com) {
         threadList.error = null;
     }
     catch(err){
-        throw 'Error while calling getJoinedChats: ' + err;
         threadList.error = err;
+        throw 'Error while calling getJoinedChats: ' + err;
     }
     return threadList;
 }
@@ -186,7 +186,7 @@ async function getChat(com, uid, count) {
     try {
         const response = await request.get(endpoints.loadChat(com, uid, count), {
             headers: {
-                'NDCAUTH': `sid=${sid}`
+                'NDCAUTH': `sid=${config.sid}`
             }
         });
         const body = JSON.parse(response);
@@ -196,8 +196,8 @@ async function getChat(com, uid, count) {
         msgList.status = 'ok';
         msgList.error = null;
     } catch (err) {
-        throw 'Error while calling getChat: ' + err;
         msgList.error = err;
+        throw 'Error while calling getChat: ' + err;
     }
     return msgList;
 }
@@ -238,8 +238,8 @@ async function sendChat(com, uid, msg) {
             message.error = null;
         }
     } catch (err) {
-        throw 'Error while calling sendChat: ' + err;
         message.error = err;
+        throw 'Error while calling sendChat: ' + err;
     }
     return message;
 }

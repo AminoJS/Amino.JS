@@ -12,5 +12,5 @@ const Amino = require('./index');
     console.log(`SID: ${sid}`);
     const myProfile = await Amino.getMyProfile();
     console.log('Well, let me guess, your username won\'t just so happen to be ' + myProfile.account.username);
-    console.log(myProfile)
-})()
+    console.log(myProfile);
+})();
