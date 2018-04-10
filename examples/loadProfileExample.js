@@ -2,7 +2,7 @@ const env = require('./env');
 // Get my Amino profile
 
 // First, import the Amino.js library
-const Amino = require('./index');
+const Amino = require('../index');
 
 // Login with your credentials
 (async function(){
