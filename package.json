@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha test",
-    "lint": "eslint . --quiet",
-    "dev": "nodemon --exec \"npm run lint\""
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
