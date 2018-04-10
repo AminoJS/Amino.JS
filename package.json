@@ -21,7 +21,8 @@
   ],
   "author": "Robin Möller <moelrobi@gmail.com> (https://robsys.space)",
   "contributors": [
-    "Jason Idris <jason.idris@chca-oh.org>"
+    "Jason Idris <jason.idris@chca-oh.org>",
+    "Felix Fong <moongod101@hotmail.com> (https://felixfong227.ml)"
   ],
   "license": "AGPL-3.0",
   "devDependencies": {

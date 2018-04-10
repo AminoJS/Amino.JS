@@ -1,3 +1,4 @@
+console.log('Example: Load your own User Data');
 const env = require('./env');
 // Get my Amino profile
 
