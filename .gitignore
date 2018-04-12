@@ -67,5 +67,8 @@ testing.js
 # env file for local testing
 env.js
 
-#OSX stuff
+# OSX stuff
 .DS_Store
+
+# Ignore Cache Files for c9-WebIDE
+.c9/

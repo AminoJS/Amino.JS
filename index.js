@@ -25,6 +25,7 @@ module.exports.getConfig = (key) => {
     return config[key];
 };
 
+//Global Error-Messages.
 const errorMessages = {
     missingSid: 'SID is not specified, please use the login() method to authenticate',
 };

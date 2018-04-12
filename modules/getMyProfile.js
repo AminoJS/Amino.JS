@@ -1,7 +1,7 @@
 //Libary Imports
 const request = require('request-promise'); //The Request Module for sending the different Modules
-const endpoints = require('../endpoints.js'); //For Creating shorter URL's in this Module
-const objs = require('../objects.js'); //For Storing the Objects that the Framework returns. 
+const endpoints = require('../helpers/endpoints.js'); //For Creating shorter URL's in this Module
+const objs = require('../helpers/objects.js'); //For Storing the Objects that the Framework returns. 
 const { errorMessages, getConfig } = require('../index');
 
 /**
