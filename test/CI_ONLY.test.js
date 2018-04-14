@@ -4,7 +4,7 @@ if(process.env.CI){
     describe('Amino credential', () => {
         it('should have the credential setted up already in place', () => {
             if(!process.env.AMINO_EMAIL){
-                throw new Error('Missing Amino credential - AMINO_USERNAME');
+                throw new Error('Missing Amino credential - AMINO_EMAIL');
             }
 
             if(!process.env.AMINO_PASSWORD){
