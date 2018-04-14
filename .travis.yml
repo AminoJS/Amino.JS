@@ -8,7 +8,7 @@ before_script:
   - yarn install
 
 env:
-   - NODE_ENV=production
+   - NODE_ENV=development
 
 node_js:
   - "8"
