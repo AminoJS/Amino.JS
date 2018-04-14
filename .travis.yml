@@ -6,6 +6,9 @@ cache:
 
 language: node_js
 
+before_script:
+  - yarn install
+
 env:
    - NODE_ENV=production
 
