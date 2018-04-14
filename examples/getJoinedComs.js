@@ -10,5 +10,5 @@ const Amino = require('../index');
         console.log(`${comminity.name} | ${comminity.link}| ${comminity.id}`);
     });
     console.log('== Raw response ==');
-    console.log(yourCommunitys);
+    console.log(JSON.stringify(yourCommunitys, null, 2));
 })();
