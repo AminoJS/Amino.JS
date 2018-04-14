@@ -1,13 +1,20 @@
 cache:
   directories:
     - "node_modules"
-    - "docs"
-    - "examples"
 
 language: node_js
 
+<<<<<<< HEAD
+=======
+before_script:
+  - yarn install
+
+env:
+   - NODE_ENV=development
+
+>>>>>>> 2d1347908d489fbd7a9a552d254f6eed362e35a8
 node_js:
   - "8"
 script:
-  - yarn lint
-  - yarn test
+  - yarn run lint
+  - yarn run test
