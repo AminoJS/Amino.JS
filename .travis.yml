@@ -6,9 +6,6 @@ cache:
 
 language: node_js
 
-env:
-   - NODE_ENV=production
-
 node_js:
   - "8"
 script:
