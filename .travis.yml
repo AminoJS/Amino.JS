@@ -6,14 +6,8 @@ cache:
 
 language: node_js
 
-before_script:
-  - yarn install
-
-env:
-   - NODE_ENV=production
-
 node_js:
   - "8"
 script:
-  - yarn lint
-  - yarn test
+  - yarn run lint
+  - yarn run test
