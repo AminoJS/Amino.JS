@@ -37,6 +37,12 @@ const communityList = {
  * 'members': 'still Raw JSON from the API!'
  * }
  */
+const communityBlogFeed = {
+    blogs: [],
+    status: 'not ok',
+    error: 'nothing happened...'
+}
+
 const threadList = {
     threads: [],
     status: 'not ok',

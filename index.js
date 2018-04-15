@@ -42,4 +42,5 @@ module.exports = {
     getJoinedChats: require('./modules/getJoinedChats'),
     getChat: require('./modules/getChat'),
     sendChat: require('./modules/sendChat'),
+    getComBlogFeed: require('./modules/getCommunityBlogFeed'),
 };
