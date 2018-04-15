@@ -13,6 +13,7 @@ const { setConfig } = require('../index');
 
 module.exports = async function login(email, password, deviceID) {
     let sid;
+    let profileid;
     if (typeof email != 'string' || typeof password !== 'string') {
         throw new Error('All Arguments are not satisfied.');
     }
@@ -33,8 +34,10 @@ module.exports = async function login(email, password, deviceID) {
             }
         });
         if (!response.sid) throw 'Login Error: SID is not defined.' + response;
+        profileid = response.account.uid;
         sid = response.sid;
         setConfig('sid', sid);
+        setConfig('profileId', profileid);
     }
     catch (err) {
         throw 'Error while calling Login: ' + err;
