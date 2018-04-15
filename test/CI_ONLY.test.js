@@ -1,5 +1,6 @@
 // Running inside the a CI build system
-if(process.env.CI){
+if(process.env.CI && process.env.TRAVIS_PULL_REQUEST !== 'false'){
+    // GitHub merge request, no PR
     // CI only test cases
     describe('Amino credential', () => {
         it('should have the credential setted up already in place', () => {
