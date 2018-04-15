@@ -1,7 +1,3 @@
-if(process.env.CI && process.env.TRAVIS_PULL_REQUEST !== 'false'){
-    // Pull request
-    describe.skip();
-}
 const fs = require('fs');
 const path = require('path');
 // Load the env.js file if is under development and env.js exists DUH
