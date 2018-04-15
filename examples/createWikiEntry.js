@@ -1,3 +1,5 @@
+//TODO: Make this better.
+
 const env = require('./env');
 const Amino = require('../index');
 (async function(){

@@ -4,6 +4,12 @@ const {
     getConfig
 } = require('../index');
 
+/**
+ * A Function that deletes Wiki Entries
+ * @param {CommunityID} com A ID that can be obtained by the function getJoinedComs
+ * @param {WikiID} uid An ID for a Wiki Entry
+ * @returns {Boolean} If the Wiki Entry was successfully deleted.
+ */
 module.exports = async function deleteWikiEntry(com, uid) {
     let sid = getConfig('sid');
     let complete = false;

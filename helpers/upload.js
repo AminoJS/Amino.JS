@@ -5,6 +5,11 @@ const {
     getConfig
 } = require('../index');
 
+/**
+ * Uploads an Image / GIF to the Amino Servers.
+ * @param {Image} path A Path for uploading a File
+ * @returns {String} A AminoURL for posting into Blogs, Wikis, Chats, etc.
+ */
 module.exports = async function upload(path) {
     let sid = getConfig('sid');
     let mediaValue = {value: null, error: null};

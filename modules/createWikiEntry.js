@@ -8,6 +8,13 @@ const {
 } = require('../index');
 const upload = require('../helpers/upload');
 
+/**
+ * Creating a Wiki Entry.
+ * @param {CommunityID} com A ID that can be obtained by the function getJoinedComs
+ * @param {String} title The Title of the Wiki.
+ * @param {String} content The Content of the Wiki Entry.
+ * @param {Image} front_picture_path The Path to an Image File **REQUIRED**
+ */
 module.exports = async function createWikiEntry(com, title, content, front_picture_path) {
     let sid = getConfig('sid');
     let id = getConfig('profileId');
