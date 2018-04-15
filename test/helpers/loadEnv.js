@@ -1,4 +1,4 @@
-if(process.env.CI && process.env.TRAVIS_PULL_REQUEST === 'false'){
+if(process.env.CI && process.env.TRAVIS_PULL_REQUEST !== 'false'){
     // Pull request
     describe.skip();
 }
