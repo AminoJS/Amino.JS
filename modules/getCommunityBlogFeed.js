@@ -23,7 +23,7 @@ module.exports = async function (com, startAt, size) {
         })
 
         // just log for now
-        console.log(blogs)
+        console.log(JSON.parse(blogs));
     } catch (err) {
         // feed.error = err;
         throw new Error(err)
