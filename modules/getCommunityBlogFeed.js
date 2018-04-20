@@ -1,7 +1,8 @@
 const { getConfig } = require('../index');
 const objs = require('../helpers/objects.js');
 const request = require('request-promise');
-const endpoints = require('../helpers/endpoints')
+const endpoints = require('../helpers/endpoints');
+const sorter = require('../helpers/sorter');
 module.exports = async function (com, startAt, size) {
 
     // get our sid
@@ -10,7 +11,7 @@ module.exports = async function (com, startAt, size) {
     //Silent fallback, will default to most recent if missing.
     startAt = startAt || 1;
     size = size || 1;
-
+    
     if (typeof sid != 'string' || typeof com !== 'string' || typeof startAt !== 'number' || typeof size !== 'number') {
         throw new Error('All Arguments are not satisfied. Check if all parameters are the right type.');
     }
@@ -20,12 +21,19 @@ module.exports = async function (com, startAt, size) {
             headers: {
                 'NDCAUTH': `sid=${sid}`
             }
-        })
+        });
 
-        // just log for now
-        console.log(JSON.parse(blogs));
+        // Parse and return the blogList
+        blogs = JSON.parse(blogs);
+        blogs.blogList.forEach(element => {
+            feed.blogs.push(sorter.blogsSorter(element));
+        });
+        feed.status = 'ok';
+        feed.error = null;
     } catch (err) {
         // feed.error = err;
-        throw new Error(err)
+        feed.error = err;
+        throw new Error(err);
     }
-}
+    return feed;
+};
