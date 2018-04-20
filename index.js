@@ -43,5 +43,6 @@ module.exports = {
     getChat: require('./modules/getChat'),
     sendChat: require('./modules/sendChat'),
     createWikiEntry: require('./modules/createWikiEntry'),
-    deleteWikiEntry: require('./modules/deleteWikiEntry')
+    deleteWikiEntry: require('./modules/deleteWikiEntry'),
+    commentWikiEntry: require('./modules/commentWikiEntry')
 };

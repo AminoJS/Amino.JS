@@ -10,5 +10,6 @@ module.exports = {
     sendChat: (com, uuid) => `${prefix}/v1/${com}/s/chat/thread/${uuid}/message`,
     checkIfWikiCanPost: (com, uuid) => `${prefix}/v1/${com}/s/user-profile/${uuid}/compose-eligible-check?objectType=item`,
     createWiki: (com) => `${prefix}/v1/${com}/s/item`,
-    deleteWiki: (com, uid) => `${prefix}/v1/${com}/s/item/${uid}`
+    deleteWiki: (com, uid) => `${prefix}/v1/${com}/s/item/${uid}`,
+    commentWiki: (com, uid) => `${prefix}/v1/${com}/s/item/${uid}/comment`
 };
