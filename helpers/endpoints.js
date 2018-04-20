@@ -8,5 +8,7 @@ module.exports = {
     loadChat: (com, uuid, count) => `${prefix}/v1/${com}/s/chat/thread/${uuid}/message?start=0&size=${count}&cv=v1.2`,
     sendChat: (com, uuid) => `${prefix}v1/${com}/s/chat/thread/${uuid}/message`,
     postBlog: (com)=> `${prefix}v1/${com}/s/blog/`,
-    deleteBlog: (com, id)=> `${prefix}v1/${com}/s/blog/${id}`
+    deleteBlog: (com, id)=> `${prefix}v1/${com}/s/blog/${id}`,
+    commentsPost: (com, id, sort, start, size)=> `${prefix}v1/${com}/s/blog/${id}/comment?sort=${sort}&start=${start}&size=${size}`,
+    commentPost: (com, id)=> `${prefix}v1/${com}/s/blog/${id}/comment`
 };

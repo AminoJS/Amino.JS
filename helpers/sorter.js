@@ -61,5 +61,34 @@ module.exports = {
                 'role': element.author.role
             }
         };
+        
+    },
+
+    blogsSorter: (element) => {
+        return {
+            'blogId': element.blogId,
+            'title': element.title,
+            'content': element.content,
+            'referedObject': element.refObject,
+            'keywords': element.keywords,
+            'createdTime': element.createdTime,
+            'likeCount': element.votesCount,
+            'commentsCount': element.commentsCount,
+            'author': element.author
+        };
+    },
+    commentSorter: (element) => {
+        return {
+            'commentId': element.commentId,
+            'content': element.content,
+            'media': element.mediaList,
+            'createdTime': element.createdTime,
+            'likeCount': element.votesSum,
+            'blogId': element.parentId,
+            "subcomments":element.subcomments,
+            'author': element.author
+        };
     }
 };
+
+    

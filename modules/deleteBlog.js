@@ -7,7 +7,7 @@ const { getConfig } = require('../index');
  * Function to delete a blog.
  * @param {SecurityString} sid For authenticating with the Narvii-API.
  * @param {CommunityUUID} com The Community ID that can be Obtained by the Function getJoinedComs
- * @param {String} id The ID of the post
+ * @param {PostUUID} id The ID of the post
  */
 
 module.exports = async function deleteBlog(com, id) {

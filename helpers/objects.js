@@ -59,12 +59,17 @@ const profile = {
     status: 'not okay',
     error: 'nothing happend!'
 };
-
+const comments = {
+    comments: [],
+    status: "not okay",
+    error: "nothing happend!"
+}
 module.exports = {
     communityList,
     threadList,
     recivedMessages,
     profile,
+    comments,
     sendingMessage: {
         message: {
             sent: false,
