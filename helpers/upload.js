@@ -12,6 +12,8 @@ const {
  */
 module.exports = async function upload(path) {
     let sid = getConfig('sid');
+    if(typeof sid != 'string') throw new Error('SID is not defined - Please Login first');
+    if(typeof path != 'string') throw new Error('Not all Arguments given.');
     let mediaValue = {value: null, error: null};
     await fs.createReadStream(path).pipe(request.post(endpoints.upload, {
         headers: {

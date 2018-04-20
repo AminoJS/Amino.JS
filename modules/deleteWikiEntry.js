@@ -12,6 +12,12 @@ const {
  */
 module.exports = async function deleteWikiEntry(com, uid) {
     let sid = getConfig('sid');
+    if(typeof sid != 'string') {
+        throw new Error('SID is not Defined. Please Login first!');
+    }
+    if(typeof com != 'string' || typeof uid != 'string') {
+        throw new Error('Not all Arguments are given.');
+    }
     let complete = false;
     request.delete(endpoints.deleteWiki(com, uid), {
         headers: {
@@ -19,11 +25,9 @@ module.exports = async function deleteWikiEntry(com, uid) {
         }
     }, (err, res) => {
         if (err) throw new Error('An Error occured!', err);
-        if(res.statusCode === 200) {
+        if (res.statusCode === 200) {
             complete = true;
-            return;
-        }
-        else complete = false;
+        } else complete = false;
     });
     return complete;
 };

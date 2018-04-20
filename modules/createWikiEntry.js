@@ -18,6 +18,9 @@ const upload = require('../helpers/upload');
 module.exports = async function createWikiEntry(com, title, content, front_picture_path) {
     let sid = getConfig('sid');
     let id = getConfig('profileId');
+    if (typeof sid != 'string') throw new Error('SID is not Defined - Please Login first');
+    if (typeof id != 'string') throw new Error('The ProfileID is not defined. But since SID is there needs to be a major Error. Please Submit an Issue!');
+    if (typeof com != 'string' || typeof title != 'string' || typeof content != 'string' || typeof front_picture_path != 'string') throw new Error('Not all Arguments are given');
     let check = false;
     let item = objs.wiki;
     await request.get(endpoints.checkIfWikiCanPost(com, id), {
