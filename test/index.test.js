@@ -42,7 +42,7 @@ describe('how do the enpoints react..', () => {
         expect(
             sendChat('xtesting', 'a_great_uuid')
         )
-        .toBe('http://service.narvii.com/apiv1/xtesting/s/chat/thread/a_great_uuid/message');
+        .toBe('http://service.narvii.com/api/v1/xtesting/s/chat/thread/a_great_uuid/message');
     });
 
 });
