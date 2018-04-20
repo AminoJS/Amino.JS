@@ -4,8 +4,9 @@
   "description": "The Framework for interacting with Amino",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test",
-    "lint": "eslint ."
+    "test": "jest test",
+    "lint": "eslint .",
+    "test:dev": "jest test --watch --silent"
   },
   "repository": {
     "type": "git",
@@ -22,15 +23,15 @@
   "author": "Robin Möller <moelrobi@gmail.com> (https://robsys.space)",
   "contributors": [
     "Jason Idris <jason.idris@chca-oh.org>",
-    "Felix Fong <moongod101@hotmail.com> (https://felixfong227.ml)"
+    "Felix Fong <moongod101@hotmail.com> (https://felixfong227.ml)",
+    "Felipe Angelo Sgarbi <akatsukilevi@yahoo.co.jp>"
   ],
   "license": "AGPL-3.0",
   "devDependencies": {
     "babel-eslint": "^8.2.1",
-    "chai": "^4.1.2",
     "eslint": "^4.17.0",
     "ink-docstrap": "^1.3.2",
-    "mocha": "^5.0.0"
+    "jest": "^22.4.3"
   },
   "dependencies": {
     "request": "^2.83.0",
