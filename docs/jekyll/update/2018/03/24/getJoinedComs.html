@@ -3,17 +3,19 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.4.0 -->
-<title>amino.js | an unofficial API for Amino.</title>
+<title>getJoinedComs(sid) | amino.js</title>
 <meta name="generator" content="Jekyll v3.7.3" />
-<meta property="og:title" content="amino.js" />
+<meta property="og:title" content="getJoinedComs(sid)" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="an unofficial API for Amino." />
-<meta property="og:description" content="an unofficial API for Amino." />
-<link rel="canonical" href="/404.html" />
-<meta property="og:url" content="/404.html" />
+<meta name="description" content="Get a JSON object of all the communities you are in, and their information." />
+<meta property="og:description" content="Get a JSON object of all the communities you are in, and their information." />
+<link rel="canonical" href="/jekyll/update/2018/03/24/getJoinedComs.html" />
+<meta property="og:url" content="/jekyll/update/2018/03/24/getJoinedComs.html" />
 <meta property="og:site_name" content="amino.js" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-03-24T20:00:36-04:00" />
 <script type="application/ld+json">
-{"description":"an unofficial API for Amino.","@type":"WebPage","url":"/404.html","headline":"amino.js","@context":"http://schema.org"}</script>
+{"description":"Get a JSON object of all the communities you are in, and their information.","@type":"BlogPosting","url":"/jekyll/update/2018/03/24/getJoinedComs.html","headline":"getJoinedComs(sid)","dateModified":"2018-03-24T20:00:36-04:00","datePublished":"2018-03-24T20:00:36-04:00","mainEntityOfPage":{"@type":"WebPage","@id":"/jekyll/update/2018/03/24/getJoinedComs.html"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="amino.js" /></head>
 <body><header class="site-header" role="banner">
@@ -35,26 +37,46 @@
 </header>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
-        <style type="text/css" media="screen">
-  .container {
-    margin: 10px auto;
-    max-width: 600px;
-    text-align: center;
-  }
-  h1 {
-    margin: 30px 0;
-    font-size: 4em;
-    line-height: 1;
-    letter-spacing: -1px;
-  }
-</style>
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
-<div class="container">
-  <h1>404</h1>
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">getJoinedComs(sid)</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2018-03-24T20:00:36-04:00" itemprop="datePublished">Mar 24, 2018
+      </time></p>
+  </header>
 
-  <p><strong>Page not found :(</strong></p>
-  <p>The requested page could not be found.</p>
-</div>
+  <div class="post-content e-content" itemprop="articleBody">
+    <p><em>Get a JSON object of all the communities you are in, and their information.</em></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="highlighter-rouge">sid</code></td>
+      <td>SecurityString</td>
+      <td>For authenticating with the Narvii-API.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Returns:</strong> Array of community objects.</p>
+
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">coms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"x159192087"</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"German Roleplay Community"</span><span class="p">,</span>
+    <span class="s2">"url"</span><span class="p">:</span> <span class="s2">"https://aminoapps.com/c/german-roleplay-community/"</span>
+<span class="p">}</span></code></pre></figure>
+
+
+  </div><a class="u-url" href="/jekyll/update/2018/03/24/getJoinedComs.html" hidden></a>
+</article>
 
       </div>
     </main><footer class="site-footer h-card">
