@@ -43,4 +43,5 @@ module.exports = {
     getChat: require('./modules/getChat'),
     sendChat: require('./modules/sendChat'),
     postBlog: require('./modules/postBlog'),
+    deleteBlog: require('./modules/deleteBlog'),
 };
