@@ -1,7 +1,8 @@
 const { getConfig } = require('../index');
 const objs = require('../helpers/objects.js');
 const request = require('request-promise');
-const endpoints = require('../helpers/endpoints')
+const endpoints = require('../helpers/endpoints');
+const sorter = require('../helpers/sorter');
 module.exports = async function (com, startAt, size) {
 
     // get our sid
@@ -20,13 +21,19 @@ module.exports = async function (com, startAt, size) {
             headers: {
                 'NDCAUTH': `sid=${sid}`
             }
-        })
+        });
 
         // Parse and return the blogList
         blogs = JSON.parse(blogs);
-        return blogs.blogList;
+        blogs.blogList.forEach(element => {
+            feed.blogs.push(sorter.blogsSorter(element));
+        });
+        feed.status = 'ok';
+        feed.error = null;
     } catch (err) {
         // feed.error = err;
-        throw new Error(err)
+        feed.error = err;
+        throw new Error(err);
     }
-}
+    return feed;
+};

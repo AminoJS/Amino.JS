@@ -41,7 +41,7 @@ const communityBlogFeed = {
     blogs: [],
     status: 'not ok',
     error: 'nothing happened...'
-}
+};
 
 const threadList = {
     threads: [],
@@ -80,4 +80,5 @@ module.exports = {
         status: 'not ok',
         error: 'Nothing has been done.'
     },
+    communityBlogFeed
 };
