@@ -1,6 +1,5 @@
 const request = require('request-promise'); //The Request Module for sending the different Modules
 const endpoints = require('../helpers/endpoints.js'); //For Creating shorter URL's in this Module
-const sorter = require('../helpers/sorter.js'); //For easier Sorting of various Responses.
 const objs = require('../helpers/objects.js'); //For Storing the Objects that the Framework returns. 
 const { getConfig } = require('../index');
 
@@ -28,7 +27,7 @@ module.exports = async function getUserBlogs(com, uid, count) {
         const body = JSON.parse(response);
         body.blogList.forEach((element) => {
                 blogList.blogs.push(element);
-            });
+        });
         blogList.status = 'ok';
         blogList.error = null;
     }
