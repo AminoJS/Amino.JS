@@ -60,11 +60,18 @@ const profile = {
     error: 'nothing happend!'
 };
 
+const profileBlogs = {
+    blogs: [],
+    status: 'not ok',
+    error: 'not everything defined'
+};
+
 module.exports = {
     communityList,
     threadList,
     recivedMessages,
     profile,
+	profileBlogs,
     sendingMessage: {
         message: {
             sent: false,
