@@ -71,7 +71,7 @@ module.exports = {
     threadList,
     recivedMessages,
     profile,
-	profileBlogs,
+    profileBlogs,
     sendingMessage: {
         message: {
             sent: false,
