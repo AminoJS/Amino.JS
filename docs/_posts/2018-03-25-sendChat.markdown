@@ -1,0 +1,30 @@
+---
+layout: post
+title:  "sendChat(sid, com, uid, msg)"
+date:   2018-03-24 20:00:36 -0400
+categories: jekyll update
+---
+*Send a message in a chat.*
+
+| Name  | Type           | Description                                                |
+|-------|----------------|------------------------------------------------------------|
+| `sid` | SecurityString | For authenticating with the Narvii-API.                    |
+| `com` | CommunityUUID  | The Community ID that can be Obtained by `getJoinedComs()` |
+| `uid` | ChatUUID       | The chat ID returned by `getJoinedChats`                   |
+| `msg` | String         | The message to be sent.                                    |
+
+**Returns:** Confirmation JSON that the message was sent.
+
+Example of a successful send.
+{% highlight javascript %}
+message = {
+  message: {
+    message: "Hello, squad!",
+    threadID: "<chat room>",
+    sent: true
+  },
+  
+  status: "ok",
+  error: null
+}
+{% endhighlight %}

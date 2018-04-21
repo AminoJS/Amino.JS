@@ -1,4 +1,4 @@
-const fetch = require('isomorphic-fetch');
+const request = require('request-promise'); //The Request Module for sending the different Modules
 const endpoints = require('../helpers/endpoints.js'); //For Creating shorter URL's in this Module
 const objs = require('../helpers/objects.js'); //For Storing the Objects that the Framework returns. 
 const { getConfig } = require('../index');
@@ -21,17 +21,16 @@ module.exports = async function sendChat(com, uid, msg) {
     message.message.message = msg;
     message.message.threadId = uid;
     try {
-        const response = await fetch(endpoints.sendChat(com, uid), {
-            method: 'POST',
+        const response = await request.post(endpoints.sendChat(com, uid), {
             headers: {
                 'NDCAUTH': `sid=${sid}`
             },
-            body: JSON.stringify({
+            json: {
                 'content': msg,
                 'type': 0,
                 'clientRefId': 43196704,
-                'timestamp': new Date().getUTCMilliseconds(),
-            }),
+                'timestamp': new Date().getUTCMilliseconds()
+            }
         });
         if (response.message) {
             message.message.sent = true;
