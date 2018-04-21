@@ -7,6 +7,13 @@ const {
     getConfig
 } = require('../index');
 
+/**
+ * The Ability to Post a Comment!
+ * @param {CommunityID} com The Community were the Comment should be placed in
+ * @param {WikiID} uid The Wiki Entry to comment on
+ * @param {String} content The Comment
+ * @param {Image} img_path OPTIONAL: if no img_path is given, it doesnt send an Image
+ */
 module.exports = async function commentWikiEntry(com, uid, content, img_path) {
     let sid = getConfig('sid');
     let completed = false;
