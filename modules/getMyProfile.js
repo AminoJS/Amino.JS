@@ -1,5 +1,5 @@
 //Libary Imports
-const fetch = require('isomorphic-fetch');
+const request = require('request-promise'); //The Request Module for sending the different Modules
 const endpoints = require('../helpers/endpoints.js'); //For Creating shorter URL's in this Module
 const objs = require('../helpers/objects.js'); //For Storing the Objects that the Framework returns. 
 const { errorMessages, getConfig } = require('../index');
@@ -17,12 +17,12 @@ module.exports = async function getMyProfile() {
         throw new Error(errorMessages.missingSid);
     }
     try {
-        const response = await fetch(endpoints.getMe, {
+        const response = await request.get(endpoints.getMe, {
             headers: {
                 'NDCAUTH': `sid=${sid}`
             }
         });
-        const body = await response.json();
+        const body = JSON.parse(response);
         profile.account.username = body.account.nickname;
         profile.account.icon = body.account.icon;
         profile.account.mediaList = body.account.mediaList;

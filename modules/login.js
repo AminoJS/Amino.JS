@@ -1,5 +1,5 @@
 //Libary Imports
-const fetch = require('isomorphic-fetch');
+const request = require('request-promise'); //The Request Module for sending the different Modules
 const endpoints = require('../helpers/endpoints.js'); //For Creating shorter URL's in this Module
 const { setConfig } = require('../index');
 
@@ -22,20 +22,18 @@ module.exports = async function login(email, password, deviceID) {
     }
 
     try {
-        const response = await fetch(endpoints.login, {
-            method: 'POST',
-            body: JSON.stringify({
+        const response = await request.post(endpoints.login, {
+            json: {
                 'email': email,
                 'secret': '0 ' + password,
                 'deviceID': deviceID,
                 'clientType': 100,
                 'action': 'normal',
                 'timestamp': new Date().getUTCMilliseconds()
-            }),
+            }
         });
-        const body = await response.json();
-        if (!body.sid) throw 'Login Error: SID is not defined.' + body;
-        sid = body.sid;
+        if (!response.sid) throw 'Login Error: SID is not defined.' + response;
+        sid = response.sid;
         setConfig('sid', sid);
     }
     catch (err) {
