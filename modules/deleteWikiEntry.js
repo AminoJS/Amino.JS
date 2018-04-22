@@ -1,4 +1,4 @@
-const request = require('request-promise');
+const fetch = require('isomorphic-fetch');
 const endpoints = require('../helpers/endpoints');
 const {
     getConfig
@@ -18,16 +18,12 @@ module.exports = async function deleteWikiEntry(com, uid) {
     if(typeof com != 'string' || typeof uid != 'string') {
         throw new Error('Not all Arguments are given.');
     }
-    let complete = false;
-    request.delete(endpoints.deleteWiki(com, uid), {
+    const res = fetch(endpoints.deleteWiki(com, uid), {
+        method: 'DELETE',
         headers: {
             NDCAUTH: `sid=${sid}`
         }
-    }, (err, res) => {
-        if (err) throw new Error('An Error occured!', err);
-        if (res.statusCode === 200) {
-            complete = true;
-        } else complete = false;
     });
-    return complete;
+    if(!res.ok) throw new Error('An Error occured!' + res.status);
+    return res.ok;
 };

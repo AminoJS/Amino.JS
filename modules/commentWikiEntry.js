@@ -1,5 +1,5 @@
 //Libary import
-const request = require('request-promise'); //The Request Module for sending the different Modules
+const fetch = require('isomorphic-fetch'); //The Request Module for sending the different Modules
 const endpoints = require('../helpers/endpoints.js'); //For Creating shorter URL's in this Module
 const upload = require('../helpers/upload');
 
@@ -20,31 +20,32 @@ module.exports = async function commentWikiEntry(com, uid, content, img_path) {
     let completed = false;
 
     if(img_path == undefined) {
-        request.post(endpoints.commentWiki(com, uid), {
+        const response = await fetch(endpoints.commentWiki(com, uid), {
+            method: 'POST',
             headers: {
                 NDCAUTH: `sid=${sid}`
             },
-            json: {
+            body: JSON.stringify({
                 'content': content,
                 'mediaList': [],
                 'eventSource': 'PostDetailView',
                 'timestamp': new Date().getUTCMilliseconds
-            }
-        }, (err, res, body) => {
-            if(err) throw new Error('Oops. this should not have happend', err);
-    
-            if(body.comment == undefined) throw new Error('Something failed while Creating your Post');
-            else completed = true;
+            })
         });
+        if(!response.ok) throw new Error('The Server returned: ' + response.status);
+        let body = await response.json();
+        if(body.comment == undefined) throw new Error('Something failed while Creating you Post.', body);
+        else completed = true;
     }
 
     else {
         let url = await upload(img_path);
-        request.post(endpoints.commentWiki(com, uid), {
+        const response = await fetch(endpoints.commentWiki(com, uid), {
+            method: 'POST',
             headers: {
                 NDCAUTH: `sid=${sid}`
             },
-            json: {
+            body: JSON.stringify({
                 'content': content,
                 'mediaList': [
                     [
@@ -64,12 +65,12 @@ module.exports = async function commentWikiEntry(com, uid, content, img_path) {
                 ],
                 'eventSource': 'PostDetailView',
                 'timestamp': new Date().getUTCMilliseconds
-            }
-        }, (err, res, body) => {
-            if(err) throw new Error('Oops. this should not have happend', err);
-            if(body.comment == undefined) throw new Error('Something failed while Creating your Post. API Response:', body);
-            else completed = true;
+            })
         });
+        if(!response.ok) throw new Error('The Server returned: ' + response.status);
+        let body = await response.json();
+        if(body.comment == undefined) throw new Error('Something failed while Creating you Post.', body);
+        else completed = true;
     }
 
     return completed;

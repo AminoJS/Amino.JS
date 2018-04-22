@@ -1,5 +1,5 @@
 //Libary import
-const request = require('request-promise'); //The Request Module for sending the different Modules
+const fetch = require('isomorphic-fetch'); //The Request Module for sending the different Modules
 const endpoints = require('../helpers/endpoints.js'); //For Creating shorter URL's in this Module
 const objs = require('../helpers/objects.js'); //For Storing the Objects that the Framework returns. 
 const sorter = require('../helpers/sorter.js'); //For easier Sorting of various Responses.
@@ -19,32 +19,25 @@ module.exports = async function createWikiEntry(com, title, content, front_pictu
     let sid = getConfig('sid');
     let id = getConfig('profileId');
     if (typeof sid != 'string') throw new Error('SID is not Defined - Please Login first');
-    if (typeof id != 'string') throw new Error('The ProfileID is not defined. But since SID is there needs to be a major Error. Please Submit an Issue!');
+    if (typeof id != 'string') throw new Error('The ProfileID is not defined. But since SID is there, it needs to be a major Error. Please Submit an Issue!');
     if (typeof com != 'string' || typeof title != 'string' || typeof content != 'string' || typeof front_picture_path != 'string') throw new Error('Not all Arguments are given');
-    let check = false;
     let item = objs.wiki;
-    await request.get(endpoints.checkIfWikiCanPost(com, id), {
+    let canIt = await fetch(endpoints.checkIfWikiCanPost(com, id), {
         headers: {
             NDCAUTH: `sid=${sid}`
         },
-    },
-    (err, res) => {
-        if (err) throw Error('Error while Checking if System can Create Posts!', err);
-        if (res.statusCode === 200) {
-            check = true;
-        } else check = false;
-    }
-    );
-    if (!check) throw new Error('Client can\'t create Wikis!');
+    });
+    if (!canIt.ok) throw new Error('User cant Create Wiki\'s due to Response: ' + canIt.status);
     let front_pic = await upload(front_picture_path);
     if (front_pic.error != null) {
         throw new Error('This should not have happend! font_pic has error atrubitute in upload()');
     }
-    await request.post(endpoints.createWiki(com), {
+    const res = await fetch(endpoints.createWiki(com), {
+        method: 'POST',
         headers: {
             NDCAUTH: `sid=${sid}`
         },
-        json: {
+        json: JSON.stringify({
             'extentions': {
                 'props': []
             },
@@ -63,14 +56,14 @@ module.exports = async function createWikiEntry(com, title, content, front_pictu
             ],
             'eventSource': 'GlobalComposeMenu',
             'timestamp': new Date().getUTCMilliseconds()
-        }
-    }, (err, res, body) => {
-        if (err) {
-            item.error = err;
-            throw new Error('Something veery wrong did happen!' + err);
-        }
-        item = sorter.sortWiki(item, body.item);
-        item.error = null;
+        })
     });
+    if (!res.ok) {
+        item.error = res.status + ' ' + res.statusText;
+        throw new Error('Something veery wrong did happen! ' + item.error);
+    }
+    const body = res.json();
+    item = sorter.sortWiki(item, body.item);
+    item.error = null;
     return item;
 };
