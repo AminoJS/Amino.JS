@@ -38,7 +38,7 @@ module.exports = async function login(email, password, deviceID) {
         if (!body.sid) throw 'Login Error: SID is not defined.' + body;
         if(!body.account.uid) throw 'Login Error: ProfileID is not defined.' + body;
         sid = body.sid;
-        profileId = body.account.uid;
+        profileid = body.account.uid;
         setConfig('sid', sid);
         setConfig('profileId', profileid);
     }
