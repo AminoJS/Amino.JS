@@ -4,6 +4,7 @@ const {
     login,
     getMe,
     getComs,
+    upload,
     getJoinedChats,
     loadChat,
     sendChat,
@@ -23,6 +24,10 @@ describe('how do the enpoints react..', () => {
     it('when a community load api call is recived', () => {
         expect(getComs).toBe('http://service.narvii.com/api/v1/g/s/community/joined?start=0&size=50');
     });
+
+    it('when a upload api call is recived', () => {
+        expect(upload).toBe('http://service.narvii.com/api/v1/g/s/media/upload');
+    })
 
     it('when a chat thread load api call is recived', () => {
         expect(
