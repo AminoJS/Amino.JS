@@ -13,6 +13,7 @@ const {
  * @param {WikiID} uid The Wiki Entry to comment on
  * @param {String} content The Comment
  * @param {Image} img_path OPTIONAL: if no img_path is given, it doesnt send an Image
+ * @returns {boolean} if the Comment was Posted.
  */
 module.exports = async function commentWikiEntry(com, uid, content, img_path) {
     let sid = getConfig('sid');
