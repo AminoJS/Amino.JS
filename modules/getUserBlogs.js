@@ -26,7 +26,7 @@ module.exports = async function getUserBlogs(com, uid, count) {
         //Parsing the Response.
         const body = JSON.parse(response);
         body.blogList.forEach((element) => {
-                blogList.blogs.push(element);
+            blogList.blogs.push(element);
         });
         blogList.status = 'ok';
         blogList.error = null;
