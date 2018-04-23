@@ -64,7 +64,13 @@ const comments = {
     status: "not okay",
     error: "nothing happend!"
 }
+const blog = {
+    blog: {},
+    status: "not okay",
+    error: "nothing happend!"
+}
 module.exports = {
+    blog,
     communityList,
     threadList,
     recivedMessages,

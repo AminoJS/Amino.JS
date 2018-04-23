@@ -1,6 +1,7 @@
 const request = require('request-promise'); //The Request Module for sending the different Modules
 const endpoints = require('../helpers/endpoints.js'); //For Creating shorter URL's in this Module
 const objs = require('../helpers/objects.js'); //For Storing the Objects that the Framework returns. 
+const sorter = require('../helpers/sorter.js'); //For easier Sorting of various Responses.
 const { getConfig } = require('../index');
 
 /** 
@@ -13,9 +14,8 @@ const { getConfig } = require('../index');
  */
 
 module.exports = async function postBlog(com, title, content) {
-    let message = objs.sendingMessage;
     const sid = getConfig('sid');
-    let blog
+    let blog = objs.blog;
     if (typeof sid != 'string' || typeof com !== 'string' || typeof title !== 'string' || typeof content !== 'string') {
         throw new Error('All Arguments are not satisfied.');
     }
@@ -34,15 +34,13 @@ module.exports = async function postBlog(com, title, content) {
                 'timestamp': new Date().getUTCMilliseconds()
             }
         });
-        if (response.blog) {
-            
-            message.message.sent = true;
-            message.status = 'ok';
-            message.error = null;
-            blog = response.blog
+        if (response.blog.blogId) {
+            blog.status = 'ok';
+            blog.error = null;
+            blog.blog = sorter.blogsSorter(response.blog)
         }
     } catch (err) {
-        message.error = err;
+        blog.error = err;
         throw 'Error while calling postBlog: ' + err;
     }
     return blog;

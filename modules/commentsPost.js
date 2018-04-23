@@ -16,7 +16,7 @@ const { getConfig } = require('../index');
  */
 
 module.exports = async function commentsPost(com, id, sort, start, size) {
-    let threadList = objs.threadList;
+    let comments = objs.comments;
     let body;
     const sid = getConfig('sid');
     if (typeof sid != 'string' || typeof com !== 'string' || typeof id !== 'string' || typeof sort !== 'string' || typeof start !== 'number' || typeof size !== 'number') {
@@ -30,11 +30,18 @@ module.exports = async function commentsPost(com, id, sort, start, size) {
         });
         //Parsing the Response.
         body = JSON.parse(response);
+        body.commentList.forEach(commentsR => {
+            comments.comments.push(sorter.commentSorter(commentsR))
+        });
+        comments.status="ok"
+        comments.error="null"
+        
+        
         
     }
     catch(err){
-        threadList.error = err;
+        comments.error = err;
         throw 'Error while calling commentsPost: ' + err;
     }
-    return body;
+    return comments;
 };

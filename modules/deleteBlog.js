@@ -11,9 +11,7 @@ const { getConfig } = require('../index');
  */
 
 module.exports = async function deleteBlog(com, id) {
-    let message = objs.sendingMessage;
     const sid = getConfig('sid');
-    let blog
     if (typeof sid != 'string' || typeof com !== 'string' || typeof id !== 'string') {
         throw new Error('All Arguments are not satisfied.');
     }
@@ -24,7 +22,6 @@ module.exports = async function deleteBlog(com, id) {
             },
         });
     } catch (err) {
-        message.error = err;
         throw 'Error while calling postBlog: ' + err;
     }
 };
