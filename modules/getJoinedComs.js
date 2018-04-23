@@ -1,4 +1,4 @@
-const request = require('request-promise'); //The Request Module for sending the different Modules
+const fetch = require('isomorphic-fetch');
 const endpoints = require('../helpers/endpoints.js'); //For Creating shorter URL's in this Module
 const sorter = require('../helpers/sorter.js'); //For easier Sorting of various Responses.
 const objs = require('../helpers/objects.js'); //For Storing the Objects that the Framework returns. 
@@ -17,12 +17,12 @@ module.exports = async function getJoinedComs() {
         throw new Error(errorMessages.missingSid);
     }
     try {
-        const response = await request.get(endpoints.getComs, {
+        const response = await fetch(endpoints.getComs, {
             headers: {
                 'NDCAUTH': `sid=${sid}`
             }
         });
-        const body = JSON.parse(response);
+        const body = await response.json();
         body.communityList.forEach((element) => {
             communityList.coms.push(sorter.comSort(element));
         });

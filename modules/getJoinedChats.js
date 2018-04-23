@@ -1,4 +1,4 @@
-const request = require('request-promise'); //The Request Module for sending the different Modules
+const fetch = require('isomorphic-fetch');
 const endpoints = require('../helpers/endpoints.js'); //For Creating shorter URL's in this Module
 const sorter = require('../helpers/sorter.js'); //For easier Sorting of various Responses.
 const objs = require('../helpers/objects.js'); //For Storing the Objects that the Framework returns. 
@@ -18,13 +18,13 @@ module.exports = async function getJoinedChats(com) {
         throw new Error('All Arguments are not satisfied.');
     }
     try{
-        const response = await request.get(endpoints.getJoinedChats(com), {
+        const response = await fetch(endpoints.getJoinedChats(com), {
             headers: {
                 'NDCAUTH': `sid=${sid}`
             }
         });
         //Parsing the Response.
-        const body = JSON.parse(response);
+        const body = await response.json();
         body.threadList.forEach((element) => {
             //Sorting the Elements and pushing them into the Array.
             threadList.threads.push(sorter.threadSort(element));
