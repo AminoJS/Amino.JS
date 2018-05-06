@@ -10,7 +10,7 @@ const {
  * @param {Image} path A Path for uploading a File
  * @returns {String} A AminoURL for posting into Blogs, Wikis, Chats, etc.
  */
-module.exports = async function upload(path) {
+module.exports = async function upload(file) {
     let sid = getConfig('sid');
     if(typeof sid != 'string') throw new Error('SID is not defined - Please Login first');
     if(typeof path != 'string') throw new Error('Not all Arguments given.');
