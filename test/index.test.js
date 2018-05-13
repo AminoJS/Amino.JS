@@ -7,8 +7,7 @@ const {
     upload,
     getJoinedChats,
     loadChat,
-    sendChat,
-    upload
+    sendChat
 } = require('../helpers/endpoints');
 
 // Making sure that no one will accidentally missed the endpoints
@@ -35,10 +34,6 @@ describe('how do the enpoints react..', () => {
             getJoinedChats('xtesting')
         )
         .toBe('https://service.narvii.com/api/v1/xtesting/s/chat/thread?type=joined-me&start=0&size=100');
-    });
-
-    it('when a upload call is recived', () => {
-	    expect(upload).toBe('http://service.narvii.com/api/v1/g/s/media/upload');
     });
 
     it('when a chat api call is recived', () => {
