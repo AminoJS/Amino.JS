@@ -1,11 +1,10 @@
-const request = require('request-promise'); //The Request Module for sending the different Modules
+const fetch = require('isomorphic-fetch'); //The Request Module for sending the different Modules
 const endpoints = require('../helpers/endpoints.js'); //For Creating shorter URL's in this Module
 const { getConfig } = require('../index');
 const sorter = require('../helpers/sorter');
 
 /** 
  * Function to post a blog.
- * @param {SecurityString} sid For authenticating with the Narvii-API.
  * @param {CommunityUUID} com The Community ID that can be Obtained by the Function getJoinedComs
  * @param {PostUUID} id The ID of the post
  * @param {String} content The content of the comment.
@@ -19,17 +18,19 @@ module.exports = async function commentPost(com, id, content) {
         throw new Error('All Arguments are not satisfied.');
     }
     try {
-        const response = await request.post(endpoints.commentPost(com, id), {
+        let response = await fetch(endpoints.commentPost(com, id), {
+            method: 'POST',
             headers: {
                 'NDCAUTH': `sid=${sid}`
             },
-            json: {
+            body: JSON.stringify({
                 'content': content,
                 'mediaList': [],
                 'eventSource':'PostDetailView',
                 'timestamp': new Date().getUTCMilliseconds()
-            }
+            })
         });
+        response = response.json();
         if (response.comment) {
             comment = sorter.commentSorter(response.comment);
         }

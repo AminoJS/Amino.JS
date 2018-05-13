@@ -1,4 +1,4 @@
-const request = require('request-promise'); //The Request Module for sending the different Modules
+const fetch = require('isomorphic-fetch'); //The Request Module for sending the different Modules
 const endpoints = require('../helpers/endpoints.js'); //For Creating shorter URL's in this Module
 const { getConfig } = require('../index');
 
@@ -15,7 +15,8 @@ module.exports = async function deleteBlog(com, id) {
         throw new Error('All Arguments are not satisfied.');
     }
     try {
-        await request.delete(endpoints.deleteBlog(com,id), {
+        await fetch(endpoints.deleteBlog(com,id), {
+            method: 'DELETE',
             headers: {
                 'NDCAUTH': `sid=${sid}`
             },

@@ -6,6 +6,5 @@ const Amino = require('../index');
     const yourCommunitys = await Amino.getJoinedComs();
         let community=yourCommunitys.coms[0].id;
         let test = await Amino.postBlog(community, "Test", "This blog will be deleted")
-        await Amino.deleteBlog(community, test.blogId)
-        
+        await Amino.deleteBlog(community, test.blogId);    
 })();

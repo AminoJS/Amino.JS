@@ -1,4 +1,4 @@
-const request = require('request-promise'); //The Request Module for sending the different Modules
+const fetch = require('isomorphic-fetch'); //The Request Module for sending the different Modules
 const endpoints = require('../helpers/endpoints.js'); //For Creating shorter URL's in this Module
 const objs = require('../helpers/objects.js'); //For Storing the Objects that the Framework returns. 
 const sorter = require('../helpers/sorter.js'); //For easier Sorting of various Responses.
@@ -6,7 +6,6 @@ const { getConfig } = require('../index');
 
 /** 
  * Function to post a blog.
- * @param {SecurityString} sid For authenticating with the Narvii-API.
  * @param {CommunityUUID} com The Community ID that can be Obtained by the Function getJoinedComs
  * @param {String} title The title of the post
  * @param {String} content The content of the post
@@ -20,11 +19,12 @@ module.exports = async function postBlog(com, title, content) {
         throw new Error('All Arguments are not satisfied.');
     }
     try {
-        const response = await request.post(endpoints.postBlog(com), {
+        let response = await fetch(endpoints.postBlog(com), {
+            method: 'POST',
             headers: {
                 'NDCAUTH': `sid=${sid}`
             },
-            json: {
+            body: JSON.stringify({
                 'content': content,
                 'latitude': 0,
                 'longitude': 0,
@@ -32,8 +32,9 @@ module.exports = async function postBlog(com, title, content) {
                 'clientRefId': 43196704,
                 'eventSource':'GlobalComposeMenu',
                 'timestamp': new Date().getUTCMilliseconds()
-            }
+            })
         });
+        response = await response.json();
         if (response.blog.blogId) {
             blog.status = 'ok';
             blog.error = null;

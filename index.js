@@ -45,7 +45,7 @@ module.exports = {
     sendChat: require('./modules/sendChat'),
     postBlog: require('./modules/postBlog'),
     deleteBlog: require('./modules/deleteBlog'),
-    commentsPost: require('./modules/commentsPost'),
+    getCommentsPost: require('./modules/commentsPost'),
     commentPost: require('./modules/commentPost'),
     getComBlogFeed: require('./modules/getCommunityBlogFeed'),
     createWikiEntry: require('./modules/createWikiEntry'),
