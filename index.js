@@ -9,9 +9,9 @@
  * TODO:
  * Get Userinfos from other Users (comming in v.0.2)
  * Comment on a User Profile (comming in v.0.2)
- * Create a Wiki Entry / Blog Post (comming in v.0.2)
+ * Create a Blog Post (comming in v.0.2)
  * Comment a Wiki Entry / Blog Post (comming in v.0.2)
- * Delete a Wiki Entry / Blog Post (comming in v.0.2)
+ * Delete a Blog Post (comming in v.0.2)
  */
 
 const config = {};
@@ -42,4 +42,7 @@ module.exports = {
     getJoinedChats: require('./modules/getJoinedChats'),
     getChat: require('./modules/getChat'),
     sendChat: require('./modules/sendChat'),
+    createWikiEntry: require('./modules/createWikiEntry'),
+    deleteWikiEntry: require('./modules/deleteWikiEntry'),
+    commentWikiEntry: require('./modules/commentWikiEntry')
 };
