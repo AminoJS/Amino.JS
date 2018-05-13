@@ -66,6 +66,12 @@ const profile = {
     error: 'nothing happend!'
 };
 
+const profileBlogs = {
+    blogs: [],
+    status: 'not ok',
+    error: 'not everything defined'
+};
+
 const wiki = {
     item: {
         itemid: 'id',
@@ -91,6 +97,7 @@ module.exports = {
     threadList,
     recivedMessages,
     profile,
+    profileBlogs,
     wiki,
     sendingMessage: {
         message: {

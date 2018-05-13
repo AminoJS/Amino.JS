@@ -8,6 +8,7 @@ module.exports = {
     getJoinedChats: (com) => `${prefix}/v1/${com}/s/chat/thread?type=joined-me&start=0&size=100`,
     loadChat: (com, uuid, count) => `${prefix}/v1/${com}/s/chat/thread/${uuid}/message?start=0&size=${count}&cv=v1.2`,
     sendChat: (com, uuid) => `${prefix}/v1/${com}/s/chat/thread/${uuid}/message`,
+    getUserBlogs: (com, uuid, count) => `${prefix}/v1/${com}/s/blog?type=user&q=${uuid}&start=0&size=${count}`,
     getCommunityBlogFeed: (com, startAt, size) => `${prefix}/v1/${com}/s/feed/blog-all?start=${startAt}&size=${size}`,
     checkIfWikiCanPost: (com, uuid) => `${prefix}/v1/${com}/s/user-profile/${uuid}/compose-eligible-check?objectType=item`,
     createWiki: (com) => `${prefix}/v1/${com}/s/item`,

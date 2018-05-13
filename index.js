@@ -40,6 +40,7 @@ module.exports = {
     getMyProfile: require('./modules/getMyProfile'),
     getJoinedComs: require('./modules/getJoinedComs'),
     getJoinedChats: require('./modules/getJoinedChats'),
+    getUserBlogs: require('./modules/getUserBlogs'),
     getChat: require('./modules/getChat'),
     sendChat: require('./modules/sendChat'),
     getComBlogFeed: require('./modules/getCommunityBlogFeed'),
