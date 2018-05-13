@@ -37,7 +37,7 @@ module.exports = async function createWikiEntry(com, title, content, front_pictu
         headers: {
             NDCAUTH: `sid=${sid}`
         },
-        json: JSON.stringify({
+        body: JSON.stringify({
             'extentions': {
                 'props': []
             },
@@ -62,8 +62,9 @@ module.exports = async function createWikiEntry(com, title, content, front_pictu
         item.error = res.status + ' ' + res.statusText;
         throw new Error('Something veery wrong did happen! ' + item.error);
     }
-    const body = res.json();
+    const body = await res.json();
     item = sorter.sortWiki(item, body.item);
+    item.status = 'ok';
     item.error = null;
     return item;
 };
