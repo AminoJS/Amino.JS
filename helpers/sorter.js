@@ -63,6 +63,20 @@ module.exports = {
         };
     },
 
+    blogsSorter: (element) => {
+        return {
+            'blogId': element.blogId,
+            'title': element.title,
+            'content': element.content,
+            'referedObject': element.refObject,
+            'keywords': element.keywords,
+            'createdTime': element.createdTime,
+            'likeCount': element.votesCount,
+            'commentsCount': element.commentsCount,
+            'author': element.author
+        };
+    },
+      
     sortWiki: (itemObj, itemElem) => {
         itemObj.item.itemid = itemElem.itemId;
         itemObj.item.createdTime = itemElem.createdTime;
