@@ -1,5 +1,5 @@
 console.log("Post and delete a blog.\n");
-const env = require('./env.default');
+const env = require('./env');
 const Amino = require('../index');
 (async function(){
     const sid = await Amino.login(env.email, env.password);

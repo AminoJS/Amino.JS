@@ -6,7 +6,6 @@ const { getConfig } = require('../index');
 
 /**
  * Get all the comments from a post
- * @param {SecurityString} sid For authenticating with the Narvii-API.
  * @param {CommunityUUID} com A ID that can be obtained by the function getJoinedComs
  * @param {PostUUID} com A ID that can be obtained by the function getJoinedComs
  * @param {String} sort The type of sort (newest, oldest)
@@ -31,13 +30,10 @@ module.exports = async function commentsPost(com, id, sort, start, size) {
         //Parsing the Response.
         body = JSON.parse(response);
         body.commentList.forEach(commentsR => {
-            comments.comments.push(sorter.commentSorter(commentsR))
+            comments.comments.push(sorter.commentSorter(commentsR));
         });
-        comments.status="ok"
-        comments.error="null"
-        
-        
-        
+        comments.status= 'ok';
+        comments.error= 'null';
     }
     catch(err){
         comments.error = err;

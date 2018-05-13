@@ -1,6 +1,5 @@
 const request = require('request-promise'); //The Request Module for sending the different Modules
 const endpoints = require('../helpers/endpoints.js'); //For Creating shorter URL's in this Module
-const objs = require('../helpers/objects.js'); //For Storing the Objects that the Framework returns. 
 const { getConfig } = require('../index');
 
 /** 
@@ -16,11 +15,12 @@ module.exports = async function deleteBlog(com, id) {
         throw new Error('All Arguments are not satisfied.');
     }
     try {
-        const response = await request.delete(endpoints.deleteBlog(com,id), {
+        await request.delete(endpoints.deleteBlog(com,id), {
             headers: {
                 'NDCAUTH': `sid=${sid}`
             },
         });
+        return true;
     } catch (err) {
         throw 'Error while calling postBlog: ' + err;
     }

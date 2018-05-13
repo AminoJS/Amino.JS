@@ -37,7 +37,7 @@ module.exports = async function postBlog(com, title, content) {
         if (response.blog.blogId) {
             blog.status = 'ok';
             blog.error = null;
-            blog.blog = sorter.blogsSorter(response.blog)
+            blog.blog = sorter.blogsSorter(response.blog);
         }
     } catch (err) {
         blog.error = err;

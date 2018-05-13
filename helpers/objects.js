@@ -67,14 +67,14 @@ const profile = {
 };
 const comments = {
     comments: [],
-    status: "not okay",
-    error: "nothing happend!"
-}
+    status: 'not okay',
+    error: 'nothing happend!'
+};
 const blog = {
     blog: {},
-    status: "not okay",
-    error: "nothing happend!"
-}
+    status: 'not okay',
+    error: 'nothing happend!'
+};
 const profileBlogs = {
     blogs: [],
     status: 'not ok',

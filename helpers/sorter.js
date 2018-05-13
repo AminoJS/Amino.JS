@@ -85,7 +85,7 @@ module.exports = {
             'createdTime': element.createdTime,
             'likeCount': element.votesSum,
             'blogId': element.parentId,
-            "subcomments":element.subcomments,
+            'subcomments':element.subcomments,
             'author': element.author
         };
     },

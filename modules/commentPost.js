@@ -1,6 +1,5 @@
 const request = require('request-promise'); //The Request Module for sending the different Modules
 const endpoints = require('../helpers/endpoints.js'); //For Creating shorter URL's in this Module
-const objs = require('../helpers/objects.js'); //For Storing the Objects that the Framework returns. 
 const { getConfig } = require('../index');
 const sorter = require('../helpers/sorter');
 
@@ -15,7 +14,7 @@ const sorter = require('../helpers/sorter');
 
 module.exports = async function commentPost(com, id, content) {
     const sid = getConfig('sid');
-    let comment
+    let comment;
     if (typeof sid != 'string' || typeof com !== 'string' || typeof id !== 'string' || typeof content !== 'string') {
         throw new Error('All Arguments are not satisfied.');
     }
