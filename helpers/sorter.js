@@ -61,7 +61,6 @@ module.exports = {
                 'role': element.author.role
             }
         };
-        
     },
 
     blogsSorter: (element) => {
@@ -77,6 +76,7 @@ module.exports = {
             'author': element.author
         };
     },
+
     commentSorter: (element) => {
         return {
             'commentId': element.commentId,
@@ -88,6 +88,21 @@ module.exports = {
             "subcomments":element.subcomments,
             'author': element.author
         };
+    },
+    sortWiki: (itemObj, itemElem) => {
+        itemObj.item.itemid = itemElem.itemId;
+        itemObj.item.createdTime = itemElem.createdTime;
+        itemObj.item.title = itemElem.label;
+        itemObj.item.content = itemElem.content;
+        itemObj.item.author.uid = itemElem.author.uid;
+        itemObj.item.author.username = itemElem.author.nickname;
+        itemObj.item.author.icon = itemElem.author.icon;
+        itemObj.item.author.role = itemElem.author.role;
+        itemObj.item.author.level = itemElem.author.level;
+        itemObj.item.mediaList = itemElem.mediaList;
+        itemObj.item.likeCount = itemElem.votesCount;
+        itemObj.item.commentCount = itemElem.commentsCount;
+        return itemObj;
     }
 };
 
