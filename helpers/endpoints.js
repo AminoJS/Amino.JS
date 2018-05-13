@@ -1,4 +1,4 @@
-let prefix = 'http://service.narvii.com/api';
+let prefix = 'https://service.narvii.com/api';
 
 module.exports = {
     login: prefix + '/v1/g/s/auth/login',
