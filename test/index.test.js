@@ -41,7 +41,7 @@ describe('how do the enpoints react..', () => {
         expect(
             getUserBlogs('xtesting', 'utesting', '100')
         )
-        .toBe('http://service.narvii.com/api/v1/xtesting/s/blog?type=user&q=utesting&start=0&size=100');
+        .toBe('https://service.narvii.com/api/v1/xtesting/s/blog?type=user&q=utesting&start=0&size=100');
     });
 
     it('when a chat api call is recived', () => {
