@@ -66,11 +66,32 @@ const profile = {
     error: 'nothing happend!'
 };
 
+const wiki = {
+    item: {
+        itemid: 'id',
+        createdTime: 'time',
+        title: 'title',
+        content: 'content',
+        author: {
+            uid: 'id',
+            username: 'nickname',
+            icon: 'icon',
+            role: 'role',
+            level: 'level'
+        },
+        mediaList: 'mediaList',
+        likeCount: 'likeCount',
+        commentCount: 'commentCount'
+    },
+    error: 'nothing happend.'
+};
+
 module.exports = {
     communityList,
     threadList,
     recivedMessages,
     profile,
+    wiki,
     sendingMessage: {
         message: {
             sent: false,
