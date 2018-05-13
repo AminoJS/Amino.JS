@@ -76,7 +76,19 @@ module.exports = {
             'author': element.author
         };
     },
-      
+
+    commentSorter: (element) => {
+        return {
+            'commentId': element.commentId,
+            'content': element.content,
+            'media': element.mediaList,
+            'createdTime': element.createdTime,
+            'likeCount': element.votesSum,
+            'blogId': element.parentId,
+            'subcomments':element.subcomments,
+            'author': element.author
+        };
+    },
     sortWiki: (itemObj, itemElem) => {
         itemObj.item.itemid = itemElem.itemId;
         itemObj.item.createdTime = itemElem.createdTime;
@@ -93,3 +105,5 @@ module.exports = {
         return itemObj;
     }
 };
+
+    

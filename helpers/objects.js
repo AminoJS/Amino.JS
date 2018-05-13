@@ -65,7 +65,16 @@ const profile = {
     status: 'not okay',
     error: 'nothing happend!'
 };
-
+const comments = {
+    comments: [],
+    status: 'not okay',
+    error: 'nothing happend!'
+};
+const blog = {
+    blog: {},
+    status: 'not okay',
+    error: 'nothing happend!'
+};
 const profileBlogs = {
     blogs: [],
     status: 'not ok',
@@ -93,10 +102,12 @@ const wiki = {
 };
 
 module.exports = {
+    blog,
     communityList,
     threadList,
     recivedMessages,
     profile,
+    comments,
     profileBlogs,
     wiki,
     sendingMessage: {
