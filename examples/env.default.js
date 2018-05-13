@@ -1,6 +1,7 @@
 module.exports = {
     email: '',
     password: '',
+    testingEnvCom: '',
     wiki: {
         comid: '',
         title: '',
