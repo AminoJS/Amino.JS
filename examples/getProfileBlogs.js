@@ -24,7 +24,7 @@ const communityID = ''; // Set the community ID that you want to fetch here
 	*/
 
 	if (communityID != '') {
-		const yourBlogs = await Amino.getUserBlogs(communityID, profileUID, '10');
+		const yourBlogs = await Amino.getUserBlogs(communityID, profileUID, 10);
 		console.log(`Blogs from community ID ${communityID}:`);
 		if (yourBlogs.blogs != null) {
 			yourBlogs.blogs.map(blog => {

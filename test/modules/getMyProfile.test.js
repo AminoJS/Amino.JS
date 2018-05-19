@@ -7,6 +7,7 @@ if(process.env.TRAVIS_PULL_REQUEST === 'false' || typeof process.env.TRAVIS_PULL
             const getMyProfile = await Amino.getMyProfile();
             expect(getMyProfile.account).toBeDefined();
             expect(getMyProfile.error).toBeNull();
+            expect(getMyProfile.status).toBe('ok');
         });
     });
 }else{
