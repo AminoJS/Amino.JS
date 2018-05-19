@@ -11,7 +11,7 @@ const { getConfig } = require('../index');
  * @returns {Object} Object where all the Blogs that the User have. They are contained in an Array. If the User has no Blogs the Libary returns null instead. 
  */
 
-module.exports = async function getUserBlogs(com, uid, count) {
+module.exports = async function getUserBlogs(com, uid, count='5') {
     let blogList = objs.profileBlogs;
     const sid = getConfig('sid');
     if (typeof sid != 'string' || typeof com !== 'string' || typeof uid !== 'string' || typeof count !== 'string') {
