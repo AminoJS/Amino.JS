@@ -1,17 +1,7 @@
 /**
  * @module Amino.JS
  * @author RobStyling
- * @version v.0.1
- * @beta
- */
-
-/** 
- * TODO:
- * Get Userinfos from other Users (comming in v.0.2)
- * Comment on a User Profile (comming in v.0.2)
- * Create a Blog Post (comming in v.0.2)
- * Comment a Wiki Entry / Blog Post (comming in v.0.2)
- * Delete a Blog Post (comming in v.0.2)
+ * @version v.2.0
  */
 
 const config = {};
