@@ -12,8 +12,8 @@ if(process.env.TRAVIS_PULL_REQUEST === 'false' || typeof process.env.TRAVIS_PULL
                 Array.isArray(myCommunityBlogFeed.blogs)
             )
             .toBe(true);
-            expect(myChatRooms.status).toBe('ok');
-            expect(myChatRooms.error).toBeNull();
+            expect(myCommunityBlogFeed.status).toBe('ok');
+            expect(myCommunityBlogFeed.error).toBeNull();
         });
     });
 }else{
