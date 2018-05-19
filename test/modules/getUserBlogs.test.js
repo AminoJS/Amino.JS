@@ -9,7 +9,7 @@ if(process.env.TRAVIS_PULL_REQUEST === 'false' || typeof process.env.TRAVIS_PULL
             const myProfile = await Amino.getMyProfile();
             const myBlogs = await Amino.getUserBlogs(firstCommunity.id, myProfile.account.uid);
             
-            expect(myBlogs.account).toBeDefined();
+            expect(myBlogs.blogs).toBeDefined();
             expect(
                 Array.isArray(myBlogs.blogs)
             )
