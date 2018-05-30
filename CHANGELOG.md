@@ -5,7 +5,10 @@ The Blog / Wiki update gives new functionaly to AminoJS, fixed some bugs, enhanc
 
 Summary:
 * Create, Comment and Delete Different Wiki Entries / Blog Posts. (Restricted to User Online)
-* 
+* Fetch Blogs from Community Feed or a Community User.
+* Users can now use AminoJS Safe, because it runs now via HTTPS
+* Testcases, a lot of them.
+* Added Code of Conduct and Issue Templates.
 
 Full Changelog (with PR Refrence):
 [`#6 Make Login more simple`](https://github.com/AminoJS/Amino.JS/pull/6)
@@ -16,6 +19,22 @@ Also thanks to [Felix](https://github.com/felixfong227), the entire libary is no
 
 [`#12 The Wiki Stuff!`](https://github.com/AminoJS/Amino.JS/pull/12)
 [Robin](https://github.com/moelrobi) then started working on the "Wiki Stuff", with that PR, the Libary started to have Wiki Functionallties. The Libary could, with the PR:  Create, Comment, Delete Wiki Blogs.
+
+[`#25 Fetch User Blogs`](https://github.com/AminoJS/Amino.JS/pull/25)
+[Felipe](https://github.com/akatsukilevi) and [Robin](https://github.com/moelrobi) created the Ability to fetch User Blogs! (Dammmn Daniel! :D)
+
+[`#26 Blog all`](https://github.com/AminoJS/Amino.JS/pull/26)
+Thanks to First-Time Contributor [Tau5](https://github.com/Tau5) AminoJS got all of the Blogs! Thanks from me again!
+
+[`#29 HTTPS!`](https://github.com/AminoJS/Amino.JS/pull/29)
+Woo.. we got that now.
+
+[`#30 & #31 & #32 Repoworks!`]
+[`#30 Create issue Templates!`](https://github.com/AminoJS/Amino.JS/pull/30)
+[`#31 Create Code of Conduct`](https://github.com/AminoJS/Amino.JS/pull/31)
+[`#32 New Testcases!`](https://github.com/AminoJS/Amino.JS/pull/32)
+
+Just some Repowork. New Issue Templates, a Code of Conduct and Testcases for easier Development.
 
 ## v.0.1.1
 Updating the NPM Package to be routing to the new Repo.
