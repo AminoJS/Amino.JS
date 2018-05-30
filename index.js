@@ -35,9 +35,9 @@ module.exports = {
     sendChat: require('./modules/sendChat'), //TEST-CASE: OK
     postBlog: require('./modules/postBlog'), //TEST-CASE: OK
     deleteBlog: require('./modules/deleteBlog'), //TEST-CASE: OK
-    getCommentsPost: require('./modules/commentsPost'), //TEST-CASE: NO
+    getCommentsPost: require('./modules/commentsPost'), //TEST-CASE: OK
     commentPost: require('./modules/commentPost'), //TEST-CASE: OK
-    getComBlogFeed: require('./modules/getCommunityBlogFeed'), //TEST-CASE: NO
+    getComBlogFeed: require('./modules/getCommunityBlogFeed'), //TEST-CASE: OK
     createWikiEntry: require('./modules/createWikiEntry'), //TEST-CASE: OK
     deleteWikiEntry: require('./modules/deleteWikiEntry'), //TEST-CASE: NO
     commentWikiEntry: require('./modules/commentWikiEntry') //TEST-CASE: OK
