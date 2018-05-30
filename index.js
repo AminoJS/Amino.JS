@@ -34,11 +34,11 @@ module.exports = {
     getChat: require('./modules/getChat'), //TEST-CASE: OK
     sendChat: require('./modules/sendChat'), //TEST-CASE: OK
     postBlog: require('./modules/postBlog'), //TEST-CASE: OK
-    deleteBlog: require('./modules/deleteBlog'), //TEST-CASE: NO
+    deleteBlog: require('./modules/deleteBlog'), //TEST-CASE: OK
     getCommentsPost: require('./modules/commentsPost'), //TEST-CASE: NO
     commentPost: require('./modules/commentPost'), //TEST-CASE: OK
     getComBlogFeed: require('./modules/getCommunityBlogFeed'), //TEST-CASE: NO
     createWikiEntry: require('./modules/createWikiEntry'), //TEST-CASE: OK
     deleteWikiEntry: require('./modules/deleteWikiEntry'), //TEST-CASE: NO
-    commentWikiEntry: require('./modules/commentWikiEntry') //TEST-CASE: NO
+    commentWikiEntry: require('./modules/commentWikiEntry') //TEST-CASE: OK
 };
