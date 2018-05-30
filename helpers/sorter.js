@@ -44,7 +44,10 @@ module.exports = {
         return {
             'id': 'x' + element.ndcId,
             'name': element.name,
-            'link': element.link
+            'link': element.link,
+            'icon': element.icon,
+            'tagline': element.tagline,
+            'createdTime': element.createdTime
         };
     },
 
