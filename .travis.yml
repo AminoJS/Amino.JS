@@ -1,7 +1,13 @@
 cache:
   directories:
     - "node_modules"
+    - "docs"
+    - "examples"
 
 language: node_js
+
 node_js:
   - "8"
+script:
+  - yarn run lint
+  - yarn run test

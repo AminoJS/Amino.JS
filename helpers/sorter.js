@@ -44,7 +44,10 @@ module.exports = {
         return {
             'id': 'x' + element.ndcId,
             'name': element.name,
-            'link': element.link
+            'link': element.link,
+            'icon': element.icon,
+            'tagline': element.tagline,
+            'createdTime': element.createdTime
         };
     },
 
@@ -61,5 +64,49 @@ module.exports = {
                 'role': element.author.role
             }
         };
+    },
+
+    blogsSorter: (element) => {
+        return {
+            'blogId': element.blogId,
+            'title': element.title,
+            'content': element.content,
+            'referedObject': element.refObject,
+            'keywords': element.keywords,
+            'createdTime': element.createdTime,
+            'likeCount': element.votesCount,
+            'commentsCount': element.commentsCount,
+            'author': element.author
+        };
+    },
+
+    commentSorter: (element) => {
+        return {
+            'commentId': element.commentId,
+            'content': element.content,
+            'media': element.mediaList,
+            'createdTime': element.createdTime,
+            'likeCount': element.votesSum,
+            'blogId': element.parentId,
+            'subcomments':element.subcomments,
+            'author': element.author
+        };
+    },
+    sortWiki: (itemObj, itemElem) => {
+        itemObj.item.itemid = itemElem.itemId;
+        itemObj.item.createdTime = itemElem.createdTime;
+        itemObj.item.title = itemElem.label;
+        itemObj.item.content = itemElem.content;
+        itemObj.item.author.uid = itemElem.author.uid;
+        itemObj.item.author.username = itemElem.author.nickname;
+        itemObj.item.author.icon = itemElem.author.icon;
+        itemObj.item.author.role = itemElem.author.role;
+        itemObj.item.author.level = itemElem.author.level;
+        itemObj.item.mediaList = itemElem.mediaList;
+        itemObj.item.likeCount = itemElem.votesCount;
+        itemObj.item.commentCount = itemElem.commentsCount;
+        return itemObj;
     }
 };
+
+    

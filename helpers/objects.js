@@ -37,6 +37,12 @@ const communityList = {
  * 'members': 'still Raw JSON from the API!'
  * }
  */
+const communityBlogFeed = {
+    blogs: [],
+    status: 'not ok',
+    error: 'nothing happened...'
+};
+
 const threadList = {
     threads: [],
     status: 'not ok',
@@ -59,12 +65,52 @@ const profile = {
     status: 'not okay',
     error: 'nothing happend!'
 };
+const comments = {
+    comments: [],
+    status: 'not okay',
+    error: 'nothing happend!'
+};
+const blog = {
+    blog: {},
+    status: 'not okay',
+    error: 'nothing happend!'
+};
+const profileBlogs = {
+    blogs: [],
+    status: 'not ok',
+    error: 'not everything defined'
+};
+
+const wiki = {
+    item: {
+        itemid: 'id',
+        createdTime: 'time',
+        title: 'title',
+        content: 'content',
+        author: {
+            uid: 'id',
+            username: 'nickname',
+            icon: 'icon',
+            role: 'role',
+            level: 'level'
+        },
+        mediaList: 'mediaList',
+        likeCount: 'likeCount',
+        commentCount: 'commentCount'
+    },
+    status: 'not ok',
+    error: 'nothing happend.'
+};
 
 module.exports = {
+    blog,
     communityList,
     threadList,
     recivedMessages,
     profile,
+    comments,
+    profileBlogs,
+    wiki,
     sendingMessage: {
         message: {
             sent: false,
@@ -74,4 +120,5 @@ module.exports = {
         status: 'not ok',
         error: 'Nothing has been done.'
     },
+    communityBlogFeed
 };

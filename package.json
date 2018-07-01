@@ -1,14 +1,16 @@
 {
   "name": "amino.js",
-  "version": "0.1.1",
-  "description": "The Framework for interacting with Amino",
+  "version": "2.0.0",
+  "description": "A Framework for interacting with Amino",
   "main": "index.js",
   "scripts": {
-    "test": "make test"
+    "test": "jest test",
+    "lint": "eslint .",
+    "test:dev": "jest test --watch --silent"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/moelrobi/Amino.JS"
+    "url": "https://github.com/AminoJS/Amino.JS"
   },
   "keywords": [
     "Amino",
@@ -20,17 +22,20 @@
   ],
   "author": "Robin Möller <moelrobi@gmail.com> (https://robsys.space)",
   "contributors": [
-    "Jason Idris <jason.idris@chca-oh.org>"
+    "Jason Idris <jason.idris@chca-oh.org>",
+    "Felix Fong <moongod101@hotmail.com> (https://felixfong227.ml)",
+    "Felipe Angelo Sgarbi <akatsukilevi@yahoo.co.jp>"
   ],
   "license": "AGPL-3.0",
   "devDependencies": {
     "babel-eslint": "^8.2.1",
-    "chai": "^4.1.2",
     "eslint": "^4.17.0",
     "ink-docstrap": "^1.3.2",
-    "mocha": "^5.0.0"
+    "jest": "^22.4.3"
   },
   "dependencies": {
+    "hoek": "^5.0.3",
+    "isomorphic-fetch": "^2.2.1",
     "request": "^2.83.0",
     "request-promise": "^4.2.2"
   }

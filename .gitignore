@@ -63,3 +63,12 @@ testing.js
 
 #A Testing file for tesing various stuff
 testing.js
+
+# env file for local testing
+env.js
+
+# OSX stuff
+.DS_Store
+
+# Ignore Cache Files for c9-WebIDE
+.c9/
