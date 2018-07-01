@@ -98,6 +98,7 @@ const wiki = {
         likeCount: 'likeCount',
         commentCount: 'commentCount'
     },
+    status: 'not ok',
     error: 'nothing happend.'
 };
 
