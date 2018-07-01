@@ -18,7 +18,7 @@ module.exports = async function deleteWikiEntry(com, uid) {
     if(typeof com != 'string' || typeof uid != 'string') {
         throw new Error('Not all Arguments are given.');
     }
-    const res = fetch(endpoints.deleteWiki(com, uid), {
+    const res = await fetch(endpoints.deleteWiki(com, uid), {
         method: 'DELETE',
         headers: {
             NDCAUTH: `sid=${sid}`
