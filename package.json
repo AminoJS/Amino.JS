@@ -1,6 +1,6 @@
 {
   "name": "amino.js",
-  "version": "2.0",
+  "version": "2.0.0",
   "description": "A Framework for interacting with Amino",
   "main": "index.js",
   "scripts": {
