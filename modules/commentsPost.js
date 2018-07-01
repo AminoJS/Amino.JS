@@ -34,12 +34,12 @@ module.exports = async function commentsPost(com, id, sort, start, size) {
             }
         });
         //Parsing the Response.
-        body = response.json();
+        body = await response.json();
         body.commentList.forEach(commentsR => {
             comments.comments.push(sorter.commentSorter(commentsR));
         });
         comments.status = 'ok';
-        comments.error = 'null';
+        comments.error = null;
     } catch (err) {
         comments.error = err;
         throw 'Error while calling commentsPost: ' + err;

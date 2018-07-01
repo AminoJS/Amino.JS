@@ -26,19 +26,19 @@ module.exports.errorMessages = errorMessages;
  * For exporting the Functions for Usage in the Client.
  */
 module.exports = {
-    login: require('./modules/login'),
-    getMyProfile: require('./modules/getMyProfile'),
-    getJoinedComs: require('./modules/getJoinedComs'),
-    getJoinedChats: require('./modules/getJoinedChats'),
-    getUserBlogs: require('./modules/getUserBlogs'),
-    getChat: require('./modules/getChat'),
-    sendChat: require('./modules/sendChat'),
-    postBlog: require('./modules/postBlog'),
-    deleteBlog: require('./modules/deleteBlog'),
-    getCommentsPost: require('./modules/commentsPost'),
-    commentPost: require('./modules/commentPost'),
-    getComBlogFeed: require('./modules/getCommunityBlogFeed'),
-    createWikiEntry: require('./modules/createWikiEntry'),
-    deleteWikiEntry: require('./modules/deleteWikiEntry'),
-    commentWikiEntry: require('./modules/commentWikiEntry')
+    login: require('./modules/login'), //TEST-CASE: OK
+    getMyProfile: require('./modules/getMyProfile'), //TEST-CASE: OK
+    getJoinedComs: require('./modules/getJoinedComs'), //TEST-CASE: OK
+    getJoinedChats: require('./modules/getJoinedChats'), //TEST-CASE: OK
+    getUserBlogs: require('./modules/getUserBlogs'), //TEST-CASE: OK
+    getChat: require('./modules/getChat'), //TEST-CASE: OK
+    sendChat: require('./modules/sendChat'), //TEST-CASE: OK
+    postBlog: require('./modules/postBlog'), //TEST-CASE: OK
+    deleteBlog: require('./modules/deleteBlog'), //TEST-CASE: OK
+    getCommentsPost: require('./modules/commentsPost'), //TEST-CASE: OK
+    commentPost: require('./modules/commentPost'), //TEST-CASE: OK
+    getComBlogFeed: require('./modules/getCommunityBlogFeed'), //TEST-CASE: OK
+    createWikiEntry: require('./modules/createWikiEntry'), //TEST-CASE: OK
+    deleteWikiEntry: require('./modules/deleteWikiEntry'), //TEST-CASE: NO
+    commentWikiEntry: require('./modules/commentWikiEntry') //TEST-CASE: OK
 };
