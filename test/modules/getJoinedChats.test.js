@@ -1,17 +1,19 @@
 if(process.env.TRAVIS_PULL_REQUEST === 'false' || typeof process.env.TRAVIS_PULL_REQUEST === 'undefined'){
     require('../helpers/loadEnv');
     describe('how the methods should response (With NO false input)', () => {
-        it('should return the a list of communities that user has joined', async () => {
+        it('Get a list of user joined chat rooms', async () => {
             const Amino = require('../../index');
             const sid = await Amino.login(process.env.AMINO_EMAIL, process.env.AMINO_PASSWORD);
-            const myCommunitys = await Amino.getJoinedComs();
-            expect(myCommunitys.coms).toBeDefined();
+            const myCommunities = await Amino.getJoinedComs();
+            const firstCommunity = myCommunities.coms[0];
+            const myChatRooms = await Amino.getJoinedChats(firstCommunity.id);
+            expect(myChatRooms.threads).toBeDefined();
             expect(
-                Array.isArray(myCommunitys.coms)
+                Array.isArray(myChatRooms.threads)
             )
             .toBe(true);
-            expect(myCommunitys.status).toBe('ok');
-            expect(myCommunitys.error).toBeNull();
+            expect(myChatRooms.status).toBe('ok');
+            expect(myChatRooms.error).toBeNull();
         });
     });
 }else{

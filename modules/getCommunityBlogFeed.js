@@ -3,14 +3,11 @@ const objs = require('../helpers/objects.js');
 const request = require('request-promise');
 const endpoints = require('../helpers/endpoints');
 const sorter = require('../helpers/sorter');
-module.exports = async function (com, startAt, size) {
+module.exports = async function (com, startAt=1, size=1) {
 
     // get our sid
     let feed = objs.communityBlogFeed;
     let sid = getConfig('sid');
-    //Silent fallback, will default to most recent if missing.
-    startAt = startAt || 1;
-    size = size || 1;
     
     if (typeof sid != 'string' || typeof com !== 'string' || typeof startAt !== 'number' || typeof size !== 'number') {
         throw new Error('All Arguments are not satisfied. Check if all parameters are the right type.');

@@ -1,7 +1,7 @@
 {
   "name": "amino.js",
-  "version": "0.1.1",
-  "description": "The Framework for interacting with Amino",
+  "version": "2.0.0",
+  "description": "A Framework for interacting with Amino",
   "main": "index.js",
   "scripts": {
     "test": "jest test",

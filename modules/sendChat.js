@@ -33,7 +33,8 @@ module.exports = async function sendChat(com, uid, msg) {
                 'timestamp': new Date().getUTCMilliseconds(),
             }),
         });
-        if (response.message) {
+        let body = await response.json();
+        if (body.message) {
             message.message.sent = true;
             message.status = 'ok';
             message.error = null;
