@@ -6,17 +6,49 @@ const {
 
 module.exports = async function checkIn(com) {
     let sid = getConfig('sid');
-    console.log(new Date().getUTCMilliseconds());
-    const response = await fetch(endpoints.checkIn(com), {
-        method: 'POST',
-        headers: {
-            'NDCAUTH': `sid=${sid}`
-        },
-        body: {
-            'timezone': '60',
-            'timestamp': new Date().getUTCMilliseconds()
+    try {
+        const response = await fetch(endpoints.checkIn(com), {
+            method: 'POST',
+            headers: {
+                'NDCAUTH': `sid=${sid}`
+            },
+            body: JSON.stringify({
+                'timezone': new Date().getTimezoneOffset(),
+                'timestamp': Date.now()
+            })
+        });
+        const body = await response.json();
+        console.log(body['api:statuscode']);
+        if(body['api:statuscode'] == '2601') {
+            return {
+                "checkIn": {
+                    "status": false,
+                    "message": "already CheckedIn!"
+                },
+                "status": "fail",
+                "error": null
+            }
         }
-    });
-    const body = await response.json();
-    console.log(body);
+        else return {
+            "checkIn": {
+                "status": true,
+                "canPlayLottery": body.canPlayLottery,
+                "streaks": body.consecutiveCheckInDays,
+                "epEarn": body.earnedReputationPoint
+            },
+            "status": "ok",
+            "error": null
+        }
+    } catch (err) {
+        return {
+            "checkIn": {
+                "status": false,
+                "canPlayLottery": null,
+                "streaks": null,
+                "epEarn": null
+            },
+            "status": "fail",
+            "error": err
+        }
+    }
 };
