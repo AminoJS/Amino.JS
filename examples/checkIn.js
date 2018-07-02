@@ -5,5 +5,6 @@ const Amino = require('../index');
     const sid = await Amino.login(env.email, env.password);
     const yourCommunitys = await Amino.getJoinedComs();
     let community = yourCommunitys.coms[1].id;
-    await Amino.checkIn(community);
+    let checkIn = await Amino.checkIn(community);
+    console.log(checkIn);
 })();

@@ -18,8 +18,7 @@ module.exports = async function checkIn(com) {
             })
         });
         const body = await response.json();
-        console.log(body['api:statuscode']);
-        if(body['api:statuscode'] == '2601') {
+        if (body['api:statuscode'] == '2601') {
             return {
                 "checkIn": {
                     "status": false,
@@ -28,8 +27,7 @@ module.exports = async function checkIn(com) {
                 "status": "fail",
                 "error": null
             }
-        }
-        else return {
+        } else return {
             "checkIn": {
                 "status": true,
                 "canPlayLottery": body.canPlayLottery,
