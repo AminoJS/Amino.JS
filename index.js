@@ -40,5 +40,6 @@ module.exports = {
     getComBlogFeed: require('./modules/getCommunityBlogFeed'), //TEST-CASE: OK
     createWikiEntry: require('./modules/createWikiEntry'), //TEST-CASE: OK
     deleteWikiEntry: require('./modules/deleteWikiEntry'), //TEST-CASE: OK
-    commentWikiEntry: require('./modules/commentWikiEntry') //TEST-CASE: OK
+    commentWikiEntry: require('./modules/commentWikiEntry'), //TEST-CASE: OK
+    checkIn: require('./modules/checkin') //TEST-CASE: NO
 };

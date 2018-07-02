@@ -35,6 +35,7 @@ module.exports = async function sendChat(com, uid, msg) {
         });
         let body = await response.json();
         if (body.message) {
+            message.message.id = body.message.messageId;
             message.message.sent = true;
             message.status = 'ok';
             message.error = null;
