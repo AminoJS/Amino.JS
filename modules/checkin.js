@@ -20,33 +20,33 @@ module.exports = async function checkIn(com) {
         const body = await response.json();
         if (body['api:statuscode'] == '2601') {
             return {
-                "checkIn": {
-                    "status": false,
-                    "message": "already CheckedIn!"
+                'checkIn': {
+                    'status': false,
+                    'message': 'already CheckedIn!'
                 },
-                "status": "fail",
-                "error": null
-            }
+                'status': 'fail',
+                'error': null
+            };
         } else return {
-            "checkIn": {
-                "status": true,
-                "canPlayLottery": body.canPlayLottery,
-                "streaks": body.consecutiveCheckInDays,
-                "epEarn": body.earnedReputationPoint
+            'checkIn': {
+                'status': true,
+                'canPlayLottery': body.canPlayLottery,
+                'streaks': body.consecutiveCheckInDays,
+                'epEarn': body.earnedReputationPoint
             },
-            "status": "ok",
-            "error": null
-        }
+            'status': 'ok',
+            'error': null
+        };
     } catch (err) {
         return {
-            "checkIn": {
-                "status": false,
-                "canPlayLottery": null,
-                "streaks": null,
-                "epEarn": null
+            'checkIn': {
+                'status': false,
+                'canPlayLottery': null,
+                'streaks': null,
+                'epEarn': null
             },
-            "status": "fail",
-            "error": err
-        }
+            'status': 'fail',
+            'error': err
+        };
     }
 };
