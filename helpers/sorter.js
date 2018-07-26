@@ -34,7 +34,8 @@ module.exports = {
             'unread': unread,
             'lastMessage': {
                 'senderId': element.lastMessageSummary.uid,
-                'message': element.lastMessageSummary.content
+                'message': element.lastMessageSummary.content,
+                'messageId': element.lastMessageSummary.messageId
             },
             'members': element.membersSummary
         };

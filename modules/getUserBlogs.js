@@ -13,6 +13,7 @@ const { getConfig } = require('../index');
 
 module.exports = async function getUserBlogs(com, uid, count='5') {
     let blogList = objs.profileBlogs;
+    blogList.blogs = [];
     const sid = getConfig('sid');
     if (typeof sid != 'string' || typeof com !== 'string' || typeof uid !== 'string' || typeof count !== 'string') {
         throw new Error('All Arguments are not satisfied.');

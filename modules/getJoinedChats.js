@@ -13,6 +13,7 @@ const { getConfig } = require('../index');
 
 module.exports = async function getJoinedChats(com) {
     let threadList = objs.threadList;
+    threadList.threads = [];
     const sid = getConfig('sid');
     if (typeof sid != 'string' || typeof com !== 'string') {
         throw new Error('All Arguments are not satisfied.');
