@@ -17,5 +17,6 @@ module.exports = {
     checkIfWikiCanPost: (com, uuid) => `${prefix}/v1/${com}/s/user-profile/${uuid}/compose-eligible-check?objectType=item`,
     createWiki: (com) => `${prefix}/v1/${com}/s/item`,
     deleteWiki: (com, uid) => `${prefix}/v1/${com}/s/item/${uid}`,
-    commentWiki: (com, uid) => `${prefix}/v1/${com}/s/item/${uid}/comment`
+    commentWiki: (com, uid) => `${prefix}/v1/${com}/s/item/${uid}/comment`,
+    getComUsers: (com) => `${prefix}/v1/${com}/s/user-profile/`,
 };
