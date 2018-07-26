@@ -5,4 +5,4 @@
 Amino.JS is a Javascript library for access to the Narvii/Amino API.
 
 #WARNING
-This software is unofficial! It's against the Terms of Service to use this Software to interact with Amino APIs. We (the creator of Amino.JS) are not responsible for any kind of damage (ban / legal actions) done by Narvii, Inc.
+This software is unofficial! It's against the Terms of Service to use this Software to interact with Amino APIs. We (the creator of Amino.JS) are not responsible for any kind of damage (ban / legal actions) done by Narvii, Inc. 
