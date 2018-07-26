@@ -18,6 +18,7 @@ const {
 
 module.exports = async function commentsPost(com, id, sort, start, size) {
     let comments = objs.comments;
+    comments.comments = [];
     let body;
     const sid = getConfig('sid');
     //Silent fallback, will default to most recent if missing.

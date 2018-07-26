@@ -12,6 +12,7 @@ const { getConfig, errorMessages } = require('../index');
 
 module.exports = async function getJoinedComs() {
     let communityList = objs.communityList;
+    communityList.coms = [];
     const sid = getConfig('sid');
     if (typeof sid != 'string') {
         throw new Error(errorMessages.missingSid);

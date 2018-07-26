@@ -7,6 +7,7 @@ module.exports = async function (com, startAt=1, size=1) {
 
     // get our sid
     let feed = objs.communityBlogFeed;
+    feed.blogs = [];
     let sid = getConfig('sid');
     
     if (typeof sid != 'string' || typeof com !== 'string' || typeof startAt !== 'number' || typeof size !== 'number') {
