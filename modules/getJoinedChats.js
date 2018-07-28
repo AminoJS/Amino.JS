@@ -18,6 +18,7 @@ module.exports = async function getJoinedChats(com) {
     if (typeof sid != 'string' || typeof com !== 'string') {
         throw new Error('All Arguments are not satisfied.');
     }
+    threadList.threads = [];
     try{
         const response = await fetch(endpoints.getJoinedChats(com), {
             headers: {

@@ -25,6 +25,7 @@ module.exports = async function getChat(com, uid, count) {
     if (count == undefined || count == null) {
         count = 1;
     }
+    msgList.messages = [];
     try {
         const response = await fetch(endpoints.loadChat(com, uid, count), {
             headers: {

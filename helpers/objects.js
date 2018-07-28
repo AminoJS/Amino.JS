@@ -120,6 +120,7 @@ module.exports = {
     wiki,
     sendingMessage: {
         message: {
+            id: 'wow',
             sent: false,
             message: 'defaults with begining of method. if not. may god help you.',
             threadId: 'defaults with begining of method. if not. may god help you.'
