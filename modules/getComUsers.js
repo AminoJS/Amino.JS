@@ -10,7 +10,7 @@ const { getConfig, errorMessages } = require('../index');
  * @returns {Object} Object containing all Joined Coms with the Logged in Account.
  */
 
-module.exports = async function getJoinedComs(communityId) {
+module.exports = async function getComUsers(communityId) {
     let communityUsers = objs.communityUsers;
     communityUsers.users = [];
     const sid = getConfig('sid');
