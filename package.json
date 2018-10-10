@@ -1,7 +1,7 @@
 {
   "name": "amino.js",
   "version": "2.1.0",
-  "description": "A Framework for interacting with Amino",
+  "description": "A Framework for interacting with Narvii Amino",
   "main": "index.js",
   "scripts": {
     "test": "jest test",
