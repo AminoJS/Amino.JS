@@ -1,15 +1,15 @@
 module.exports = {
-    email: '',
-    password: '',
-    testingEnvCom: '',
+    email: 'aminojs@cwin.com.br',
+    password: 'github',
+    testingEnvCom: 'x20796354',
     wiki: {
-        comid: '',
-        title: '',
-        content: '',
-        img_path: ''
+        comid: '1234',
+        title: 'Test',
+        content: 'Test',
+        img_path: './image.jpg'
     },
     wikiComment: {
-        content: '',
-        img_path: 'optional' 
+        content: 'content',
+        img_path: '' 
     }
 };
