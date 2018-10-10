@@ -1,7 +1,5 @@
 const fetch = require('isomorphic-fetch');
 const endpoints = require('../helpers/endpoints.js'); //For Creating shorter URL's in this Module
-const sorter = require('../helpers/sorter.js'); //For easier Sorting of various Responses.
-const objs = require('../helpers/objects.js'); //For Storing the Objects that the Framework returns. 
 const { getConfig } = require('../index');
 
 /**
@@ -14,9 +12,9 @@ const { getConfig } = require('../index');
 
 module.exports = async function doCheckIn(com, timezone) {
     let checkInData = {
-        "data": {},
-        "status": "not ok",
-        "error": "nothing happening"
+        'data': {},
+        'status': 'not ok',
+        'error': 'nothing happening'
     };
     const sid = getConfig('sid');
     if (typeof sid != 'string' || typeof com !== 'string' || typeof timezone !== 'string') {

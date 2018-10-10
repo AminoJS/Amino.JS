@@ -1,6 +1,5 @@
 const fetch = require('isomorphic-fetch');
 const endpoints = require('../helpers/endpoints.js'); //For Creating shorter URL's in this Module
-const objs = require('../helpers/objects.js'); //For Storing the Objects that the Framework returns.
 const { getConfig } = require('../index');
 
 /*
