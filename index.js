@@ -40,5 +40,12 @@ module.exports = {
     getComBlogFeed: require('./modules/getCommunityBlogFeed'), //TEST-CASE: OK
     createWikiEntry: require('./modules/createWikiEntry'), //TEST-CASE: OK
     deleteWikiEntry: require('./modules/deleteWikiEntry'), //TEST-CASE: OK
-    commentWikiEntry: require('./modules/commentWikiEntry') //TEST-CASE: OK
+    commentWikiEntry: require('./modules/commentWikiEntry'), //TEST-CASE: OK
+    sendAudio: require('./modules/sendAudio'),
+    sendImage: require('./modules/sendImage'),
+    sendSticker: require('./modules/sendSticker'),
+    getFavoriteMembers: require('./modules/getFavoriteMembers'),
+    getCheckInCommunities: require('./modules/getCheckInCommunities'),
+    doCheckIn: require('./modules/doCheckIn'),
+    AminoAPI: require('./framework/main') //TEST-CASE: Not needed, wrapper to coding only
 };

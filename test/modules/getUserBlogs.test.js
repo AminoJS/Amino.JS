@@ -12,12 +12,11 @@ if(process.env.TRAVIS_PULL_REQUEST === 'false' || typeof process.env.TRAVIS_PULL
             expect(myBlogs.blogs).toBeDefined();
             expect(
                 Array.isArray(myBlogs.blogs)
-            )
-            .toBe(true);
+            ).toBe(true);
             expect(myBlogs.error).toBeNull();
             expect(myBlogs.status).toBe('ok');
         });
     });
-}else{
+} else{
     describe.skip();
 }

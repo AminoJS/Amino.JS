@@ -17,5 +17,8 @@ module.exports = {
     checkIfWikiCanPost: (com, uuid) => `${prefix}/v1/${com}/s/user-profile/${uuid}/compose-eligible-check?objectType=item`,
     createWiki: (com) => `${prefix}/v1/${com}/s/item`,
     deleteWiki: (com, uid) => `${prefix}/v1/${com}/s/item/${uid}`,
-    commentWiki: (com, uid) => `${prefix}/v1/${com}/s/item/${uid}/comment`
+    commentWiki: (com, uid) => `${prefix}/v1/${com}/s/item/${uid}/comment`,
+    getFavoriteMembers: (com, count) => `${prefix}/v1/${com}/s/user-group/quick-access?start=0&size=${count}`,
+    getCheckInReminder: (communities, timezone) => `${prefix}/v1/g/s/reminder/check?ndcIds=${communities.replace("&", "%2C")}&timezone=${timezone}`,
+    doCheckIn: (com) => `${prefix}/v1/${com}/s/check-in`
 };

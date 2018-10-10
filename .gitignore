@@ -72,3 +72,9 @@ env.js
 
 # Ignore Cache Files for c9-WebIDE
 .c9/
+
+# Local test folder
+testing/
+
+# Local Jester settings file
+jest.config.js

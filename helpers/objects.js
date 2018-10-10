@@ -81,6 +81,12 @@ const profileBlogs = {
     error: 'not everything defined'
 };
 
+const favoriteMembers = {
+    members: [],
+    status: 'not ok',
+    error: 'nothing happend!'
+};
+
 const wiki = {
     item: {
         itemid: 'id',
@@ -111,6 +117,7 @@ module.exports = {
     comments,
     profileBlogs,
     wiki,
+    favoriteMembers,
     sendingMessage: {
         message: {
             sent: false,

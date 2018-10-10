@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "hoek": "^5.0.3",
+    "import-local": "^2.0.0",
     "isomorphic-fetch": "^2.2.1",
     "request": "^2.83.0",
     "request-promise": "^4.2.2"
