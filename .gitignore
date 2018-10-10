@@ -78,3 +78,6 @@ testing/
 
 # Local Jester settings file
 jest.config.js
+
+# Visual Studio Code folder
+.vscode/
