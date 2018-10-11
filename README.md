@@ -47,8 +47,6 @@ To run the tests, you need to install the Jest library
 $ npm install -g jest
 ```
 
-### Break down into end to end tests
-
 Each test make sure that the modules and calls are working together to the Narvii Amino, making sure it isn't causing any type of problem(like calling a inexistent endpoint)
 
 ## Deployment
