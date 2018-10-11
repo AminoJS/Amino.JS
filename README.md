@@ -23,7 +23,7 @@ AminoAPI.proccessAction(Amino.login('email', 'password'), function(data){
     // Here is the success handler
 }, function(error){
     // Here is the error handler
-})
+});
 // Differently than the direct call, you can use the framework in a normal context(outside of a async context)
 ```
 
