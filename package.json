@@ -26,7 +26,7 @@
     "Felix Fong <moongod101@hotmail.com> (https://felixfong227.ml)",
     "Felipe Angelo Sgarbi <akatsukilevi@yahoo.co.jp>"
   ],
-  "license": "AGPL-3.0",
+  "license": "MIT",
   "devDependencies": {
     "babel-eslint": "^8.2.1",
     "eslint": "^4.17.0",

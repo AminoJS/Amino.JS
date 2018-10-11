@@ -4,81 +4,78 @@ Amino.JS is a Javascript library for access to the Narvii/Amino API.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+To start using this library is easy.
+First include it on your project
+```js
+var Amino = require("amino.js");
+```
+From here, you can choose 2 options.
+Use the modules directly
+```js
+const sid = await Amino.login('email', 'password');
+// Remember, theses functions are async, so you need to use it on a async context
+// Also, you have to catch the exceptions by yourself
+```
+Or use the framework
+```js
+const AminoAPI = new Amino.AminoAPI();
+AminoAPI.proccessAction(Amino.login('email', 'password'), function(data){
+    // Here is the success handler
+}, function(error){
+    // Here is the error handler
+})
+// Differently than the direct call, you can use the framework in a normal context(outside of a async context)
+```
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
+The only prerequisite for using the Amino.JS library is the Node.JS itself
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
+Install this library is easy as
 ```
-Give the example
+$ npm install amino.js
 ```
 
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
+Or simply by cloning this repo
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
+To run the tests, you need to install the Jest library
+```
+$ npm install -g jest
+```
 
 ### Break down into end to end tests
 
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
+Each test make sure that the modules and calls are working together to the Narvii Amino, making sure it isn't causing any type of problem(like calling a inexistent endpoint)
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+To deploy, it's recommended to make a handler for the SID(Session ID), to avoid any type of session leaking, or session hijack.
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [Isomorphic Fetch](https://www.npmjs.com/package/isomorphic-fetch) - Fetch for node and Browserify. Built on top of [GitHub's WHATWG Fetch polyfill](https://github.com/github/fetch).
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **[Robin Möller (moelrobi)](https://github.com/moelrobi)** - Initial Work
+* **[Felix Fong (felixfong227)](https://github.com/felixfong227)**
+* **[Tau (Tau5)](https://github.com/Tau5)**
+* **[Jason Idris (coffeeboo)](https://github.com/coffeeboo)**
+* **[Akatsuki Levi (akatsukilevi)](https://github.com/akatsukilevi)**
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/akatsukilevi/Amino.JS/contributors) who participated in this project.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
 ## Acknowledgments
 
