@@ -16,6 +16,7 @@ const { getConfig } = require('../index');
 
 module.exports = async function getChat(com, uid, count) {
     let msgList = objs.recivedMessages;
+    msgList.messages = [];
     const sid = getConfig('sid');
     if (typeof sid != 'string' || typeof com !== 'string' || typeof uid !== 'string') {
         throw new Error('All Arguments are not satisfied.');

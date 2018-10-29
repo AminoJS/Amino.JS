@@ -1,4 +1,11 @@
 # Changelogs
+
+# 2.1.0 Bugfix
+
+There was a bug that was represent in almost all modules. This bug stacked the arrays that came while using get methodes. We were forced to release this patch because its broken alot of software.
+
+For more infomartion, [read here](https://github.com/AminoJS/Amino.JS/pull/40)
+
 ## v.2.0 (The Blog / Wiki Update)
 "Finally, we can release it." ~Me, or so.
 The Blog / Wiki update gives new functionaly to AminoJS, fixed some bugs, enhances security and handles testcases way differently then v.0.1
