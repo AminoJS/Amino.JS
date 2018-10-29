@@ -7,13 +7,23 @@ if(process.env.TRAVIS_PULL_REQUEST === 'false' || typeof process.env.TRAVIS_PULL
             const myCommunities = await Amino.getJoinedComs();
             const firstCommunity = myCommunities.coms[0];
             const myProfile = await Amino.getMyProfile();
-            const myBlogs = await Amino.getUserBlogs(firstCommunity.id, myProfile.account.uid);
-            
+            let myBlogs = await Amino.getUserBlogs(firstCommunity.id, myProfile.account.uid);
             expect(myBlogs.blogs).toBeDefined();
-            expect(
-                Array.isArray(myBlogs.blogs)
-            )
-            .toBe(true);
+            if(!myBlogs.blogs) {
+
+                expect(
+                    myBlogs.blogs === null
+                )
+                .toBe(true)
+
+            } else {
+
+                expect(
+                    Array.isArray(myBlogs.blogs)
+                )
+                .toBe(true);
+                
+            }
             expect(myBlogs.error).toBeNull();
             expect(myBlogs.status).toBe('ok');
         });
