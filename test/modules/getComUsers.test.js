@@ -17,9 +17,9 @@ if(process.env.TRAVIS_PULL_REQUEST === 'false' || typeof process.env.TRAVIS_PULL
             )
             .toBe(true);
 
-            expect(myChatRooms.status).toBe('ok');
+            expect(users.status).toBe('ok');
 
-            expect(myChatRooms.error).toBeNull();
+            expect(users.error).toBeNull();
             
         });
     });
