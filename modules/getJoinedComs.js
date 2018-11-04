@@ -6,12 +6,13 @@ const { getConfig, errorMessages } = require('../index');
 
 /**
  * @typedef {Object} joinedComs
- * @property {string} id The community ID
- * @property {string} name The name of the community
- * @property {string} link The URL to the actual community itself
- * @property {string} icon The URL icon for this specify community
- * @property {string} tagline The very own tagline of this community
- * @property {Date} createdTime The date of creation of this community
+ * @property {Object[]} coms All the communities the user had join
+ * @property {string} coms[].id The community ID
+ * @property {string} coms[].name The name of the community
+ * @property {string} coms[].link The URL to the actual community itself
+ * @property {string} coms[].icon The URL icon for this specify community
+ * @property {string} coms[].tagline The very own tagline of this community
+ * @property {Date} coms[].createdTime The date of creation of this community
  */
 
 /**
