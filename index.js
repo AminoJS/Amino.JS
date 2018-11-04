@@ -32,6 +32,7 @@ module.exports = {
     getJoinedChats: require('./modules/getJoinedChats'), //TEST-CASE: OK
     getUserBlogs: require('./modules/getUserBlogs'), //TEST-CASE: OK
     getChat: require('./modules/getChat'), //TEST-CASE: OK
+    getAdminLogs: require('./modules/getAdminLogList'), //TEST-CASE: NOT OK
     sendChat: require('./modules/sendChat'), //TEST-CASE: OK
     postBlog: require('./modules/postBlog'), //TEST-CASE: OK
     deleteBlog: require('./modules/deleteBlog'), //TEST-CASE: OK
