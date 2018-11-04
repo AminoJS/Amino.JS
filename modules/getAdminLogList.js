@@ -5,32 +5,32 @@ const { getConfig } = require('../index');
 
 /**
  * @typedef logsResponse
- * @type {Object}
- * @property {number} logId The ID of the log
- * @property {string} objectUrl The Object URL for this log
- * @property {string} operationName The operation name(Operation code)
- * @property {number} operation
- * @property {any} moderationLevel
- * @property {string} operationLevel
- * @property {string} objectId
+ * @property {Object[]} logs
+ * @property {number} logs[].logId The ID of the log
+ * @property {string} logs[].objectUrl The Object URL for this log
+ * @property {string} logs[].operationName The operation name(Operation code)
+ * @property {number} logs[].operation
+ * @property {any} logs[].moderationLevel
+ * @property {string} logs[].operationLevel
+ * @property {string} logs[].objectId
  * 
- * @property {object} author
- * @property {number} author.status
- * @property {number} author.role
- * @property {string} author.nickname The author's nickname
- * @property {string} author.uid The author's UID
- * @property {string} author.icon The author's profile picture
+ * @property {object} logs[].author
+ * @property {number} logs[].author.status
+ * @property {number} logs[].author.role
+ * @property {string} logs[].author.nickname The author's nickname
+ * @property {string} logs[].author.uid The author's UID
+ * @property {string} logs[].author.icon The author's profile picture
  * 
- * @property {object} extData
- * @property {object} extData.value
- * @property {string} extData.value.path
- * @property {boolean} extData.value.value
- * @property {number} extData.value.timestamp
+ * @property {object} logs[].extData
+ * @property {object} logs[].extData.value
+ * @property {string} logs[].extData.value.path
+ * @property {boolean} logs[].extData.value.value
+ * @property {number} logs[].extData.value.timestamp
  * 
- * @property {any} operationDetail
- * @property {number} ndcId
- * @property {Date} createdTime
- * @property {number} objectType
+ * @property {any} logs[].operationDetail
+ * @property {number} logs[].ndcId
+ * @property {Date} logs[].createdTime
+ * @property {number} logs[].objectType
  */
  
 /**
