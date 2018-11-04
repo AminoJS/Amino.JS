@@ -10,7 +10,7 @@ if(process.env.TRAVIS_PULL_REQUEST === 'false' || typeof process.env.TRAVIS_PULL
             expect(logs.logs).toBeDefined();
             if(!logs.logs){
                 expect(
-                    myBlogs.blogs === null
+                    logs.blogs === null
                 )
                 .toBe(true)
             } else {
