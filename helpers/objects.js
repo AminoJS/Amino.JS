@@ -102,6 +102,12 @@ const wiki = {
     error: 'nothing happend.'
 };
 
+const adminLogs = {
+    logs: [],
+    status: 'no ok',
+    error: '__EMPTY__',
+};
+
 module.exports = {
     blog,
     communityList,
@@ -111,6 +117,7 @@ module.exports = {
     comments,
     profileBlogs,
     wiki,
+    adminLogs,
     sendingMessage: {
         message: {
             sent: false,
