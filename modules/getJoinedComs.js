@@ -5,9 +5,18 @@ const objs = require('../helpers/objects.js'); //For Storing the Objects that th
 const { getConfig, errorMessages } = require('../index');
 
 /**
+ * @typedef {Object} joinedComs
+ * @property {string} id The community ID
+ * @property {string} name The name of the community
+ * @property {string} link The URL to the actual community itself
+ * @property {string} icon The URL icon for this specify community
+ * @property {string} tagline The very own tagline of this community
+ * @property {Date} createdTime The date of creation of this community
+ */
+
+/**
  * Gets a JSON-Object were all Community ID's, Name's and URL's for the current Logged-In Account are obainted in. 
- * @param {SecurityString} sid For authenticating with the Narvii-API.
- * @returns {Object} Object containing all Joined Coms with the Logged in Account.
+ * @returns {joinedComs} Object containing all Joined Coms with the Logged in Account.
  */
 
 module.exports = async function getJoinedComs() {
