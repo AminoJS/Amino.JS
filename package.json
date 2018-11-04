@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest test",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "test:dev": "jest test --watch --silent"
   },
   "repository": {
