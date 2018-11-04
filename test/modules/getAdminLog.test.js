@@ -12,8 +12,8 @@ if(process.env.TRAVIS_PULL_REQUEST === 'false' || typeof process.env.TRAVIS_PULL
                 Array.isArray(logs.logs)
             )
             .toBe(true);
-            expect(myChatRooms.status).toBe('ok');
-            expect(myChatRooms.error).toBeNull();
+            expect(logs.status).toBe('ok');
+            expect(logs.error).toBeNull();
         });
     });
 }else{
