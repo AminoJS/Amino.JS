@@ -8,10 +8,17 @@ if(process.env.TRAVIS_PULL_REQUEST === 'false' || typeof process.env.TRAVIS_PULL
             const firstCommunity = myCommunities.coms[0];
             const logs = await Amino.getAdminLogs(firstCommunity.id);
             expect(logs.logs).toBeDefined();
-            expect(
-                Array.isArray(logs.logs)
-            )
-            .toBe(true);
+            if(!logs.logs){
+                expect(
+                    myBlogs.blogs === null
+                )
+                .toBe(true)
+            } else {
+                expect(
+                    Array.isArray(logs.logs)
+                )
+                .toBe(true);
+            }
             expect(logs.status).toBe('ok');
             expect(logs.error).toBeNull();
         });
