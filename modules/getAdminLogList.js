@@ -56,8 +56,12 @@ async function getAdminLogs(com, start = 0, size = 10) {
         });
         //Parsing the Response.
         const body = await response.json();
-        if (body.adminLogList.length === 0) adminLogs.logs = null;
-        adminLogs.logs = body.adminLogList;
+        if(body.adminLogList) {
+            if (body.adminLogList.length === 0) adminLogs.logs = null;
+            adminLogs.logs = body.adminLogList;
+        } else {
+            adminLogs.logs = null;
+        }
         adminLogs.status = 'ok';
         adminLogs.error = null;
     }
