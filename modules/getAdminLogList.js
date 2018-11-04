@@ -38,7 +38,7 @@ const { getConfig } = require('../index');
  * @param {string} com A ID that can be obtained by the function getJoinedComs
  * @param {number} [start=0] start A starting number of the log
  * @param {number} [size=10] size The size of the actual logs array
- * @returns {Array.<logsResponse>} Array of all the actions performed by the admins
+ * @returns {logsResponse} Array of all the actions performed by the admins
  */ 
  
 async function getAdminLogs(com, start = 0, size = 10) {
