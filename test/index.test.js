@@ -2,10 +2,6 @@ const index = require('../index');
 const sorter = require('../helpers/sorter');
 const endpoints = require('../helpers/endpoints');
 
-console.log("PASS 1: " + (process.env.AMINO_EMAIL.charAt(0) == "a" ? "OK" : "FAIL"));
-console.log("PASS 2: " + (process.env.AMINO_PASSWORD.charAt(0) == "g" ? "OK" : "FAIL"));
-console.log("PASS 3: " + (process.env.AMINO_DEBUG_COMMUNITY.charAt(0) == "x" ? "OK" : "FAIL"));
-
 // Making sure that no one will accidentally missed the endpoints
 describe('how do the enpoints react..', () => {
 
