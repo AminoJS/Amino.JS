@@ -1,4 +1,4 @@
-# Amino.JS [![Build Status](https://travis-ci.org/akatsukilevi/Amino.JS.svg?branch=master)](https://travis-ci.org/AminoJS/Amino.JS)
+# Amino.JS [![Build Status](https://travis-ci.org/AminoJS/Amino.JS.svg?branch=master)](https://travis-ci.org/AminoJS/Amino.JS)
 
 ![Amino](https://pm1.narvii.com/6354/a293fd6d1f40df3bdd0a1211ad395fcfc1fd0def_hq.jpg)
 
@@ -71,7 +71,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 * **[Jason Idris (coffeeboo)](https://github.com/coffeeboo)**
 * **[Akatsuki Levi (akatsukilevi)](https://github.com/akatsukilevi)**
 
-See also the list of [contributors](https://github.com/akatsukilevi/Amino.JS/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/AminoJS/Amino.JS/contributors) who participated in this project.
 
 ## License
 
