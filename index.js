@@ -41,6 +41,7 @@ module.exports = {
     createWikiEntry: require('./modules/createWikiEntry'), //TEST-CASE: OK
     deleteWikiEntry: require('./modules/deleteWikiEntry'), //TEST-CASE: OK
     commentWikiEntry: require('./modules/commentWikiEntry'), //TEST-CASE: OK
+    getComUsers: require('./modules/getComUsers'),
     sendAudio: require('./modules/sendAudio'),
     sendImage: require('./modules/sendImage'),
     sendSticker: require('./modules/sendSticker'),
