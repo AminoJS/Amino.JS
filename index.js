@@ -42,5 +42,4 @@ module.exports = {
     deleteWikiEntry: require('./modules/deleteWikiEntry'), //TEST-CASE: OK
     commentWikiEntry: require('./modules/commentWikiEntry'), //TEST-CASE: OK
     getComUsers: require('./modules/getComUsers'), //TEST-CASE: NOT OK
-    checkIn: require('./modules/checkin') //TEST-CASE: NO
 };
