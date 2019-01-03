@@ -108,6 +108,12 @@ const wiki = {
     error: 'nothing happend.'
 };
 
+const checkInData = {
+    'data': {},
+    'status': 'not ok',
+    'error': 'nothing happening'
+};
+
 module.exports = {
     blog,
     communityList,
@@ -127,5 +133,6 @@ module.exports = {
         status: 'not ok',
         error: 'Nothing has been done.'
     },
-    communityBlogFeed
+    communityBlogFeed,
+    checkInData
 };

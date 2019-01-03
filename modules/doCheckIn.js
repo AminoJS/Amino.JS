@@ -1,5 +1,6 @@
 const fetch = require('isomorphic-fetch');
 const endpoints = require('../helpers/endpoints.js'); //For Creating shorter URL's in this Module
+const objects = require('../helpers/objects');
 const { getConfig } = require('../index');
 
 /**
@@ -11,11 +12,7 @@ const { getConfig } = require('../index');
  */
 
 module.exports = async function doCheckIn(com, timezone) {
-    let checkInData = {
-        'data': {},
-        'status': 'not ok',
-        'error': 'nothing happening'
-    };
+    let checkInData = objects.checkInData;
     const sid = getConfig('sid');
     if (typeof sid != 'string' || typeof com !== 'string' || typeof timezone !== 'string') {
         throw new Error('All Arguments are not satisfied.');
