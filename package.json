@@ -1,7 +1,7 @@
 {
   "name": "amino.js",
   "version": "2.1.0",
-  "description": "A Framework for interacting with Amino",
+  "description": "A Framework for interacting with Narvii Amino",
   "main": "index.js",
   "scripts": {
     "test": "jest test",
@@ -26,7 +26,7 @@
     "Felix Fong <moongod101@hotmail.com> (https://felixfong227.ml)",
     "Felipe Angelo Sgarbi <akatsukilevi@yahoo.co.jp>"
   ],
-  "license": "AGPL-3.0",
+  "license": "MIT",
   "devDependencies": {
     "babel-eslint": "^8.2.1",
     "eslint": "^4.17.0",
@@ -35,6 +35,7 @@
   },
   "dependencies": {
     "hoek": "^5.0.3",
+    "import-local": "^2.0.0",
     "isomorphic-fetch": "^2.2.1",
     "request": "^2.83.0",
     "request-promise": "^4.2.2"

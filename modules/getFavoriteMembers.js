@@ -5,37 +5,40 @@ const objs = require('../helpers/objects.js'); //For Storing the Objects that th
 const { getConfig } = require('../index');
 
 /**
- * Loads all Kind of Chat Infomations that the Person itself joined.
+ * Loads Favorite Members
  * @param {SecurityString} sid For authenticating with the Narvii-API.
  * @param {CommunityUUID} com A ID that can be obtained by the function getJoinedComs
- * @returns {Object} Object where all the Chats that the Logged-in User has joined are contained in an Array.
+ * @returns {Object} Object with all the Members that the Logged-in User has in the Favorite Members Area in an Array.
  */
 
-module.exports = async function getJoinedChats(com) {
-    let threadList = objs.threadList;
-    threadList.threads = [];
+module.exports = async function getFavoriteMembers(com, count) {
+    let membersList = objs.favoriteMembers;
+    if(count == undefined){
+        count = 20;
+    }
+    membersList.members = [];
     const sid = getConfig('sid');
     if (typeof sid != 'string' || typeof com !== 'string') {
         throw new Error('All Arguments are not satisfied.');
     }
     try{
-        const response = await fetch(endpoints.getJoinedChats(com), {
+        const response = await fetch(endpoints.getFavoriteMembers(com, count), {
             headers: {
                 'NDCAUTH': `sid=${sid}`
             }
         });
         //Parsing the Response.
         const body = await response.json();
-        body.threadList.forEach((element) => {
+        body.userProfileList.forEach((element) => {
             //Sorting the Elements and pushing them into the Array.
-            threadList.threads.push(sorter.threadSort(element));
+            membersList.members.push(sorter.favoriteMembersSorter(element));
         });
-        threadList.status = 'ok';
-        threadList.error = null;
+        membersList.status = 'ok';
+        membersList.error = null;
     }
     catch(err){
-        threadList.error = err;
-        throw 'Error while calling getJoinedChats: ' + err;
+        membersList.error = err;
+        throw 'Error while calling getFavoriteMembers: ' + err;
     }
-    return threadList;
+    return membersList;
 };

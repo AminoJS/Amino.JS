@@ -1,47 +1,48 @@
 const fetch = require('isomorphic-fetch');
 const endpoints = require('../helpers/endpoints.js'); //For Creating shorter URL's in this Module
-const objs = require('../helpers/objects.js'); //For Storing the Objects that the Framework returns. 
+var fs = require('fs'); // For reading the audio file
 const { getConfig } = require('../index');
 
 /*
- * Function to send a Mesage into a Chat.
+ * Function to send a Audio to a Chat.
+ * In order to work properly, the audio must be a m4a format, and use the Apple Lossless Audio Codec(alac codec)
+ * The audio can't have more than 120 seconds(2 minutes) of duration.
  * @param {SecurityString} sid For authenticating with the Narvii-API.
  * @param {CommunityUUID} com The Community ID that can be Obtained by the Function getJoinedComs
  * @param {ChatUUID} uid The Chats ID that can be obtained by the function getJoinedChats
- * @param {String} msg The Message to be sent.
+ * @param {String} audioPath The path to the audio file who will be sent.
  * @returns {Object} A Custom Object where the Message, the MessageID, and a Boolean 
  */
 
-module.exports = async function sendChat(com, uid, msg) {
-    let message = objs.sendingMessage;
+module.exports = async function sendAudio(com, uid, audioPath) {
+    let message = null;
     const sid = getConfig('sid');
-    if (typeof sid != 'string' || typeof com !== 'string' || typeof uid !== 'string' || typeof msg !== 'string') {
+    if (typeof sid != 'string' || typeof com !== 'string' || typeof uid !== 'string' || typeof audioPath !== 'string') {
         throw new Error('All Arguments are not satisfied.');
     }
-    message.message.message = msg;
-    message.message.threadId = uid;
     try {
+        var audioRaw = fs.readFileSync(audioPath);
+        var audioBase64 = audioRaw.toString('base64');
         const response = await fetch(endpoints.sendChat(com, uid), {
             method: 'POST',
             headers: {
                 'NDCAUTH': `sid=${sid}`
             },
             body: JSON.stringify({
-                'content': msg,
-                'type': 0,
+                'content': null,
+                'type': 2,
                 'clientRefId': 43196704,
                 'timestamp': new Date().getUTCMilliseconds(),
+                'mediaType': 110,
+                'mediaUploadValue': audioBase64,
+                'attachedObject': null
             }),
         });
         let body = await response.json();
-        if (body.message) {
-            message.message.sent = true;
-            message.status = 'ok';
-            message.error = null;
-        }
+        message = body;
     } catch (err) {
-        message.error = err;
-        throw 'Error while calling sendChat: ' + err;
+        message = err;
+        throw 'Error while calling sendAudio: ' + err;
     }
     return message;
 };

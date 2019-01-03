@@ -48,7 +48,5 @@ describe('how do the enpoints react..', () => {
         )
         .toBe('https://service.narvii.com/api/v1/xtesting/s/chat/thread/a_great_uuid/message');
     });
-    it('when a checkin Call is recived', () =>{
-        expect(endpoints.checkIn('xTesting')).toBe('https://service.narvii.com/api/v1/xTesting/s/check-in')
-    })
+
 });

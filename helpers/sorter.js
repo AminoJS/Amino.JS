@@ -81,6 +81,15 @@ module.exports = {
         };
     },
 
+    favoriteMembersSorter: (element) => {
+        return {
+            'userName': element.nickname,
+            'userId': element.uid,
+            'level': element.level,
+            'userIcon': element.icon
+        };
+    },
+
     commentSorter: (element) => {
         return {
             'commentId': element.commentId,

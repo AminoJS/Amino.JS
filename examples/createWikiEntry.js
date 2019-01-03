@@ -19,11 +19,9 @@ if(env.wiki.comid == '' || env.wiki.title == '' || env.wiki.content == '' || env
     const yourWikiEntry = await Amino.createWikiEntry(env.wiki.comid, env.wiki.title, env.wiki.content, env.wiki.img_path);
     //Printin out the Libary Response
     console.log(`You just Posted a Wiki with the Title: ${yourWikiEntry.item.title}`);
-    /**
-     * Uncomment for raw Response!
-     * console.log('===RAW LIBARY RESPONSE===')
-     * console.log(yourWikiEntry);
-     */
+    
+    console.log('===RAW LIBARY RESPONSE===')
+    console.log(yourWikiEntry);
 
     //Deleting the Wiki Entry you just created above.
     const deletedWikiEntry = await Amino.deleteWikiEntry(env.wiki.comid, yourWikiEntry.item.itemid);

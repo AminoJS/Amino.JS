@@ -81,6 +81,12 @@ const profileBlogs = {
     error: 'not everything defined'
 };
 
+const favoriteMembers = {
+    members: [],
+    status: 'not ok',
+    error: 'nothing happend!'
+};
+
 const wiki = {
     item: {
         itemid: 'id',
@@ -102,11 +108,10 @@ const wiki = {
     error: 'nothing happend.'
 };
 
-const communityUsers = {
-    count: 1,
-    users: [],
-    status: 'not ok',
-    error: 'nothing happend.'
+const checkInData = {
+    'data': {},
+    'status': 'not ok',
+    'error': 'nothing happening'
 };
 
 module.exports = {
@@ -118,9 +123,9 @@ module.exports = {
     comments,
     profileBlogs,
     wiki,
+    favoriteMembers,
     sendingMessage: {
         message: {
-            id: 'wow',
             sent: false,
             message: 'defaults with begining of method. if not. may god help you.',
             threadId: 'defaults with begining of method. if not. may god help you.'
@@ -129,5 +134,5 @@ module.exports = {
         error: 'Nothing has been done.'
     },
     communityBlogFeed,
-    communityUsers,
+    checkInData
 };
