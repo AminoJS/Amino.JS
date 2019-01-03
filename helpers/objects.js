@@ -114,6 +114,13 @@ const checkInData = {
     'error': 'nothing happening'
 };
 
+const communityUsers = {
+    count: 1,
+    users: [],
+    status: 'not ok',
+    error: 'nothing happend.'
+};
+
 module.exports = {
     blog,
     communityList,
@@ -134,5 +141,6 @@ module.exports = {
         error: 'Nothing has been done.'
     },
     communityBlogFeed,
-    checkInData
+    checkInData,
+    communityUsers
 };
