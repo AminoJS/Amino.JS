@@ -1,3 +1,5 @@
+jest.setTimeout(7000); //Set a custom Timeout.
+
 if(process.env.TRAVIS_PULL_REQUEST === 'false' || typeof process.env.TRAVIS_PULL_REQUEST === 'undefined'){
     require('../helpers/loadEnv');
     describe('how the methods should response (With NO false input)', () => {

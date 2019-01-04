@@ -3,7 +3,8 @@ const sorter = require('../helpers/sorter');
 const endpoints = require('../helpers/endpoints');
 
 // If my logic isn't wrong, i must be able to call the setTimeout function here, and no pig can fly yet
-jest.setTimeout(7000); // Set a timeout of 7000. Should it stay as this timeout or should we increase it?
+// This is wrong. Travis actually still fails since it's only for this
+// jest.setTimeout(7000);
 
 // Making sure that no one will accidentally missed the endpoints
 describe('how do the enpoints react..', () => {
@@ -52,4 +53,47 @@ describe('how do the enpoints react..', () => {
         .toBe('https://service.narvii.com/api/v1/xtesting/s/chat/thread/a_great_uuid/message');
     });
 
+    it('when a blog should be posted (endpoint)', () => {
+        expect(endpoints.postBlog('xtesting')).toBe('https://service.narvii.com/api/v1/xtesting/s/blog');
+    });
+
+    it('when a blog should be deleted (endpoint)', () => {
+        expect(endpoints.deleteBlog('xtesting', 'a_great_uuid')).toBe('https://service.narvii.com/api/v1/xtesting/s/blog/a_great_uuid');
+    });
+
+    it('when comments need to be loaded (endpoint)', () => {
+        expect(endpoints.commentsPost('xtesting', 'a_great_uuid', 'newest', 5, 10)).toBe('https://service.narvii.com/api/v1/xtesting/s/blog/a_great_uuid/comment?sort=newest&start=5&size=10');
+    });
+
+    it('when something needs to be comment (endpoint)', () => {
+        expect(endpoints.commentPost('xtesting', 'a_great_uuid')).toBe('https://service.narvii.com/api/v1/xtesting/s/blog/a_great_uuid/comment');
+    });
+
+    it('when you want to get the blog feed (enpoint)', () => {
+        expect(endpoints.getCommunityBlogFeed('xtesting', 5, 10)).toBe('https://service.narvii.com/api/v1/xtesting/s/feed/blog-all?start=5&size=10');
+    });
+
+    it('when you want to check if you can post a wiki entry. (endpoint)', () => {
+        expect(endpoints.checkIfWikiCanPost('xtesting', 'a_great_uuid')).toBe('https://service.narvii.com/api/v1/xtesting/s/user-profile/a_great_uuid/compose-eligible-check?objectType=item');
+    });
+    
+    it('when you want to create a wiki entry. (endpoint)', () => {
+        expect(endpoints.createWiki('xtesting')).toBe('https://service.narvii.com/api/v1/xtesting/s/item');
+    });
+
+    it('when you want to delete a wiki entry. (endpoint)', () => {
+        expect(endpoints.deleteWiki('xtesting', 'a_great_uuid')).toBe('https://service.narvii.com/api/v1/xtesting/s/item/a_great_uuid');
+    });
+
+    it('when you want to comment on a wiki entry. (endpoint)', () => {
+        expect(endpoints.commentWiki('xtesting', 'a_great_uuid')).toBe('https://service.narvii.com/api/v1/xtesting/s/item/a_great_uuid/comment');
+    });
+
+    it('when you want to load your favorite members. (endpoint)', () => {
+        expect(endpoints.getFavoriteMembers('xtesting', 30)).toBe('https://service.narvii.com/api/v1/xtesting/s/user-group/quick-access?start=0&size=30');
+    });
+
+    it('when its time to check into communities. (endpoint)', () => {
+        expect(endpoints.getCheckInReminder('xtesting&xtesting2', 'UTC'))
+    });
 });
