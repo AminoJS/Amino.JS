@@ -2,6 +2,9 @@ const index = require('../index');
 const sorter = require('../helpers/sorter');
 const endpoints = require('../helpers/endpoints');
 
+// If my logic isn't wrong, i must be able to call the setTimeout function here, and no pig can fly yet
+jest.setTimeout(7000); // Set a timeout of 7000. Should it stay as this timeout or should we increase it?
+
 // Making sure that no one will accidentally missed the endpoints
 describe('how do the enpoints react..', () => {
 
