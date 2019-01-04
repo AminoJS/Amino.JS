@@ -13,8 +13,7 @@
     "url": "https://github.com/AminoJS/Amino.JS"
   },
   "jest": {
-    "testURL": "http://localhost/", 
-    "setTimeout": 7000
+    "testURL": "http://localhost/"
   },
   "keywords": [
     "Amino",
