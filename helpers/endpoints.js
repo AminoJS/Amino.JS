@@ -18,8 +18,8 @@ module.exports = {
     createWiki: (com) => `${prefix}/v1/${com}/s/item`, //Testcase: OK
     deleteWiki: (com, uid) => `${prefix}/v1/${com}/s/item/${uid}`, //Testcase: OK
     commentWiki: (com, uid) => `${prefix}/v1/${com}/s/item/${uid}/comment`, //Testcase: OK
-    getFavoriteMembers: (com, count) => `${prefix}/v1/${com}/s/user-group/quick-access?start=0&size=${count}`,
-    getCheckInReminder: (communities, timezone) => `${prefix}/v1/g/s/reminder/check?ndcIds=${communities.replace('&', '%2C')}&timezone=${timezone}`,
-    doCheckIn: (com) => `${prefix}/v1/${com}/s/check-in`,
-    getComUsers: (com) => `${prefix}/v1/${com}/s/user-profile/`
+    getFavoriteMembers: (com, count) => `${prefix}/v1/${com}/s/user-group/quick-access?start=0&size=${count}`, //Testcase: OK
+    getCheckInReminder: (communities, timezone) => `${prefix}/v1/g/s/reminder/check?ndcIds=${communities.replace('&', '%2C')}&timezone=${timezone}`, //Testcase: OK
+    doCheckIn: (com) => `${prefix}/v1/${com}/s/check-in`, //Testcase: OK
+    getComUsers: (com) => `${prefix}/v1/${com}/s/user-profile/` //Testcase: OK
 };

@@ -94,6 +94,14 @@ describe('how do the enpoints react..', () => {
     });
 
     it('when its time to check into communities. (endpoint)', () => {
-        expect(endpoints.getCheckInReminder('xtesting&xtesting2', 'UTC'))
+        expect(endpoints.getCheckInReminder('xtesting&xtesting2', 'UTC')).toBe('https://service.narvii.com/api/v1/g/s/remindet/check?ndcIds=xtesting%2Cxtesting2&timezone=UTC');
     });
+
+    it('when we are checking in. (endpoint).', () => {
+        expect(endpoints.doCheckIn('xtesting')).toBe('https://service.narvii.com/api/v1/xtesting/s/check-in');
+    })
+
+    it('when we want to load the community users. (endpoint)', () => {
+        expect(endpoints.getComUsers('xtesting')).toBe('https://service.narvii.com/api/v1/xtesting/s/user-profile');
+    })
 });
