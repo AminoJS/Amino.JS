@@ -1,7 +1,7 @@
 {
   "name": "amino.js",
-  "version": "2.1.0",
-  "description": "A Framework for interacting with Narvii Amino",
+  "version": "3.0.0",
+  "description": "A Framework for interacting with Narvii/Aminoapps",
   "main": "index.js",
   "scripts": {
     "test": "jest test",
@@ -23,7 +23,7 @@
     "Framework",
     "Narvii"
   ],
-  "author": "Robin Möller <moelrobi@gmail.com> (https://robsys.space)",
+  "author": "Robin Möller <moelrobi@gmail.com> (https://sirrob.eu)",
   "contributors": [
     "Jason Idris <jason.idris@chca-oh.org>",
     "Felix Fong <moongod101@hotmail.com> (https://felixfong227.ml)",
