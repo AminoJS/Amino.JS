@@ -21,5 +21,5 @@ module.exports = {
     getFavoriteMembers: (com, count) => `${prefix}/v1/${com}/s/user-group/quick-access?start=0&size=${count}`, //Testcase: OK
     getCheckInReminder: (communities, timezone) => `${prefix}/v1/g/s/reminder/check?ndcIds=${communities.replace('&', '%2C')}&timezone=${timezone}`, //Testcase: OK
     doCheckIn: (com) => `${prefix}/v1/${com}/s/check-in`, //Testcase: OK
-    getComUsers: (com) => `${prefix}/v1/${com}/s/user-profile/` //Testcase: OK
+    getComUsers: (com) => `${prefix}/v1/${com}/s/user-profile` //Testcase: OK
 };
