@@ -23,7 +23,14 @@ module.exports = async function deleteWikiEntry(com, uid) {
         headers: {
             NDCAUTH: `sid=${sid}`
         }
+    }).then(function(response) {
+        if(response.status >= 400) {
+            throw new Error(`Amino appears to be offline. Response status = ${response.status}`);
+        } else {
+            return true;
+        }
+    }).catch(function(ex) {
+        throw new Error(`An error ocurred: ${ex}`);
     });
-    if(!res.ok) throw new Error('An Error occured!' + res.status);
-    return res.ok;
+    return res;
 };

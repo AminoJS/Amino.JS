@@ -16,21 +16,22 @@ module.exports = async function getComUsers(communityId) {
     if (typeof sid != 'string') {
         throw new Error(errorMessages.missingSid);
     }
-    try {
-        const response = await fetch(endpoints.getComUsers(communityId), {
-            headers: {
-                'NDCAUTH': `sid=${sid}`
-            }
-        });
-        const body = await response.json();
-        communityUsers.users = body.userProfileList;
-        communityUsers.count = body.userProfileCount;
-        communityUsers.error = null;
-        communityUsers.status = 'ok';
-    }
-    catch (err) {
-        communityUsers.error = err;
-        throw 'Error while calling getComUsers: ' + err;
-    }
+    const body = await fetch(endpoints.getComUsers(communityId), {
+        headers: {
+            'NDCAUTH': `sid=${sid}`
+        }
+    }).then(function(response) {
+        if(response.status >= 400) {
+            throw new Error(`Amino appears to be offline. Response status = ${response.status}`);
+        } else {
+            return response.json();
+        }
+    }).catch(function(ex) {
+        throw new Error(`An error ocurred: ${ex}`);
+    });
+    communityUsers.users = body.userProfileList;
+    communityUsers.count = body.userProfileCount;
+    communityUsers.error = null;
+    communityUsers.status = 'ok';
     return communityUsers;
 };

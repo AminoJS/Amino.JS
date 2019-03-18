@@ -22,28 +22,30 @@ module.exports = async function login(email, password, deviceID) {
         deviceID = '015051B67B8D59D0A86E0F4A78F47367B749357048DD5F23DF275F05016B74605AAB0D7A6127287D9C';
     }
 
-    try {
-        const response = await fetch(endpoints.login, {
-            method: 'POST',
-            body: JSON.stringify({
-                'email': email,
-                'secret': '0 ' + password,
-                'deviceID': deviceID,
-                'clientType': 100,
-                'action': 'normal',
-                'timestamp': new Date().getUTCMilliseconds()
-            }),
-        });
-        const body = await response.json();
-        if (!body.sid) throw 'Login Error: SID is not defined.' + body;
-        if(!body.account.uid) throw 'Login Error: ProfileID is not defined.' + body;
-        sid = body.sid;
-        profileid = body.account.uid;
-        setConfig('sid', sid);
-        setConfig('profileId', profileid);
-    }
-    catch (err) {
-        throw 'Error while calling Login: ' + err;
-    }
+    const body = await fetch(endpoints.login, {
+        method: 'POST',
+        body: JSON.stringify({
+            'email': email,
+            'secret': '0 ' + password,
+            'deviceID': deviceID,
+            'clientType': 100,
+            'action': 'normal',
+            'timestamp': new Date().getUTCMilliseconds()
+        }),
+    }).then(function(response) {
+        if(response.status >= 400) {
+            throw new Error(`Amino appears to be offline. Response status = ${response.status}`);
+        } else {
+            return response.json();
+        }
+    }).catch(function(ex) {
+        throw new Error(`An error ocurred: ${ex}`);
+    });
+    if (!body.sid) throw 'Login Error: SID is not defined.' + body;
+    if(!body.account.uid) throw 'Login Error: ProfileID is not defined.' + body;
+    sid = body.sid;
+    profileid = body.account.uid;
+    setConfig('sid', sid);
+    setConfig('profileId', profileid);
     return sid;
 };

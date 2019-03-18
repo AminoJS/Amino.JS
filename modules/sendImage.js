@@ -21,7 +21,7 @@ module.exports = async function sendImage(com, uid, ImagePath) {
     try {
         var imageRaw = fs.readFileSync(ImagePath);
         var imageBase64 = imageRaw.toString('base64');
-        const response = await fetch(endpoints.sendChat(com, uid), {
+        const body = await fetch(endpoints.sendChat(com, uid), {
             method: 'POST',
             headers: {
                 'NDCAUTH': `sid=${sid}`
@@ -35,8 +35,15 @@ module.exports = async function sendImage(com, uid, ImagePath) {
                 'mediaUploadValue': imageBase64,
                 'attachedObject': null
             }),
+        }).then(function(response) {
+            if(response.status >= 400) {
+                throw new Error(`Amino appears to be offline. Response status = ${response.status}`);
+            } else {
+                return response.json();
+            }
+        }).catch(function(ex) {
+            throw new Error(`An error ocurred: ${ex}`);
         });
-        let body = await response.json();
         message = body;
     } catch (err) {
         message = err;

@@ -14,15 +14,19 @@ module.exports = async function deleteBlog(com, id) {
     if (typeof sid != 'string' || typeof com !== 'string' || typeof id !== 'string') {
         throw new Error('All Arguments are not satisfied.');
     }
-    try {
-        await fetch(endpoints.deleteBlog(com,id), {
-            method: 'DELETE',
-            headers: {
-                'NDCAUTH': `sid=${sid}`
-            },
-        });
-        return true;
-    } catch (err) {
-        throw 'Error while calling postBlog: ' + err;
-    }
+    await fetch(endpoints.deleteBlog(com,id), {
+        method: 'DELETE',
+        headers: {
+            'NDCAUTH': `sid=${sid}`
+        },
+    }).then(function(response) {
+        if(response.status >= 400) {
+            throw new Error(`Amino appears to be offline. Response status = ${response.status}`);
+        } else {
+            return response.json();
+        }
+    }).catch(function(ex) {
+        throw new Error(`An error ocurred: ${ex}`);
+    });
+    return true;
 };

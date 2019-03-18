@@ -17,26 +17,26 @@ module.exports = async function doCheckIn(com, timezone) {
     if (typeof sid != 'string' || typeof com !== 'string' || typeof timezone !== 'string') {
         throw new Error('All Arguments are not satisfied.');
     }
-    try{
-        const response = await fetch(endpoints.doCheckIn(com), {
-            headers: {
-                'NDCAUTH': `sid=${sid}`,
-                'NDC-MSG-SIG': 'AcYt8HVzM3r6BgVIRJC+Cb4bm35F'
-            },
-            body: JSON.stringify({
-                'timezone': timezone,
-                'timestamp': new Date().getUTCMilliseconds(),
-            }),
-        });
-        //Parsing the Response.
-        const body = await response.json();
-        checkInData.data = body;
-        checkInData.status = 'ok';
-        checkInData.error = null;
-    }
-    catch(err){
-        checkInData.error = err;
-        throw 'Error while calling doCheckIn: ' + err;
-    }
+    const body = await fetch(endpoints.doCheckIn(com), {
+        headers: {
+            'NDCAUTH': `sid=${sid}`,
+            'NDC-MSG-SIG': 'AcYt8HVzM3r6BgVIRJC+Cb4bm35F'
+        },
+        body: JSON.stringify({
+            'timezone': timezone,
+            'timestamp': new Date().getUTCMilliseconds(),
+        }),
+    }).then(function(response) {
+        if(response.status >= 400) {
+            throw new Error(`Amino appears to be offline. Response status = ${response.status}`);
+        } else {
+            return response.json();
+        }
+    }).catch(function(ex) {
+        throw new Error(`An error ocurred: ${ex}`);
+    });
+    checkInData.data = body;
+    checkInData.status = 'ok';
+    checkInData.error = null;
     return checkInData;
 };

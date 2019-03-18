@@ -18,24 +18,24 @@ module.exports = async function getUserBlogs(com, uid, count='5') {
     if (typeof sid != 'string' || typeof com !== 'string' || typeof uid !== 'string' || typeof count !== 'string') {
         throw new Error('All Arguments are not satisfied.');
     }
-    try{
-        const response = await fetch(endpoints.getUserBlogs(com, uid, count), {
-            headers: {
-                'NDCAUTH': `sid=${sid}`
-            }
-        });
-        //Parsing the Response.
-        const body = await response.json();
-        if(body.blogList.length == 0) blogList.blogs = null;
-        body.blogList.forEach((element) => {
-            blogList.blogs.push(element);
-        });
-        blogList.status = 'ok';
-        blogList.error = null;
-    }
-    catch(err){
-        blogList.error = err;
-        throw 'Error while calling getUserBlogs: ' + err;
-    }
+    const body = await fetch(endpoints.getUserBlogs(com, uid, count), {
+        headers: {
+            'NDCAUTH': `sid=${sid}`
+        }
+    }).then(function(response) {
+        if(response.status >= 400) {
+            throw new Error(`Amino appears to be offline. Response status = ${response.status}`);
+        } else {
+            return response.json();
+        }
+    }).catch(function(ex) {
+        throw new Error(`An error ocurred: ${ex}`);
+    });
+    if(body.blogList.length == 0) blogList.blogs = null;
+    body.blogList.forEach((element) => {
+        blogList.blogs.push(element);
+    });
+    blogList.status = 'ok';
+    blogList.error = null;
     return blogList;
 };

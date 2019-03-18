@@ -15,34 +15,34 @@ const { getConfig } = require('../index');
  */
 
 module.exports = async function sendAudio(com, uid, audioPath) {
-    let message = null;
     const sid = getConfig('sid');
     if (typeof sid != 'string' || typeof com !== 'string' || typeof uid !== 'string' || typeof audioPath !== 'string') {
         throw new Error('All Arguments are not satisfied.');
     }
-    try {
-        var audioRaw = fs.readFileSync(audioPath);
-        var audioBase64 = audioRaw.toString('base64');
-        const response = await fetch(endpoints.sendChat(com, uid), {
-            method: 'POST',
-            headers: {
-                'NDCAUTH': `sid=${sid}`
-            },
-            body: JSON.stringify({
-                'content': null,
-                'type': 2,
-                'clientRefId': 43196704,
-                'timestamp': new Date().getUTCMilliseconds(),
-                'mediaType': 110,
-                'mediaUploadValue': audioBase64,
-                'attachedObject': null
-            }),
-        });
-        let body = await response.json();
-        message = body;
-    } catch (err) {
-        message = err;
-        throw 'Error while calling sendAudio: ' + err;
-    }
-    return message;
+    var audioRaw = fs.readFileSync(audioPath);
+    var audioBase64 = audioRaw.toString('base64');
+    const body = await fetch(endpoints.sendChat(com, uid), {
+        method: 'POST',
+        headers: {
+            'NDCAUTH': `sid=${sid}`
+        },
+        body: JSON.stringify({
+            'content': null,
+            'type': 2,
+            'clientRefId': 43196704,
+            'timestamp': new Date().getUTCMilliseconds(),
+            'mediaType': 110,
+            'mediaUploadValue': audioBase64,
+            'attachedObject': null
+        }),
+    }).then(function(response) {
+        if(response.status >= 400) {
+            throw new Error(`Amino appears to be offline. Response status = ${response.status}`);
+        } else {
+            return response.json();
+        }
+    }).catch(function(ex) {
+        throw new Error(`An error ocurred: ${ex}`);
+    });
+    return body;
 };

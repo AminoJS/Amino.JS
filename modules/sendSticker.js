@@ -20,7 +20,7 @@ module.exports = async function sendSticker(com, uid, stickerID) {
         throw new Error('All Arguments are not satisfied.');
     }
     try {
-        const response = await fetch(endpoints.sendChat(com, uid), {
+        const body = await fetch(endpoints.sendChat(com, uid), {
             method: 'POST',
             headers: {
                 'NDCAUTH': `sid=${sid}`
@@ -31,8 +31,15 @@ module.exports = async function sendSticker(com, uid, stickerID) {
                 'timestamp': new Date().getUTCMilliseconds(),
                 'stickerId': stickerID
             }),
+        }).then(function(response) {
+            if(response.status >= 400) {
+                throw new Error(`Amino appears to be offline. Response status = ${response.status}`);
+            } else {
+                return response.json();
+            }
+        }).catch(function(ex) {
+            throw new Error(`An error ocurred: ${ex}`);
         });
-        let body = await response.json();
         message = body;
     } catch (err) {
         message = err;

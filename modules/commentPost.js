@@ -17,25 +17,28 @@ module.exports = async function commentPost(com, id, content) {
     if (typeof sid != 'string' || typeof com !== 'string' || typeof id !== 'string' || typeof content !== 'string') {
         throw new Error('All Arguments are not satisfied.');
     }
-    try {
-        let response = await fetch(endpoints.commentPost(com, id), {
-            method: 'POST',
-            headers: {
-                'NDCAUTH': `sid=${sid}`
-            },
-            body: JSON.stringify({
-                'content': content,
-                'mediaList': [],
-                'eventSource':'PostDetailView',
-                'timestamp': new Date().getUTCMilliseconds()
-            })
-        });
-        response = response.json();
-        if (response.comment) {
-            comment = sorter.commentSorter(response.comment);
+    let response = await fetch(endpoints.commentPost(com, id), {
+        method: 'POST',
+        headers: {
+            'NDCAUTH': `sid=${sid}`
+        },
+        body: JSON.stringify({
+            'content': content,
+            'mediaList': [],
+            'eventSource':'PostDetailView',
+            'timestamp': new Date().getUTCMilliseconds()
+        })
+    }).then(function(response) {
+        if(response.status >= 400) {
+            throw new Error(`Amino appears to be offline. Response status = ${response.status}`);
+        } else {
+            return response.json();
         }
-    } catch (err) {
-        throw 'Error while calling commentPost: ' + err;
+    }).catch(function(ex) {
+        throw new Error(`An error ocurred: ${ex}`);
+    });
+    if (response.comment) {
+        comment = sorter.commentSorter(response.comment);
     }
     return comment;
 };

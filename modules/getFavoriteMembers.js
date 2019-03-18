@@ -21,24 +21,24 @@ module.exports = async function getFavoriteMembers(com, count) {
     if (typeof sid != 'string' || typeof com !== 'string') {
         throw new Error('All Arguments are not satisfied.');
     }
-    try{
-        const response = await fetch(endpoints.getFavoriteMembers(com, count), {
-            headers: {
-                'NDCAUTH': `sid=${sid}`
-            }
-        });
-        //Parsing the Response.
-        const body = await response.json();
-        body.userProfileList.forEach((element) => {
-            //Sorting the Elements and pushing them into the Array.
-            membersList.members.push(sorter.favoriteMembersSorter(element));
-        });
-        membersList.status = 'ok';
-        membersList.error = null;
-    }
-    catch(err){
-        membersList.error = err;
-        throw 'Error while calling getFavoriteMembers: ' + err;
-    }
+    const body = await fetch(endpoints.getFavoriteMembers(com, count), {
+        headers: {
+            'NDCAUTH': `sid=${sid}`
+        }
+    }).then(function(response) {
+        if(response.status >= 400) {
+            throw new Error(`Amino appears to be offline. Response status = ${response.status}`);
+        } else {
+            return response.json();
+        }
+    }).catch(function(ex) {
+        throw new Error(`An error ocurred: ${ex}`);
+    });
+    body.userProfileList.forEach((element) => {
+        //Sorting the Elements and pushing them into the Array.
+        membersList.members.push(sorter.favoriteMembersSorter(element));
+    });
+    membersList.status = 'ok';
+    membersList.error = null;
     return membersList;
 };

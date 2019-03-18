@@ -17,22 +17,23 @@ module.exports = async function getJoinedComs() {
     if (typeof sid != 'string') {
         throw new Error(errorMessages.missingSid);
     }
-    try {
-        const response = await fetch(endpoints.getComs, {
-            headers: {
-                'NDCAUTH': `sid=${sid}`
-            }
-        });
-        const body = await response.json();
-        body.communityList.forEach((element) => {
-            communityList.coms.push(sorter.comSort(element));
-        });
-        communityList.status = 'ok';
-        communityList.error = null;
-    }
-    catch (err) {
-        communityList.error = err;
-        throw 'Error while calling getJoinedComs: ' + err;
-    }
+    const body = await fetch(endpoints.getComs, {
+        headers: {
+            'NDCAUTH': `sid=${sid}`
+        }
+    }).then(function(response) {
+        if(response.status >= 400) {
+            throw new Error(`Amino appears to be offline. Response status = ${response.status}`);
+        } else {
+            return response.json();
+        }
+    }).catch(function(ex) {
+        throw new Error(`An error ocurred: ${ex}`);
+    });
+    body.communityList.forEach((element) => {
+        communityList.coms.push(sorter.comSort(element));
+    });
+    communityList.status = 'ok';
+    communityList.error = null;
     return communityList;
 };

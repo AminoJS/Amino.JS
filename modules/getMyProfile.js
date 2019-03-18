@@ -16,22 +16,24 @@ module.exports = async function getMyProfile() {
     if (typeof sid != 'string') {
         throw new Error(errorMessages.missingSid);
     }
-    try {
-        const response = await fetch(endpoints.getMe, {
-            headers: {
-                'NDCAUTH': `sid=${sid}`
-            }
-        });
-        const body = await response.json();
-        profile.account.username = body.account.nickname;
-        profile.account.icon = body.account.icon;
-        profile.account.mediaList = body.account.mediaList;
-        profile.account.uid = body.account.uid;
-        profile.status = 'ok';
-        profile.error = null;
-    } catch (err) {
-        profile.error = err;
-        throw 'Error while calling getMyProfile: ' + err;
-    }
+    const body = await fetch(endpoints.getMe, {
+        headers: {
+            'NDCAUTH': `sid=${sid}`
+        }
+    }).then(function(response) {
+        if(response.status >= 400) {
+            throw new Error(`Amino appears to be offline. Response status = ${response.status}`);
+        } else {
+            return response.json();
+        }
+    }).catch(function(ex) {
+        throw new Error(`An error ocurred: ${ex}`);
+    });
+    profile.account.username = body.account.nickname;
+    profile.account.icon = body.account.icon;
+    profile.account.mediaList = body.account.mediaList;
+    profile.account.uid = body.account.uid;
+    profile.status = 'ok';
+    profile.error = null;
     return profile;
 };
