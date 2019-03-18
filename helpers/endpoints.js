@@ -22,5 +22,8 @@ module.exports = {
     getCheckInReminder: (communities, timezone) => `${prefix}/v1/g/s/reminder/check?ndcIds=${communities.replace('&', '%2C')}&timezone=${timezone}`, //Testcase: OK
     doCheckIn: (com) => `${prefix}/v1/${com}/s/check-in`, //Testcase: OK
     getComUsers: (com) => `${prefix}/v1/${com}/s/user-profile`, //Testcase: OK
-    auditLogs: (com, start, size) => `${prefix}/v1/${com}/s/admin/operation?start=${start}&size=${size}`
+    auditLogs: (com, start, size) => `${prefix}/v1/${com}/s/admin/operation?start=${start}&size=${size}`,
+    openFlags: (com, start, size) => `${prefix}/v1/${com}/s/flag?status=pending&type=all&start=${start}&size=${size}`,
+    inviteChat: (com, chatThread) => `${prefix}/v1/${com}/s/chat/thread/${chatThread}/member/invite`,
+    removeChat: (com, chatThread, user, rejoin) => `${prefix}/v1/${com}/s/chat/thread/${chatThread}/member/${user}?allowRejoin=${rejoin}`
 };

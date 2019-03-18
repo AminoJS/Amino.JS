@@ -49,5 +49,8 @@ module.exports = {
     getCheckInCommunities: require('./modules/getCheckInCommunities'),
     doCheckIn: require('./modules/doCheckIn'),
     AminoAPI: require('./framework/main'), //TEST-CASE: Not needed, wrapper to coding only
-    auditLogs: require('./modules/auditLogs')
+    auditLogs: require('./modules/auditLogs'),
+    openFlags: require('./modules/openFlags'),
+    inviteChat: require('./modules/inviteChat'),
+    removeChat: require('./modules/removeChat'),
 };

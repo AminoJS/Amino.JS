@@ -4,7 +4,7 @@ const endpoints = require('../helpers/endpoints.js'); //For Creating shorter URL
 const { getConfig } = require('../index');
 
 /**
- * Loads Audit Logs
+ * Loads Open Flags List
  * @param {SecurityString} sid For authenticating with the Narvii-API.
  * @param {CommunityUUID} com The Community ID that can be Obtained by the function getJoinedComs
  * @param {Number} start The start position you want it to use
@@ -12,7 +12,7 @@ const { getConfig } = require('../index');
  * @returns {Object} Object where all the Messages in the requested Chat are contained in an Array.
  */
 
-module.exports = async function auditLogs(com, start, size) {
+module.exports = async function openFlags(com, start, size) {
     const sid = getConfig('sid');
     if (typeof sid != 'string' || typeof com !== 'string') {
         throw new Error('All Arguments are not satisfied.');
@@ -24,7 +24,7 @@ module.exports = async function auditLogs(com, start, size) {
     if (size == undefined || size == null) {
         size = 1;
     }
-    const body = await fetch(endpoints.auditLogs(com, start, size), {
+    const body = await fetch(endpoints.openFlags(com, start, size), {
         headers: {
             'NDCAUTH': `sid=${sid}`
         }
