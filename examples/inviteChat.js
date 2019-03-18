@@ -5,9 +5,9 @@ const Amino = require('../index');
     await Amino.login(env.email, env.password);
 
     var toInvite = [
-        env.userTarget,
-        'a7ea83be-13f8-493e-bc97-10dbbeaed425'
+        env.userTarget
     ];
+    
     const invite = await Amino.inviteChat(env.testingEnvCom, env.chatTarget, toInvite);
     console.log(JSON.stringify(invite, null, 2));
 })();
