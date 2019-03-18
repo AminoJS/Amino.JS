@@ -31,7 +31,8 @@ AminoAPI.proccessAction(Amino.login('email', 'password'), function(data){
 
 ### Prerequisites
 
-The only prerequisite for using the Amino.JS library is the Node.JS itself
+The only prerequisite for using the Amino.JS library is the Node.JS itself.
+> Levi: i made a test, using a experimental build of the Node.JS for android, and i tested the Amino.JS library on it. It worked perfectly(despite a small lag due to my phone not being a pretty good one)
 
 ### Installing
 
@@ -58,6 +59,8 @@ To deploy, it's recommended to make a handler for the SID(Session ID), to avoid 
 ## Built With
 
 * [Isomorphic Fetch](https://www.npmjs.com/package/isomorphic-fetch) - Fetch for node and Browserify. Built on top of [GitHub's WHATWG Fetch polyfill](https://github.com/github/fetch).
+* A lot of coffee
+* A brand-new used laptop
 
 ## Contributing
 
