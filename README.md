@@ -83,3 +83,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Acknowledgments
 
 * This software is unofficial! It's against the Terms of Service to use this Software to interact with Amino APIs. We (the creator of Amino.JS) are not responsible for any kind of damage (ban / legal actions) done by Narvii, Inc. 
+* UPDATE:
+> Levi: I'm currently trying to make this API official in the AminoApps. Even though time isn't helping me much, i'll be working to make it official.
+* We are not responsible for any usage you have with the API due to improper usage
