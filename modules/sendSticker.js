@@ -2,10 +2,9 @@ const fetch = require('isomorphic-fetch');
 const endpoints = require('../helpers/endpoints.js'); //For Creating shorter URL's in this Module
 const { getConfig } = require('../index');
 
-/*
+/**
  * Function to send a Sticker to a Chat.
- * In order to work properly, the audio must be a m4a format, and use the Apple Lossless Audio Codec(alac codec)
- * The audio can't have more than 120 seconds(2 minutes) of duration.
+ * Note that a Sticker ID List still don't exists on this module. This is being planned to a future release
  * @param {SecurityString} sid For authenticating with the Narvii-API.
  * @param {CommunityUUID} com The Community ID that can be Obtained by the Function getJoinedComs
  * @param {ChatUUID} uid The Chats ID that can be obtained by the function getJoinedChats

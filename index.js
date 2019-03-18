@@ -48,5 +48,6 @@ module.exports = {
     getFavoriteMembers: require('./modules/getFavoriteMembers'),
     getCheckInCommunities: require('./modules/getCheckInCommunities'),
     doCheckIn: require('./modules/doCheckIn'),
-    AminoAPI: require('./framework/main') //TEST-CASE: Not needed, wrapper to coding only
+    AminoAPI: require('./framework/main'), //TEST-CASE: Not needed, wrapper to coding only
+    auditLogs: require('./modules/auditLogs')
 };

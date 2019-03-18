@@ -3,7 +3,7 @@ const endpoints = require('../helpers/endpoints.js'); //For Creating shorter URL
 var fs = require('fs'); // For reading the audio file
 const { getConfig } = require('../index');
 
-/*
+/**
  * Function to send a Audio to a Chat.
  * In order to work properly, the audio must be a m4a format, and use the Apple Lossless Audio Codec(alac codec)
  * The audio can't have more than 120 seconds(2 minutes) of duration.

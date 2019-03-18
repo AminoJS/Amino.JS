@@ -3,7 +3,7 @@ const endpoints = require('../helpers/endpoints.js'); //For Creating shorter URL
 const objs = require('../helpers/objects.js'); //For Storing the Objects that the Framework returns. 
 const { getConfig } = require('../index');
 
-/*
+/**
  * Function to send a Mesage into a Chat.
  * @param {SecurityString} sid For authenticating with the Narvii-API.
  * @param {CommunityUUID} com The Community ID that can be Obtained by the Function getJoinedComs

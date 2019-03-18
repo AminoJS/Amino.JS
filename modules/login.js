@@ -4,7 +4,7 @@ const endpoints = require('../helpers/endpoints.js'); //For Creating shorter URL
 const { setConfig } = require('../index');
 
 /**
-* Loginfunction for the Framework for Handeling API Reqeusts.
+* Login function for the Framework for Handeling API Reqeusts.
 * @param  {String} email Email-Adress for logging in.
 * @param  {String} password Password for logging in.
 * @param  {UUID} deviceID Siehe mehr unter ('Wiki/Device ID Dump').

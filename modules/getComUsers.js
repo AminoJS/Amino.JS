@@ -8,7 +8,6 @@ const { getConfig, errorMessages } = require('../index');
  * @param {SecurityString} sid For authenticating with the Narvii-API.
  * @returns {Object} Object containing all Joined Coms with the Logged in Account.
  */
-
 module.exports = async function getComUsers(communityId) {
     let communityUsers = objs.communityUsers;
     communityUsers.users = [];

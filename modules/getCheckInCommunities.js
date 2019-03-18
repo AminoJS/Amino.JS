@@ -4,7 +4,7 @@ const objs = require('../helpers/objects.js'); //For Storing the Objects that th
 const { getConfig } = require('../index');
 
 /**
- * Loads Favorite Members
+ * Loads Communities Check-In Status
  * @param {SecurityString} sid For authenticating with the Narvii-API.
  * @param {String} coms A list of communities to get the check-in status, separated by "&"
  * @param {String} timezone The desired timezone to check(It will affect the user Check-In Functionality)
