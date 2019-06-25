@@ -9,15 +9,17 @@ const { getConfig } = require('../index');
  * @param {CommunityUUID} com The Community ID that can be Obtained by the Function getJoinedComs
  * @param {ChatUUID} uid The Chats ID that can be obtained by the function getJoinedChats
  * @param {String} ImagePath The path to the image file who will be sent.
+ * @param {String} ImageType(Optional) The MIME type of the image who's being sent
  * @returns {Object} A Custom Object where the Message, the MessageID, and a Boolean 
  */
 
-module.exports = async function sendImage(com, uid, ImagePath) {
+module.exports = async function sendImage(com, uid, ImagePath, imageType) {
     let message = null;
     const sid = getConfig('sid');
     if (typeof sid != 'string' || typeof com !== 'string' || typeof uid !== 'string' || typeof ImagePath !== 'string') {
         throw new Error('All Arguments are not satisfied.');
     }
+    imageType = (typeof imageType != 'string' ? 'image/png' : imageType);
     try {
         var imageRaw = fs.readFileSync(ImagePath);
         var imageBase64 = imageRaw.toString('base64');
@@ -33,6 +35,8 @@ module.exports = async function sendImage(com, uid, ImagePath) {
                 'timestamp': new Date().getUTCMilliseconds(),
                 'mediaType': 100,
                 'mediaUploadValue': imageBase64,
+                'mediaUploadValueContentType': imageType,
+                'mediaUhqEnabled': false,
                 'attachedObject': null
             }),
         }).then(function(response) {
