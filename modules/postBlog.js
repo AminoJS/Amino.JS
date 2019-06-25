@@ -33,8 +33,15 @@ module.exports = async function postBlog(com, title, content) {
                 'eventSource':'GlobalComposeMenu',
                 'timestamp': new Date().getUTCMilliseconds()
             })
+        }).then(function(response) {
+            if(response.status >= 400) {
+                throw new Error(`Amino appears to be offline. Response status = ${response.status}`);
+            } else {
+                return response.json();
+            }
+        }).catch(function(ex) {
+            throw new Error(`An error ocurred: ${ex}`);
         });
-        response = await response.json();
         if (response.blog.blogId) {
             blog.status = 'ok';
             blog.error = null;

@@ -1,7 +1,7 @@
 {
   "name": "amino.js",
-  "version": "2.1.0",
-  "description": "A Framework for interacting with Amino",
+  "version": "3.0.0",
+  "description": "A Framework for interacting with Narvii/Aminoapps",
   "main": "index.js",
   "scripts": {
     "test": "jest test",
@@ -12,6 +12,9 @@
     "type": "git",
     "url": "https://github.com/AminoJS/Amino.JS"
   },
+  "jest": {
+    "testURL": "http://localhost/"
+  },
   "keywords": [
     "Amino",
     "Kikai",
@@ -20,23 +23,22 @@
     "Framework",
     "Narvii"
   ],
-  "author": "Robin Möller <moelrobi@gmail.com> (https://robsys.space)",
+  "author": "Robin Möller <moelrobi@gmail.com> (https://sirrob.eu)",
   "contributors": [
     "Jason Idris <jason.idris@chca-oh.org>",
     "Felix Fong <moongod101@hotmail.com> (https://felixfong227.ml)",
     "Felipe Angelo Sgarbi <akatsukilevi@yahoo.co.jp>"
   ],
-  "license": "AGPL-3.0",
+  "license": "MIT",
   "devDependencies": {
     "babel-eslint": "^8.2.1",
     "eslint": "^4.17.0",
     "ink-docstrap": "^1.3.2",
-    "jest": "^22.4.3"
+    "jest": "^24.5.0"
   },
   "dependencies": {
     "hoek": "^5.0.3",
-    "isomorphic-fetch": "^2.2.1",
-    "request": "^2.83.0",
-    "request-promise": "^4.2.2"
+    "import-local": "^2.0.0",
+    "isomorphic-fetch": "^2.2.1"
   }
 }

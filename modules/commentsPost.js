@@ -19,7 +19,6 @@ const {
 module.exports = async function commentsPost(com, id, sort, start, size) {
     let comments = objs.comments;
     comments.comments = [];
-    let body;
     const sid = getConfig('sid');
     //Silent fallback, will default to most recent if missing.
     start = start || 1;
@@ -28,22 +27,23 @@ module.exports = async function commentsPost(com, id, sort, start, size) {
     if (typeof sid != 'string' || typeof com !== 'string' || typeof id !== 'string' || typeof start !== 'number' || typeof size !== 'number') {
         throw new Error('All Arguments are not satisfied.');
     }
-    try {
-        const response = await fetch(endpoints.commentsPost(com, id, sort, start, size), {
-            headers: {
-                'NDCAUTH': `sid=${sid}`
-            }
-        });
-        //Parsing the Response.
-        body = await response.json();
-        body.commentList.forEach(commentsR => {
-            comments.comments.push(sorter.commentSorter(commentsR));
-        });
-        comments.status = 'ok';
-        comments.error = null;
-    } catch (err) {
-        comments.error = err;
-        throw 'Error while calling commentsPost: ' + err;
-    }
+    const body = await fetch(endpoints.commentsPost(com, id, sort, start, size), {
+        headers: {
+            'NDCAUTH': `sid=${sid}`
+        }
+    }).then(function(response) {
+        if(response.status >= 400) {
+            throw new Error(`Amino appears to be offline. Response status = ${response.status}`);
+        } else {
+            return response.json();
+        }
+    }).catch(function(ex) {
+        throw new Error(`An error ocurred: ${ex}`);
+    });
+    body.commentList.forEach(commentsR => {
+        comments.comments.push(sorter.commentSorter(commentsR));
+    });
+    comments.status = 'ok';
+    comments.error = null;
     return comments;
 };

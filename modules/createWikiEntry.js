@@ -32,7 +32,7 @@ module.exports = async function createWikiEntry(com, title, content, front_pictu
     if (front_pic.error != null) {
         throw new Error('This should not have happend! font_pic has error atrubitute in upload()');
     }
-    const res = await fetch(endpoints.createWiki(com), {
+    const body = await fetch(endpoints.createWiki(com), {
         method: 'POST',
         headers: {
             NDCAUTH: `sid=${sid}`
@@ -57,12 +57,15 @@ module.exports = async function createWikiEntry(com, title, content, front_pictu
             'eventSource': 'GlobalComposeMenu',
             'timestamp': new Date().getUTCMilliseconds()
         })
+    }).then(function(response) {
+        if(response.status >= 400) {
+            throw new Error(`Amino appears to be offline. Response status = ${response.status}`);
+        } else {
+            return response.json();
+        }
+    }).catch(function(ex) {
+        throw new Error(`An error ocurred: ${ex}`);
     });
-    if (!res.ok) {
-        item.error = res.status + ' ' + res.statusText;
-        throw new Error('Something veery wrong did happen! ' + item.error);
-    }
-    const body = await res.json();
     item = sorter.sortWiki(item, body.item);
     item.status = 'ok';
     item.error = null;

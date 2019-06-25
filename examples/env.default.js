@@ -10,6 +10,6 @@ module.exports = {
     },
     wikiComment: {
         content: '',
-        img_path: 'optional' 
+        img_path: '' 
     }
 };

@@ -81,6 +81,12 @@ const profileBlogs = {
     error: 'not everything defined'
 };
 
+const favoriteMembers = {
+    members: [],
+    status: 'not ok',
+    error: 'nothing happend!'
+};
+
 const wiki = {
     item: {
         itemid: 'id',
@@ -102,6 +108,19 @@ const wiki = {
     error: 'nothing happend.'
 };
 
+const checkInData = {
+    'data': {},
+    'status': 'not ok',
+    'error': 'nothing happening'
+};
+
+const communityUsers = {
+    count: 1,
+    users: [],
+    status: 'not ok',
+    error: 'nothing happend.'
+};
+
 module.exports = {
     blog,
     communityList,
@@ -111,6 +130,7 @@ module.exports = {
     comments,
     profileBlogs,
     wiki,
+    favoriteMembers,
     sendingMessage: {
         message: {
             sent: false,
@@ -120,5 +140,7 @@ module.exports = {
         status: 'not ok',
         error: 'Nothing has been done.'
     },
-    communityBlogFeed
+    communityBlogFeed,
+    checkInData,
+    communityUsers
 };

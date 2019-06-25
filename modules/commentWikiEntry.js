@@ -20,7 +20,7 @@ module.exports = async function commentWikiEntry(com, uid, content, img_path) {
     let completed = false;
 
     if(img_path == undefined) {
-        const response = await fetch(endpoints.commentWiki(com, uid), {
+        const body = await fetch(endpoints.commentWiki(com, uid), {
             method: 'POST',
             headers: {
                 NDCAUTH: `sid=${sid}`
@@ -31,16 +31,22 @@ module.exports = async function commentWikiEntry(com, uid, content, img_path) {
                 'eventSource': 'PostDetailView',
                 'timestamp': new Date().getUTCMilliseconds
             })
+        }).then(function(response) {
+            if(response.status >= 400) {
+                throw new Error(`Amino appears to be offline. Response status = ${response.status}`);
+            } else {
+                return response.json();
+            }
+        }).catch(function(ex) {
+            throw new Error(`An error ocurred: ${ex}`);
         });
-        if(!response.ok) throw new Error('The Server returned: ' + response.status);
-        let body = await response.json();
         if(body.comment == undefined) throw new Error('Something failed while Creating you Post.', body);
         else completed = true;
     }
 
     else {
         let url = await upload(img_path);
-        const response = await fetch(endpoints.commentWiki(com, uid), {
+        const body = await fetch(endpoints.commentWiki(com, uid), {
             method: 'POST',
             headers: {
                 NDCAUTH: `sid=${sid}`
@@ -66,9 +72,15 @@ module.exports = async function commentWikiEntry(com, uid, content, img_path) {
                 'eventSource': 'PostDetailView',
                 'timestamp': new Date().getUTCMilliseconds
             })
+        }).then(function(response) {
+            if(response.status >= 400) {
+                throw new Error(`Amino appears to be offline. Response status = ${response.status}`);
+            } else {
+                return response.json();
+            }
+        }).catch(function(ex) {
+            throw new Error(`An error ocurred: ${ex}`);
         });
-        if(!response.ok) throw new Error('The Server returned: ' + response.status);
-        let body = await response.json();
         if(body.comment == undefined) throw new Error('Something failed while Creating you Post.', body);
         else completed = true;
     }

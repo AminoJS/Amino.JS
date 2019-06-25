@@ -60,7 +60,7 @@ module.exports = {
             'type': element.type,
             'author': {
                 'uid': element.author.uid,
-                'name': element.author.name,
+                'name': element.author.nickname,
                 'level': element.author.level,
                 'role': element.author.role
             }
@@ -78,6 +78,15 @@ module.exports = {
             'likeCount': element.votesCount,
             'commentsCount': element.commentsCount,
             'author': element.author
+        };
+    },
+
+    favoriteMembersSorter: (element) => {
+        return {
+            'userName': element.nickname,
+            'userId': element.uid,
+            'level': element.level,
+            'userIcon': element.icon
         };
     },
 

@@ -3,7 +3,7 @@ const endpoints = require('../helpers/endpoints.js'); //For Creating shorter URL
 const objs = require('../helpers/objects.js'); //For Storing the Objects that the Framework returns. 
 const { getConfig } = require('../index');
 
-/*
+/**
  * Function to send a Mesage into a Chat.
  * @param {SecurityString} sid For authenticating with the Narvii-API.
  * @param {CommunityUUID} com The Community ID that can be Obtained by the Function getJoinedComs
@@ -21,7 +21,7 @@ module.exports = async function sendChat(com, uid, msg) {
     message.message.message = msg;
     message.message.threadId = uid;
     try {
-        const response = await fetch(endpoints.sendChat(com, uid), {
+        const body = await fetch(endpoints.sendChat(com, uid), {
             method: 'POST',
             headers: {
                 'NDCAUTH': `sid=${sid}`
@@ -32,8 +32,15 @@ module.exports = async function sendChat(com, uid, msg) {
                 'clientRefId': 43196704,
                 'timestamp': new Date().getUTCMilliseconds(),
             }),
+        }).then(function(response) {
+            if(response.status >= 400) {
+                throw new Error(`Amino appears to be offline. Response status = ${response.status}`);
+            } else {
+                return response.json();
+            }
+        }).catch(function(ex) {
+            throw new Error(`An error ocurred: ${ex}`);
         });
-        let body = await response.json();
         if (body.message) {
             message.message.sent = true;
             message.status = 'ok';

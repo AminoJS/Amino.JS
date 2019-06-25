@@ -1,4 +1,4 @@
-const request = require('request-promise');
+const fetch = require('isomorphic-fetch');
 const endpoints = require('./endpoints');
 const fs = require('fs');
 const {
@@ -15,19 +15,22 @@ module.exports = async function upload(path) {
     if(typeof sid != 'string') throw new Error('SID is not defined - Please Login first');
     if(typeof path != 'string') throw new Error('Not all Arguments given.');
     let mediaValue = {value: null, error: null};
-    await fs.createReadStream(path).pipe(request.post(endpoints.upload, {
+    
+    const body = await fetch(endpoints.upload, {
+        method: 'POST',
         headers: {
-            'NDCAUTH': `sid=${sid}`
+            NDCAUTH: `sid=${sid}`
+        },
+        body: fs.readFileSync(path)
+    }).then(function(response) {
+        if(response.status >= 400) {
+            throw new Error(`Amino appears to be offline. Response status = ${response.status}`);
+        } else {
+            return response.json();
         }
-    }, (err, res, body) => {
-        if(err) {
-            mediaValue.error = err;
-            throw new Error('Failed to Upload media', err);
-        }
-        else {
-            body = JSON.parse(body);
-            mediaValue.value = body.mediaValue;
-        } 
-    }));
+    }).catch(function(ex) {
+        throw new Error(`An error ocurred: ${ex}`);
+    });
+    mediaValue.value = body.mediaValue;
     return mediaValue;
 };

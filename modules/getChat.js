@@ -25,21 +25,23 @@ module.exports = async function getChat(com, uid, count) {
     if (count == undefined || count == null) {
         count = 1;
     }
-    try {
-        const response = await fetch(endpoints.loadChat(com, uid, count), {
-            headers: {
-                'NDCAUTH': `sid=${sid}`
-            }
-        });
-        const body = await response.json();
-        body.messageList.forEach((element) => {
-            msgList.messages.push(sorter.sendMessageSorter(uid, element));
-        });
-        msgList.status = 'ok';
-        msgList.error = null;
-    } catch (err) {
-        msgList.error = err;
-        throw 'Error while calling getChat: ' + err;
-    }
+    const body = await fetch(endpoints.loadChat(com, uid, count), {
+        headers: {
+            'NDCAUTH': `sid=${sid}`
+        }
+    }).then(function(response) {
+        if(response.status >= 400) {
+            throw new Error(`Amino appears to be offline. Response status = ${response.status}`);
+        } else {
+            return response.json();
+        }
+    }).catch(function(ex) {
+        throw new Error(`An error ocurred: ${ex}`);
+    });
+    body.messageList.forEach((element) => {
+        msgList.messages.push(sorter.sendMessageSorter(uid, element));
+    });
+    msgList.status = 'ok';
+    msgList.error = null;
     return msgList;
 };

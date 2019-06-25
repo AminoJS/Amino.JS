@@ -18,24 +18,25 @@ module.exports = async function getJoinedChats(com) {
     if (typeof sid != 'string' || typeof com !== 'string') {
         throw new Error('All Arguments are not satisfied.');
     }
-    try{
-        const response = await fetch(endpoints.getJoinedChats(com), {
-            headers: {
-                'NDCAUTH': `sid=${sid}`
-            }
-        });
-        //Parsing the Response.
-        const body = await response.json();
-        body.threadList.forEach((element) => {
-            //Sorting the Elements and pushing them into the Array.
-            threadList.threads.push(sorter.threadSort(element));
-        });
-        threadList.status = 'ok';
-        threadList.error = null;
-    }
-    catch(err){
-        threadList.error = err;
-        throw 'Error while calling getJoinedChats: ' + err;
-    }
+    const body = await fetch(endpoints.getJoinedChats(com), {
+        headers: {
+            'NDCAUTH': `sid=${sid}`
+        }
+    }).then(function(response) {
+        if(response.status >= 400) {
+            throw new Error(`Amino appears to be offline. Response status = ${response.status}`);
+        } else {
+            return response.json();
+        }
+    }).catch(function(ex) {
+        throw new Error(`An error ocurred: ${ex}`);
+    });
+    //Parsing the Response.
+    body.threadList.forEach((element) => {
+        //Sorting the Elements and pushing them into the Array.
+        threadList.threads.push(sorter.threadSort(element));
+    });
+    threadList.status = 'ok';
+    threadList.error = null;
     return threadList;
 };

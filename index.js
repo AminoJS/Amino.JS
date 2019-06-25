@@ -12,12 +12,12 @@ module.exports.setConfig = (key, value) => {
 };
 
 module.exports.getConfig = (key) => {
-    return config[key];
+    return config[key];    
 };
 
 //Global Error-Messages.
 const errorMessages = {
-    missingSid: 'SID is not specified, please use the login() method to authenticate',
+    missingSid: 'SID is not specified, please use the login() method to authenticate and try again',
 };
 
 module.exports.errorMessages = errorMessages;
@@ -40,5 +40,17 @@ module.exports = {
     getComBlogFeed: require('./modules/getCommunityBlogFeed'), //TEST-CASE: OK
     createWikiEntry: require('./modules/createWikiEntry'), //TEST-CASE: OK
     deleteWikiEntry: require('./modules/deleteWikiEntry'), //TEST-CASE: OK
-    commentWikiEntry: require('./modules/commentWikiEntry') //TEST-CASE: OK
+    commentWikiEntry: require('./modules/commentWikiEntry'), //TEST-CASE: OK
+    getComUsers: require('./modules/getComUsers'),
+    sendAudio: require('./modules/sendAudio'),
+    sendImage: require('./modules/sendImage'),
+    sendSticker: require('./modules/sendSticker'),
+    getFavoriteMembers: require('./modules/getFavoriteMembers'),
+    getCheckInCommunities: require('./modules/getCheckInCommunities'),
+    doCheckIn: require('./modules/doCheckIn'),
+    AminoAPI: require('./framework/main'), //TEST-CASE: Not needed, wrapper to coding only
+    auditLogs: require('./modules/auditLogs'),
+    openFlags: require('./modules/openFlags'),
+    inviteChat: require('./modules/inviteChat'),
+    removeChat: require('./modules/removeChat'),
 };
