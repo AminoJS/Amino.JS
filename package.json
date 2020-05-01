@@ -6,7 +6,9 @@
   "scripts": {
     "test": "jest test",
     "lint": "eslint .",
-    "test:dev": "jest test --watch --silent"
+    "test:dev": "jest test --watch --silent",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -37,6 +39,8 @@
     "hoek": "^5.0.3",
     "isomorphic-fetch": "^2.2.1",
     "request": "^2.83.0",
-    "request-promise": "^4.2.2"
-  }
+    "request-promise": "^4.2.2",
+    "snyk": "^1.316.1"
+  },
+  "snyk": true
 }
