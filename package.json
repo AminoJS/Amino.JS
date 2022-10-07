@@ -6,7 +6,9 @@
   "scripts": {
     "test": "jest test",
     "lint": "eslint .",
-    "test:dev": "jest test --watch --silent"
+    "test:dev": "jest test --watch --silent",
+    "prepare": "npm run snyk-protect",
+    "snyk-protect": "snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -35,8 +37,10 @@
   },
   "dependencies": {
     "hoek": "^5.0.3",
-    "isomorphic-fetch": "^2.2.1",
-    "request": "^2.83.0",
-    "request-promise": "^4.2.2"
-  }
+    "isomorphic-fetch": "^3.0.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2",
+    "@snyk/protect": "latest"
+  },
+  "snyk": true
 }
